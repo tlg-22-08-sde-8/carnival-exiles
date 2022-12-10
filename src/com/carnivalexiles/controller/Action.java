@@ -1,7 +1,7 @@
-package controller;
+package com.carnivalexiles.controller;
 
-import model.locations.Location;
-import model.User;
+import com.carnivalexiles.model.locations.Location;
+import com.carnivalexiles.model.User;
 
 public enum Action {
 

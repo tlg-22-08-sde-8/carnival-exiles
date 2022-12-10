@@ -1,6 +1,4 @@
-package model.locations;
-
-import java.util.ArrayList;
+package com.carnivalexiles.model.locations;
 
 public abstract class Location {
 

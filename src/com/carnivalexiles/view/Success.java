@@ -1,4 +1,4 @@
-package view;
+package com.carnivalexiles.view;
 
 public class Success {
 

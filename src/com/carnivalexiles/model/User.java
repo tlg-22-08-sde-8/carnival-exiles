@@ -1,4 +1,4 @@
-package model;
+package com.carnivalexiles.model;
 
 public class User {
 
