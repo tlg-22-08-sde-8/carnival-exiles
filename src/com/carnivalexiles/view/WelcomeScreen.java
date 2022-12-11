@@ -20,4 +20,14 @@ public class WelcomeScreen {
             "... Sometime later, you wake up to a monkey bonking you on the head with a " +
             "bottle on a mysterious Island all while its eating your fanny pack bacon… \n\n");
   }
+
+  public static void playGame(){
+    String userInput = "Y";
+    System.out.println("Would you like to start your true vacation adventure?");
+    //TODO Retrieve user Input if they would like to play the game
+    if ((userInput.toUpperCase() != "Y") || (userInput.toUpperCase() != "YES")){
+      //TODO exit game/close game
+    }
+    return;
+  }
 }
