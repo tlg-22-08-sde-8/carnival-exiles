@@ -6,6 +6,8 @@ public class Main {
   public static void main(String[] args) {
     //Print opening dialogue
     WelcomeScreen.displayTitle();
-    WelcomeScreen.displayInstructions();
+    WelcomeScreen.displayIntroduction();
+    //Prompt user for input to play the game (Y/N)
+    WelcomeScreen.playGame();
   }
 }
