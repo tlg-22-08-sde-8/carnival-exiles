@@ -27,7 +27,7 @@ public enum Action {
   public boolean canConsumeValid(User player) {
     // TODO: 12/9/2022 Determine if the user has an edible item in the inventory bag.
     // TODO: 12/9/2022 Consume item and increase HP.
-    player.setHealthPoints(10);
+    player.setHealthPoints(100);
     return false;
   }
 
