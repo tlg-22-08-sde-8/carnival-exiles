@@ -1,16 +1,23 @@
 package com.carnivalexiles.view;
 
+
 public class WelcomeScreen {
 
   public static void displayTitle(){
-    System.out.println("Welcome to Carnival Exiles \n\n");
+    // TODO: ASCII Title Text: Sprint 2
+    System.out.println("Welcome to Carnival Exiles! \n\n");
   }
-  public static void displayInstructions(){
-    System.out.println(
-            "You are on the biggest Carnival cruise ship and you decide to go to the buffet for bacon. \n" +
-            "As you reach for the last piece, a hungover buffoon fights you for the piece and throws you overboard. " +
-            "As you are flailing overboard, you quickly store the crisp smoked applewood bacon into your trusty waterproof fanny pack. \n\n" +
-            "Suddenly, you wake up to a monkey bonking you on the head with a bottle on a mysterious Island all while eating your buffet bacon… \n\n" +
-            "Would you like to start the game? \n");
+
+  public static void displayIntroduction(){
+    System.out.println("Taking a vacation to celebrate your recent promotion, " +
+            "you found yourself on the biggest Carnival cruise ship in the world \n" +
+            "Hankering for some pankering, you went to the port-side buffet. \n" +
+            "As you reached for the last piece of bacon, after stuffing a dozen in " +
+            "your trusty waterproof fanny pack, \n" +
+            "a hungover ruffian fights you for the piece and throws you overboard. \n" +
+            "As you plummet to the unseen depths below, you quickly munch on the crispy " +
+            "applewood smoked bacon and feel victorious. \n\n\n" +
+            "... Sometime later, you wake up to a monkey bonking you on the head with a " +
+            "bottle on a mysterious Island all while its eating your fanny pack bacon… \n\n");
   }
 }
