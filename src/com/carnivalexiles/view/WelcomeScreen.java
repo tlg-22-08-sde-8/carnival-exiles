@@ -1,12 +1,14 @@
 package com.carnivalexiles.view;
 
+import java.io.IOException;
+import com.carnivalexiles.controller.TextParser;
 
 public class WelcomeScreen {
 
-  public static void displayTitle(){
-    // TODO: ASCII Title Text: Sprint 2
-    System.out.println("Welcome to Carnival Exiles! \n\n");
-  }
+    public static void displayTitle(){
+        // TODO 12/11/2022: ASCII Title Text: Sprint 2
+        System.out.println("\nWelcome to Carnival Exiles! \n");
+    }
 
   public static void displayIntroduction(){
     System.out.println("Taking a vacation to celebrate your recent promotion, " +
