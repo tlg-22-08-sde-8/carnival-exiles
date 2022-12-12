@@ -13,6 +13,6 @@ public class Main {
         WelcomeScreen.displayIntroduction();
         //Play the game until the user types 'Quit'
         TextParser.playGame();
-
     }
+
 }

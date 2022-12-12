@@ -1,55 +1,53 @@
 package com.carnivalexiles.model.locations;
 
-public abstract class Location {
+public class Location {
 
-    //Fields
-    private String description;
-    private String name;
-    private String[] items = new String[10];
-    private String visibleLocations;
+  //Fields
+  private String description;
+  private String name;
+  private String[] items = new String[10];
+  private String visibleLocations;
+
+  //Ctor
+  public Location(String description, String name, String[] items, String visibleLocations) {
+    setDescription(description);
+    setName(name);
+    setItems(items);
+    setVisibleLocations(visibleLocations);
+  }
+
+  //Methods
 
 
-    //Ctor
-    public Location(String description, String name, String[] items, String visibleLocations) {
-        setDescription(description);
-        setName(name);
-        setItems(items);
-        setVisibleLocations(visibleLocations);
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    //Methods
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    //Getters and Setters
+  public String getName() {
+    return name;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String[] getItems() {
+    return items;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setItems(String[] items) {
+    this.items = items;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getVisibleLocations() {
+    return visibleLocations;
+  }
 
-    public String[] getItems() {
-        return items;
-    }
-
-    public void setItems(String[] items) {
-        this.items = items;
-    }
-
-    public String getVisibleLocations() {
-        return visibleLocations;
-    }
-
-    public void setVisibleLocations(String visibleLocations) {
-        this.visibleLocations = visibleLocations;
-    }
+  public void setVisibleLocations(String visibleLocations) {
+    this.visibleLocations = visibleLocations;
+  }
 }
