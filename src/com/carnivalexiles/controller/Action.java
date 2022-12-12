@@ -30,7 +30,9 @@ public class Action {
         return result;
     }
 
-    public boolean goTo(Location current, Location destination) {
+
+    public static boolean travelToValid(Location current, Location destination) {
+
         // TODO: 12/9/2022 Return boolean as to whether the user can go to the next location.
         // TODO: 12/9/2022 Call visibleLocation(Current) and determine if the destination we are going to is a possible location.
         // TODO: 12/9/2022 Takes care of GO option.
@@ -51,9 +53,8 @@ public class Action {
         return false;
     }
 
-    public boolean cry() {
-        // TODO: 12/10/22 Return True if called on
-        return false;
+    public static void cry() {
+        System.out.println("You spend a few hours crying because of your situation.");
     }
 
     public boolean canRest() {

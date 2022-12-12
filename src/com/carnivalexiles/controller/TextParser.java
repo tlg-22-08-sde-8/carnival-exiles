@@ -49,6 +49,9 @@ public class TextParser {
         // Enter the game with any key or quit by typing "quit"
         System.out.print("> ");
         userInput = scanner.nextLine().toLowerCase();
+        scanner.close();
+
+
         if (!userInput.equals("quit")) {
             System.out.println(System.lineSeparator().repeat(50));
             playGame();
@@ -56,12 +59,62 @@ public class TextParser {
         else {
             printGameOver();
         }
+
+        switch (userInput) {
+            case "go":
+                // TODO: 12/12/2022 Method to Go to location.
+                break;
+            case "consume":
+                // TODO: 12/12/2022 Method to consume something.
+                break;
+            case "swim":
+                // TODO: 12/12/2022 Method to swim.
+                break;
+            case "cry":
+                Action.cry();
+                break;
+            case "rest":
+                // TODO: 12/12/2022 Method to rest and take time.
+                break;
+            case "grab":
+                // TODO: 12/12/2022 Method to grab an item.
+                break;
+            case "hug":
+                // TODO: 12/12/2022 Method to hug magic monkey.
+                break;
+            case "drop":
+                // TODO: 12/12/2022 Method to select an item and drop it.
+                break;
+            case "attack":
+                // TODO: 12/12/2022 Method to attack something.
+                break;
+            case "retreat":
+                // TODO: 12/12/2022 Method to retreat.
+                break;
+            case "look":
+                // TODO: 12/12/2022 Method to look around.
+                break;
+            case "quit":
+                // TODO: 12/12/2022 Method to quit the game.
+                break;
+        }
+//Test message
+
     }
 
     public static void printGameOver() {
         System.out.println(System.lineSeparator().repeat(50));
         System.out.println("GAME OVER");
     }
+
+
+        // TODO: 12/9/2022 Parse the initial text and see if its valid
+        // TODO: 12/9/2022 If valid then send the match to its named method
+        // TODO: 12/9/2022 if (UserAction != null) { }
+        // TODO: 12/9/2022 Switch
+        // TODO: 12/9/2022 is userAction == Consume?
+        // TODO: 12/9/2022 is userAction == Go TO?
+        // TODO: 12/9/2022 is userAction == PickUP?
 
     public static void playGame() {
         ConsoleView consoleView = new ConsoleView(user, start, day);
