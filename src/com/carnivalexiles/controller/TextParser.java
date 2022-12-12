@@ -68,7 +68,7 @@ public class TextParser {
                 // TODO: 12/12/2022 Method to consume something.
                 break;
             case "swim":
-                // TODO: 12/12/2022 Method to swim. 
+                // TODO: 12/12/2022 Method to swim.
                 break;
             case "cry":
                 Action.cry();
@@ -98,7 +98,7 @@ public class TextParser {
                 // TODO: 12/12/2022 Method to quit the game.
                 break;
         }
-
+//Test message
 
     }
 
