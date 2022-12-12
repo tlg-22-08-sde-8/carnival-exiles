@@ -11,6 +11,7 @@ public class Main {
         System.out.println(System.lineSeparator().repeat(50));
         WelcomeScreen.displayTitle();
         WelcomeScreen.displayIntroduction();
+        WelcomeScreen.displayObjective();
         //Play the game until the user types 'Quit'
         TextParser.enterGame();
 

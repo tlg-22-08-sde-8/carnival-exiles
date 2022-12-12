@@ -2,11 +2,12 @@ package com.carnivalexiles.controller;
 
 import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
+import java.util.Arrays;
 
 public class Action {
 
     public static final String[] allActions = {"Go", "Consume", "Swim", "Cry", "Rest",
-            "Grab", "Hug", "Drop", "Attack", "Retreat", "Look", "Help", "Quit"};
+            "Grab", "Hug", "Drop", "Attack", "Retreat", "look", "Help", "Quit"};
 
     public static String printHelpMenu() {
         String result = ""
@@ -96,7 +97,10 @@ public class Action {
         return false;
     }
 
-    public void look(Location location) {
+    public static void look(String[] inventory) {
+        System.out.println("What do you want to look at?\n");
+        System.out.println("This is your current inventory:\n" + Arrays.toString(inventory));
+        TextParser.getUserInput();
         // TODO: 12/10/22 Determine where the user is.
         // TODO: 12/10/22 Provide more information as to what the user can see.
     }

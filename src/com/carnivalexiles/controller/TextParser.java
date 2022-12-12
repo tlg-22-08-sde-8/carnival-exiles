@@ -5,10 +5,7 @@ import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.Start;
 import com.carnivalexiles.view.ConsoleView;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -28,19 +25,6 @@ public class TextParser {
 
     ConsoleView consoleView;
 
-//    //Check user input for Game Initiation
-//    public static void playGame() throws IOException {
-//        //Retrieve user Input to play the game until they type 'Quit'
-//        BufferedReader br;
-//        String userInput;
-//        br = new BufferedReader(new InputStreamReader(System.in));
-//        do {
-//            // place game logic code here. When user types q, game quits
-//            System.out.print("> ");
-//            userInput = br.readLine();
-//            System.out.println("You entered '" + userInput + "'");
-//        } while (!"Quit".equals(userInput));
-//    }
 
     public static void enterGame() throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -49,8 +33,6 @@ public class TextParser {
         // Enter the game with any key or quit by typing "quit"
         System.out.print("> ");
         userInput = scanner.nextLine().toLowerCase();
-        scanner.close();
-
 
         if (!userInput.equals("quit")) {
             System.out.println(System.lineSeparator().repeat(50));
@@ -59,7 +41,36 @@ public class TextParser {
         else {
             printGameOver();
         }
+    }
 
+    public static void printGameOver() {
+        System.out.println(System.lineSeparator().repeat(50));
+        System.out.println("GAME OVER");
+    }
+
+
+    public static void playGame() {
+        ConsoleView consoleView = new ConsoleView(user, start, day);
+        System.out.println(consoleView.getGameView());
+        getUserInput();
+    }
+
+    public static void getUserInput() {
+        // At this point, provide textParser/scanner and read user input
+        System.out.print("What do you want to do?\n> ");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        while (!Arrays.asList(Action.allActions).contains(userInput)) {
+            System.out.println("Action not available, type \"Help\" for assistance");
+            System.out.print("> ");
+            userInput = scanner.nextLine();
+
+        }
+
+       actionHandler(userInput);
+    }
+
+    public static void actionHandler(String userInput) {
         switch (userInput) {
             case "go":
                 // TODO: 12/12/2022 Method to Go to location.
@@ -92,48 +103,20 @@ public class TextParser {
                 // TODO: 12/12/2022 Method to retreat.
                 break;
             case "look":
-                // TODO: 12/12/2022 Method to look around.
+                Action.look(user.getInventory());
                 break;
             case "quit":
                 // TODO: 12/12/2022 Method to quit the game.
                 break;
         }
-//Test message
-
     }
 
-    public static void printGameOver() {
-        System.out.println(System.lineSeparator().repeat(50));
-        System.out.println("GAME OVER");
-    }
-
-
-        // TODO: 12/9/2022 Parse the initial text and see if its valid
-        // TODO: 12/9/2022 If valid then send the match to its named method
-        // TODO: 12/9/2022 if (UserAction != null) { }
-        // TODO: 12/9/2022 Switch
-        // TODO: 12/9/2022 is userAction == Consume?
-        // TODO: 12/9/2022 is userAction == Go TO?
-        // TODO: 12/9/2022 is userAction == PickUP?
-
-    public static void playGame() {
-        ConsoleView consoleView = new ConsoleView(user, start, day);
-        System.out.println(consoleView.getGameView());
-        getUserInput();
-    }
-
-    public static void getUserInput() {
-        // At this point, provide textParser/scanner and read user input
-        System.out.print("What do you want to do?\n> ");
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine();
-        while (!Arrays.asList(Action.allActions).contains(userInput)) {
-            System.out.println("Action not available, type \"Help\" for assistance");
-            System.out.print("> ");
-            userInput = scanner.nextLine();
-        }
-        System.out.println(userInput + " do something inside Action class");
-        // Take user input and apply that within the logic switch
-    }
+    // TODO: 12/9/2022 Parse the initial text and see if its valid
+    // TODO: 12/9/2022 If valid then send the match to its named method
+    // TODO: 12/9/2022 if (UserAction != null) { }
+    // TODO: 12/9/2022 Switch
+    // TODO: 12/9/2022 is userAction == Consume?
+    // TODO: 12/9/2022 is userAction == Go TO?
+    // TODO: 12/9/2022 is userAction == PickUP?
 
 }

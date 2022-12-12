@@ -21,14 +21,16 @@ public class WelcomeScreen {
             "... Sometime later, you wake up to a monkey bonking you on the head with a " +
             "bottle on a mysterious Island all while its eating your fanny pack bacon… \n");
     //Check to see if user would like to play the game
-    System.out.println("Would you like to start your true vacation adventure? (Any Key or 'Quit')" );
+    //System.out.println("Would you like to start your true vacation adventure? (Any Key or 'Quit')" );
   }
 
   public static void displayObjective() {
     System.out.println("To escape the island and beat the game, you must survive for seven days!\n"
-        + "Explore the island! Interact with the wildlife! Eat some interesting food!\n"
-        + "Do not let your health points or HP fall below zero!\n\n\n\n"
-        + "P.S. Watch out for traps!");
+        + "Explore the lands! Interact with the wildlife! Eat some interesting food!\n"
+        + "Do not let your health points or HP fall below zero!\n\n"
+        + "P.S. Watch out for traps!\n");
+
+    System.out.println("Would you like to start your true vacation adventure? (Any Key or 'Quit')" );
   }
 
 }
