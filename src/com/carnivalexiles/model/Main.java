@@ -8,6 +8,6 @@ public class Main {
         //Print opening dialogue
         System.out.println(System.lineSeparator().repeat(50));
         WelcomeScreen.displayTitle();
-        //WelcomeScreen.displayIntroduction();
+        WelcomeScreen.displayIntroduction();
     }
 }
