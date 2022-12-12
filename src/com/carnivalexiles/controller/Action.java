@@ -5,12 +5,11 @@ import com.carnivalexiles.model.locations.Location;
 
 public class Action {
 
-    public static final String[] allActions = {"Go", "Consume", "Swim", "Cry", "Rest",
-            "Grab", "Hug", "Drop", "Attack", "Retreat", "Look", "Help", "Quit"};
+    public static final String[] allActions = {"go", "consume", "swim", "cry", "rest",
+            "grab", "hug", "drop", "attack", "retreat", "look", "help", "quit"};
 
     public static String printHelpMenu() {
-        String result = ""
-                + "----------------------------------\n"
+        String result = "\n"
                 + "----------- HELP MENU-------------\n"
                 + "1. Go to a Location (Type \"Go\")\n"
                 + "2. Consume (Type \"Consume\")\n"
@@ -25,7 +24,6 @@ public class Action {
                 + "11. Look around (Type \"Look\")\n"
                 + "12. Quit the game (Type \"Quit\")\n"
                 + "-------------- END----------------\n"
-                + "----------------------------------\n"
                 ;
         return result;
     }
