@@ -1,15 +1,12 @@
 package model.locations;
 
-import java.util.ArrayList;
-
-public abstract class Location {
+public class Location {
 
   //Fields
   private String description;
   private String name;
   private String[] items = new String[10];
   private String visibleLocations;
-
 
   //Ctor
   public Location(String description, String name, String[] items, String visibleLocations) {
@@ -21,7 +18,6 @@ public abstract class Location {
 
   //Methods
 
-  //Getters and Setters
 
   public String getDescription() {
     return description;
