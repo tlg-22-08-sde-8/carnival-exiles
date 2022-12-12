@@ -22,7 +22,7 @@ public class WelcomeScreen {
             "... Sometime later, you wake up to a monkey bonking you on the head with a " +
             "bottle on a mysterious Island all while its eating your fanny pack bacon… \n");
         //Check to see if user would like to play the game
-        System.out.println("Would you like to start your true vacation adventure? (Y or Exit)" );
+        System.out.println("Would you like to start your true vacation adventure? (Any Key or 'Quit')" );
         //Parse the user's response, if they agree, play the game, if not, exit the application
         TextParser.playGame();
     }
