@@ -9,6 +9,7 @@ import com.carnivalexiles.view.ConsoleView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TextParser {
@@ -24,7 +25,6 @@ public class TextParser {
     static String[] items = new String[4];
     static String visibleLocations = "SANDY BEACH and COCO FOREST";
     static Location start = new Start(description, name, items, visibleLocations);
-
 
     ConsoleView consoleView;
 
@@ -119,15 +119,21 @@ public class TextParser {
     public static void playGame() {
         ConsoleView consoleView = new ConsoleView(user, start, day);
         System.out.println(consoleView.getGameView());
+        getUserInput();
     }
 
-//    public void getUserInput() {
-//        String userInput;
-//        // At this point, provide textParser/scanner and read user input
-//        System.out.println("What do you want to do?\n>");
-//        Scanner scanner = new Scanner(System.in);
-//
-//    }
-
+    public static void getUserInput() {
+        // At this point, provide textParser/scanner and read user input
+        System.out.print("What do you want to do?\n> ");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        while (!Arrays.asList(Action.allActions).contains(userInput)) {
+            System.out.println("Action not available, type \"Help\" for assistance");
+            System.out.print("> ");
+            userInput = scanner.nextLine();
+        }
+        System.out.println(userInput + " do something inside Action class");
+        // Take user input and apply that within the logic switch
+    }
 
 }

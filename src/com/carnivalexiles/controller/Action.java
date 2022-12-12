@@ -30,7 +30,9 @@ public class Action {
         return result;
     }
 
+
     public static boolean travelToValid(Location current, Location destination) {
+
         // TODO: 12/9/2022 Return boolean as to whether the user can go to the next location.
         // TODO: 12/9/2022 Call visibleLocation(Current) and determine if the destination we are going to is a possible location.
         // TODO: 12/9/2022 Takes care of GO option.
