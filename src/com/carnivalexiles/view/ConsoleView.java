@@ -20,7 +20,11 @@ public class ConsoleView {
         user.getInventoryAsString(), location.getDescription());
   }
 
-  // TODO: 12/12/22 Finish Formatting the Console-View Class 
+  public String getGameView() {
+    return gameView;
+  }
+
+  // TODO: 12/12/22 Finish Formatting the Console-View Class
   // MAIN METHOD ADDED HERE ONLY FOR TESTING THE CONSOLE-VIEW OUTPUT TO CONSOLE
   // WILL NEED TO REMOVED ONCE THIS CLASS IS FINAL
   public static void main(String[] args) {
