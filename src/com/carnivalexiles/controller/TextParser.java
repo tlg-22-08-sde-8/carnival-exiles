@@ -1,10 +1,12 @@
 package com.carnivalexiles.controller;
 
 import com.carnivalexiles.model.Day;
+import com.carnivalexiles.model.Main;
 import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.Start;
 import com.carnivalexiles.view.ConsoleView;
+import com.carnivalexiles.view.WelcomeScreen;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,18 +47,32 @@ public class TextParser {
         }
     }
 
-    public static void printGameOver() {
+    public static void printGameOver() throws IOException {
         System.out.println(System.lineSeparator().repeat(50));
-        System.out.println("GAME OVER");
+        String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
+        String[] validAnswers = {"yes", "no", "quit"};
+        System.out.print("GAME OVER...play again? " + enterMessage);
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine().toLowerCase();
+        while (!Arrays.asList(validAnswers).contains(userInput)) {
+            System.out.print(enterMessage);
+            userInput = scanner.nextLine().toLowerCase();
+        }
+        if (userInput.equals("yes")) {
+            System.out.println(System.lineSeparator().repeat(50));
+            WelcomeScreen.displayTitle();
+            WelcomeScreen.displayIntroduction();
+            TextParser.enterGame();
+        }
     }
 
-    public static void playGame() {
+    public static void playGame() throws IOException {
         ConsoleView consoleView = new ConsoleView(user, start, day);
         System.out.println(consoleView.getGameView());
         getUserInput();
     }
 
-    public static void getUserInput() {
+    public static void getUserInput() throws IOException {
         // At this point, provide textParser/scanner and read user input
         System.out.print("What do you want to do?\n> ");
         Scanner scanner = new Scanner(System.in);
@@ -69,7 +85,7 @@ public class TextParser {
         actionHandler(userInput);
     }
 
-    public static void actionHandler(String userInput) {
+    public static void actionHandler(String userInput) throws IOException {
         switch (userInput) {
             case "go":
                 // TODO: 12/12/2022 Method to Go to location.
@@ -105,7 +121,7 @@ public class TextParser {
                 // TODO: 12/12/2022 Method to look around.
                 break;
             case "quit":
-                // TODO: 12/12/2022 Method to quit the game.
+                printGameOver();
                 break;
             case "help":
                 performHelp();
@@ -117,5 +133,7 @@ public class TextParser {
     private static void performHelp() {
         System.out.println((Action.printHelpMenu()));
     }
+
+
 
 }
