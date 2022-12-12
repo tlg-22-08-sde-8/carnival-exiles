@@ -15,7 +15,7 @@ public class ConsoleView {
             + "Hp: %d                  Location: %s                 Day %d: %s\n"
             + "Inventory: %s\n"
             + "-----------------------------------------------------------------------\n\n"
-            + "%s\n\n"
+            + "%s\n"
         , user.getHealthPoints(), location.getName(), day.getDay(), day.getTimeOfDay(),
         user.getInventoryAsString(), location.getDescription());
   }
