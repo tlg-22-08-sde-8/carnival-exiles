@@ -1,8 +1,8 @@
-package model;
+package com.carnivalexiles.model;
 
 public class Day {
   private int day;
-  private String timeOfDay;
+  private String timeOfDay;           // Array with 4 values as String -> dawn, dusk, afternoon, night
 
   public Day() {
     this.day = 0;

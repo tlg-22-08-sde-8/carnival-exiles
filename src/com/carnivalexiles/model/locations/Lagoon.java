@@ -1,4 +1,4 @@
-package model.locations;
+package com.carnivalexiles.model.locations;
 
 public class Lagoon extends Location{
 

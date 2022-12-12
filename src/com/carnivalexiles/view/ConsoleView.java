@@ -1,9 +1,9 @@
-package view;
+package com.carnivalexiles.view;
 
-import model.Day;
-import model.User;
-import model.locations.Location;
-import model.locations.Start;
+import com.carnivalexiles.model.Day;
+import com.carnivalexiles.model.User;
+import com.carnivalexiles.model.locations.Location;
+import com.carnivalexiles.model.locations.Start;
 
 public class ConsoleView {
 

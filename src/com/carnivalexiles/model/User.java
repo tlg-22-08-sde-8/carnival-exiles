@@ -1,4 +1,4 @@
-package model;
+package com.carnivalexiles.model;
 
 import java.util.Arrays;
 

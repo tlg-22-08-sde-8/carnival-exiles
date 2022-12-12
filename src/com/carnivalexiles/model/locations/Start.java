@@ -1,4 +1,4 @@
-package model.locations;
+package com.carnivalexiles.model.locations;
 
 public class Start extends Location{
   public Start(String description, String name, String[] items, String visibleLocations) {
