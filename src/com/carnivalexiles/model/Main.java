@@ -1,6 +1,8 @@
 package com.carnivalexiles.model;
 
+import com.carnivalexiles.controller.TextParser;
 import com.carnivalexiles.view.WelcomeScreen;
+
 import java.io.IOException;
 
 public class Main {
@@ -9,5 +11,8 @@ public class Main {
         System.out.println(System.lineSeparator().repeat(50));
         WelcomeScreen.displayTitle();
         WelcomeScreen.displayIntroduction();
+        //Play the game until the user types 'Quit'
+        TextParser.playGame();
+
     }
 }
