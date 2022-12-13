@@ -1,7 +1,5 @@
 package com.carnivalexiles.model.locations;
 
-import java.io.IOException;
-
 public class MapLocation {
     public static final String[] ALL_LOCATIONS = {"SANDY BEACH", "COCO FOREST", "MOIST MARSHLAND", "SUS MOUNTAIN",
             "LOGARITHMIC LAKE", "LUMINOUS LAGOON"};
