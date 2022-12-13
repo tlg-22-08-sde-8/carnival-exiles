@@ -13,19 +13,85 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class TextParser {
-    static User user = new User(100, new String[]{"Machete"});
+    static User user = new User(100, new String[]{"Empty Bottle"});
     static Day day = new Day();
 
-    // Creating a start location EXAMPLE ONLY
-    static String description =
-            "You look around and you see a beautiful sandy beach and a forest,\n"
-                    + " filled with coconuts, to your left. In the distance, you can see a large\n"
-                    + " Sus Mountain and more land beyond the beach.";
-    static String name = "START";
-    static String[] items = new String[4];
-    static String visibleLocations = "SANDY BEACH and COCO FOREST";
-    static Location start = new Start(description, name, items, visibleLocations);
+    // Creating a start location
+    static String startDescription =
+            "You look around and you see a beautiful Sandy Beach that stretches \n"
+                    + "beyond the horizon to your right and a luscious forest,\n"
+                + "filled with coconuts, to your left.\n";
+    static String startName = "START           ";
+    static String[] startItems = new String[4];
+    static String startVisibleLocations = "SANDY BEACH and COCO FOREST";
+    static Location startLocation = new Start(startDescription, startName, startItems, startVisibleLocations);
 
+    // Creating SANDY BEACH
+    static String beachDescription =
+        "You’ve arrived to Sandy Beach. Warm sand beneath your toes and \n"
+            + "the sound of waves splashing. Coco Forest is on your left and nearby\n"
+            + "to your right is a moist marshland.\n";
+    static String beachName = "SANDY BEACH     ";
+    static String[] beachItems = new String[4];
+    static String beachVisibleLocations = "MOIST MARSHLAND and COCO FOREST";
+    static Location beachLocation = new Start(beachDescription, beachName, beachItems, beachVisibleLocations);
+
+    // Creating COCO FOREST
+    static String forestDescription =
+        "You’ve arrived at Coco Forest. An abundance of coconuts lie on the floor,\n"
+            + "some that have been eaten. You realize your belly is rumbling \n"
+            + "and you are quite parched from all your travels… Sandy Beach\n"
+            + "is behind you, and you also see a mountain peaking over behind \n"
+            + "the trees looking ominous.\n";
+    static String forestName = "COCO FOREST     ";
+    static String[] forestItems = new String[4];
+    static String forestVisibleLocations = "SUS MOUNTAIN and SANDY BEACH";
+    static Location forestLocation = new Start(forestDescription, forestName, forestItems, forestVisibleLocations);
+
+    // Creating SUS MOUNTAIN
+    static String mountainDescription =
+        "Oh no! You’ve arrived at Sus Mountain and lava is slowly oozing out. \n"
+            + "It seems that there are x days left until an eruption. You need to \n"
+            + "get off of this island quickly!\n";
+    static String mountainName = "SUS MOUNTAIN    ";
+    static String[] mountainItems = new String[4];
+    static String mountainVisibleLocations = "LOGARITHMIC LAKE and COCO FOREST";
+    static Location mountainLocation = new Start(mountainDescription, mountainName, mountainItems, mountainVisibleLocations);
+
+    // Creating LOGARITHMIC LAKE
+    static String lakeDescription =
+              "You arrive at a very beautiful and efficiently running lake. A Wizard\n"
+            + "appears. He says “In order to quench your thirst with this water,\n"
+            + "you must answer the following question”: \n\n"
+            + "If you have 2 logs and you jump over 1, how many times\n"
+            + "do you need to jump before you get tired? \n\n"
+            + "If the Wizard’s question is too difficult of a riddle… \n"
+            + "you can check out the moist marshland to quench your \n"
+            + "thirst.\n";
+    static String lakeName = "LOGARITHMIC LAKE\n";
+    static String[] lakeItems = new String[4];
+    static String lakeVisibleLocations = "MOIST MARSHLAND and SUS MOUNTAIN";
+    static Location lakeLocation = new Start(lakeDescription, lakeName, lakeItems, lakeVisibleLocations);
+
+    // Creating MOIST MARSHLAND
+    static String marshlandDescription =
+        "You have arrived at the Moist Marshland and it is just as humid as you\n"
+            + "anticipated. The stickiness of the marsh is too much to bear. You look in all\n"
+            + "directions and spot Luminous Lagoon ahead of you and Sandy Beach and Logarithmic\n"
+            +"Lake in your rear.\n";
+    static String marshlandName = "MOIST MARSHLAND ";
+    static String[] marshlandItems = new String[4];
+    static String marshlandVisibleLocations = " Sandy Beach and Logarithmic Lake and Luminous Lagoon";
+    static Location marshlandLocation = new Start(marshlandDescription, marshlandName, marshlandItems, marshlandVisibleLocations);
+
+    // Creating LUMINOUS LAGOON
+    static String lagoonDescription =
+        "You’ve arrived at Luminous Lagoon. The ripples shimmer with the reflection\n"
+            +"of the sun.\n";
+    static String lagoonName = "LUMINOUS LAGOON ";
+    static String[] lagoonItems = new String[4];
+    static String lagoonVisibleLocations = " Sandy Beach and Logarithmic Lake and Luminous Lagoon";
+    static Location lagoonLocation = new Start(lagoonDescription, lagoonName, lagoonItems, lagoonVisibleLocations);
     ConsoleView consoleView;
 
 //    //Check user input for Game Initiation
@@ -49,7 +115,6 @@ public class TextParser {
         // Enter the game with any key or quit by typing "quit"
         System.out.print("> ");
         userInput = scanner.nextLine().toLowerCase();
-        scanner.close();
 
 
         if (!userInput.equals("quit")) {
@@ -117,8 +182,28 @@ public class TextParser {
         // TODO: 12/9/2022 is userAction == PickUP?
 
     public static void playGame() {
-        ConsoleView consoleView = new ConsoleView(user, start, day);
+        ConsoleView consoleView = new ConsoleView(user, startLocation, day);
         System.out.println(consoleView.getGameView());
+//beach
+        ConsoleView consoleView1 = new ConsoleView(user, beachLocation, day);
+        System.out.println(consoleView1.getGameView());
+//forest
+        ConsoleView consoleView2 = new ConsoleView(user, forestLocation, day);
+        System.out.println(consoleView2.getGameView());
+//mountain
+        ConsoleView consoleView3 = new ConsoleView(user, mountainLocation, day);
+        System.out.println(consoleView3.getGameView());
+//lake
+        ConsoleView consoleView4 = new ConsoleView(user, lakeLocation, day);
+        System.out.println(consoleView4.getGameView());
+//marshland
+        ConsoleView consoleView5 = new ConsoleView(user, marshlandLocation, day);
+        System.out.println(consoleView5.getGameView());
+
+        //lagoon
+        ConsoleView consoleView6 = new ConsoleView(user, lagoonLocation, day);
+        System.out.println(consoleView6.getGameView());
+
         getUserInput();
     }
 
@@ -132,7 +217,7 @@ public class TextParser {
             System.out.print("> ");
             userInput = scanner.nextLine();
         }
-        System.out.println(userInput + " do something inside Action class");
+        System.out.println(userInput.toLowerCase() + " do something inside Action class");
         // Take user input and apply that within the logic switch
     }
 

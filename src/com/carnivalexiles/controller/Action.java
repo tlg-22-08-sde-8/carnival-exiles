@@ -5,7 +5,7 @@ import com.carnivalexiles.model.locations.Location;
 
 public class Action {
 
-    public static final String[] allActions = {"Go", "Consume", "Swim", "Cry", "Rest",
+    public static final String[] allActions = {"go", "Consume", "Swim", "Cry", "Rest",
             "Grab", "Hug", "Drop", "Attack", "Retreat", "Look", "Help", "Quit"};
 
     public static String printHelpMenu() {
