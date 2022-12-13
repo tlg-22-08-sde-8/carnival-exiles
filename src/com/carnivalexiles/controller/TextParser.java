@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class TextParser {
     static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
@@ -22,7 +21,7 @@ public class TextParser {
 
     private static ConsoleView consoleView;                                          // Game console
 
-    public static void enterGame() throws IOException {
+    public static void enterGame() throws IOException, InterruptedException {
         String userInput;
 
         // Enter the game with any key or quit by typing "quit"
@@ -38,7 +37,7 @@ public class TextParser {
         }
     }
 
-    public static void printGameOver() throws IOException {
+    public static void printGameOver() throws IOException, InterruptedException {
         System.out.println(System.lineSeparator().repeat(50));
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
@@ -56,13 +55,13 @@ public class TextParser {
         }
     }
 
-    public static void playGame(User user, Location location, Day day) throws IOException {
+    public static void playGame(User user, Location location, Day day) throws IOException, InterruptedException {
         consoleView = new ConsoleView(user, location, day);
         System.out.println(consoleView.getGameView());
         getUserInput();
     }
 
-    public static void getUserInput() throws IOException {
+    public static void getUserInput() throws IOException, InterruptedException {
         // At this point, provide textParser/scanner and read user input
         System.out.print("What do you want to do?\n> ");
         String userInput = bufferReader.readLine().toLowerCase();
@@ -74,13 +73,13 @@ public class TextParser {
         actionHandler(userInput);
     }
 
-    public static void actionHandler(String userInput) throws IOException {
+    public static void actionHandler(String userInput) throws IOException, InterruptedException {
         switch (userInput) {
             case "go":
                 goTo();
                 break;
             case "consume":
-                // TODO: 12/12/2022 Method to consume something.
+                consumeItem();
                 break;
             case "swim":
                 // TODO: 12/12/2022 Method to swim.
@@ -119,7 +118,7 @@ public class TextParser {
         }
     }
 
-    private static void goTo() throws IOException {
+    private static void goTo() throws IOException, InterruptedException {
         String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
         String UpperCaseVisibleLocations = visibleLocations.toUpperCase();
         var visibleLocationsAsList = new ArrayList<String>();
@@ -151,6 +150,13 @@ public class TextParser {
 
     public static void cry() {
         System.out.println("You spend a few hours crying because of your situation.");
+    }
+
+    public static void consumeItem() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     public void look(Location location) {
