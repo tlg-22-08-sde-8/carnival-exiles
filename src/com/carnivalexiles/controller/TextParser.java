@@ -1,34 +1,24 @@
 package com.carnivalexiles.controller;
 
 import com.carnivalexiles.model.Day;
-import com.carnivalexiles.model.Main;
 import com.carnivalexiles.model.User;
-import com.carnivalexiles.model.locations.Location;
-import com.carnivalexiles.model.locations.Start;
+import com.carnivalexiles.model.locations.*;
 import com.carnivalexiles.view.ConsoleView;
 import com.carnivalexiles.view.WelcomeScreen;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class TextParser {
-    static User user = new User(100, new String[]{"Machete"});
-    static Day day = new Day();
 
-    // Creating a start location EXAMPLE ONLY
-    static String description =
-            "You look around and you see a beautiful sandy beach and a forest,\n"
-                    + " filled with coconuts, to your left. In the distance, you can see a large\n"
-                    + " Sus Mountain and more land beyond the beach.";
-    static String name = "START";
-    static String[] items = new String[4];
-    static String visibleLocations = "SANDY BEACH and COCO FOREST";
-    static Location start = new Start(description, name, items, visibleLocations);
+    static MapLocation mapLocations = new MapLocation();                              // All map locations obj
+    static User user = new User(100, new String[]{"Empty Bottle"});       // Game user
+    static Day day = new Day();                                                      // Game day
 
-    ConsoleView consoleView;
+    private static ConsoleView consoleView;                                          // Game console
 
     public static void enterGame() throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -40,7 +30,7 @@ public class TextParser {
 
         if (!userInput.equals("quit")) {
             System.out.println(System.lineSeparator().repeat(50));
-            playGame();
+            playGame(user, mapLocations.getStartLocation(), day);
         }
         else {
             printGameOver();
@@ -66,8 +56,8 @@ public class TextParser {
         }
     }
 
-    public static void playGame() throws IOException {
-        ConsoleView consoleView = new ConsoleView(user, start, day);
+    public static void playGame(User user, Location location, Day day) throws IOException {
+        consoleView = new ConsoleView(user, location, day);
         System.out.println(consoleView.getGameView());
         getUserInput();
     }
@@ -76,7 +66,7 @@ public class TextParser {
         // At this point, provide textParser/scanner and read user input
         System.out.print("What do you want to do?\n> ");
         Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine();
+        String userInput = scanner.nextLine().toLowerCase();
         while (!Arrays.asList(Action.allActions).contains(userInput)) {
             System.out.println("Action not available, type \"Help\" for assistance");
             System.out.print("> ");
@@ -88,7 +78,7 @@ public class TextParser {
     public static void actionHandler(String userInput) throws IOException {
         switch (userInput) {
             case "go":
-                // TODO: 12/12/2022 Method to Go to location.
+                goTo();
                 break;
             case "consume":
                 // TODO: 12/12/2022 Method to consume something.
@@ -97,7 +87,7 @@ public class TextParser {
                 // TODO: 12/12/2022 Method to swim.
                 break;
             case "cry":
-                Action.cry();
+                cry();
                 break;
             case "rest":
                 // TODO: 12/12/2022 Method to rest and take time.
@@ -130,8 +120,44 @@ public class TextParser {
         }
     }
 
+    private static void goTo() throws IOException {
+        String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
+        String UpperCaseVisibleLocations = visibleLocations.toUpperCase();
+        var visibleLocationsAsList = new ArrayList<String>();
+        // Create a list of the available locations from the visible locations at this location
+        for (String location : mapLocations.ALL_LOCATIONS) {
+            if (UpperCaseVisibleLocations.contains(location)) {
+                visibleLocationsAsList.add(location);
+            }
+        }
+        System.out.printf("Where would you like to go? You can go to %s (pick one)\n> ", visibleLocations);
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        userInput = userInput.toUpperCase();
+        while (!visibleLocationsAsList.contains(userInput)) {
+            if (Arrays.asList(Action.allActions).contains(userInput.toLowerCase())) {
+                actionHandler(userInput.toLowerCase());
+                break;
+            }
+            System.out.printf("Location not available, enter one of the following %s\n", visibleLocationsAsList);
+            System.out.print("> ");
+            userInput = scanner.nextLine();
+        }
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, mapLocations.locationHandler(userInput),day);
+    }
+
     private static void performHelp() {
         System.out.println((Action.printHelpMenu()));
+    }
+
+    public static void cry() {
+        System.out.println("You spend a few hours crying because of your situation.");
+    }
+
+    public void look(Location location) {
+        // TODO: 12/10/22 Determine where the user is.
+        // TODO: 12/10/22 Provide more information as to what the user can see.
     }
 
 
