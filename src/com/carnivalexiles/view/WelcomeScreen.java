@@ -1,8 +1,10 @@
 package com.carnivalexiles.view;
 
 public class WelcomeScreen {
-  public static final String GREEN = "\033[0;32m";   // GREEN
-  public static final String RESET = "\033[0m";  // Text Reset
+  public static final String GREEN = "\033[0;32m";                          // GREEN
+  public static final String BOLD = "\u001b[1m";                            // BOLD
+  public static final String BOLD_RED = "\u001b[1m\u001b[31m\u001b[4m";     // BOLD RED UNDERLINE
+  public static final String RESET = "\033[0m";                             // Text Reset
 
   public static void displayTitle(){
     // TODO 12/11/2022: ASCII Title Text: Sprint 2
@@ -20,17 +22,15 @@ public class WelcomeScreen {
             "applewood smoked bacon and feel victorious. \n\n" +
             "... Sometime later, you wake up to a monkey bonking you on the head with a " +
             "bottle on a mysterious Island all while its eating your fanny pack bacon… \n");
-    //Check to see if user would like to play the game
-    //System.out.println("Would you like to start your true vacation adventure? (Any Key or 'Quit')" );
+    displayObjective();
   }
 
   public static void displayObjective() {
-    System.out.println("To escape the island and beat the game, you must survive for seven days!\n"
+    System.out.println(BOLD + "OBJECTIVE: " + RESET
         + "Explore the lands! Interact with the wildlife! Eat some interesting food!\n"
-        + "Do not let your health points or HP fall below zero!\n\n"
+        + BOLD_RED + "Do not let your health points (HP) fall below zero!\n\n" + RESET
         + "P.S. Watch out for traps!\n");
-
-    System.out.println("Would you like to start your true vacation adventure? (Any Key or 'Quit')" );
+    System.out.println("Would you like to start your true vacation adventure? (Enter any key or 'Quit')" );
   }
 
 }
