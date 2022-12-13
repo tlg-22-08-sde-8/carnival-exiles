@@ -15,10 +15,10 @@ public class ConsoleView {
     this.currentLocation = location;
     this.currentDay = day;
     this.gameView = String.format(""
-            + "------------------------------------------------------------------------------------------\n"
+            + "----------------------------------------------------------------------------------\n"
             + "Hp: %d                  Location: %s                 Day %d: %s\n"
             + "Inventory: %s\n"
-            + "------------------------------------------------------------------------------------------\n\n"
+            + "----------------------------------------------------------------------------------\n\n"
             + "%s\n"
         , user.getHealthPoints(), location.getName(), day.getDay(), day.getTimeOfDay(),
         user.getInventoryAsString(), location.getDescription());
