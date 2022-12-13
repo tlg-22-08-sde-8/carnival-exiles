@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class TextParser {
     static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
@@ -22,7 +21,7 @@ public class TextParser {
 
     private static ConsoleView consoleView;                                          // Game console
 
-    public static void enterGame() throws IOException {
+    public static void enterGame() throws IOException, InterruptedException {
         String userInput;
 
         // Enter the game with any key or quit by typing "quit"
@@ -38,7 +37,7 @@ public class TextParser {
         }
     }
 
-    public static void printGameOver() throws IOException {
+    public static void printGameOver() throws IOException, InterruptedException {
         System.out.println(System.lineSeparator().repeat(50));
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
@@ -56,13 +55,13 @@ public class TextParser {
         }
     }
 
-    public static void playGame(User user, Location location, Day day) throws IOException {
+    public static void playGame(User user, Location location, Day day) throws IOException, InterruptedException {
         consoleView = new ConsoleView(user, location, day);
         System.out.println(consoleView.getGameView());
         getUserInput();
     }
 
-    public static void getUserInput() throws IOException {
+    public static void getUserInput() throws IOException, InterruptedException {
         // At this point, provide textParser/scanner and read user input
         System.out.print("What do you want to do?\n> ");
         String userInput = bufferReader.readLine().toLowerCase();
@@ -74,40 +73,40 @@ public class TextParser {
         actionHandler(userInput);
     }
 
-    public static void actionHandler(String userInput) throws IOException {
+    public static void actionHandler(String userInput) throws IOException, InterruptedException {
         switch (userInput) {
             case "go":
                 goTo();
                 break;
             case "consume":
-                // TODO: 12/12/2022 Method to consume something.
+                consumeItem();
                 break;
             case "swim":
-                // TODO: 12/12/2022 Method to swim.
+                swim();
                 break;
             case "cry":
                 cry();
                 break;
             case "rest":
-                // TODO: 12/12/2022 Method to rest and take time.
+                rest();
                 break;
             case "grab":
-                // TODO: 12/12/2022 Method to grab an item.
+                grab();
                 break;
             case "hug":
-                // TODO: 12/12/2022 Method to hug magic monkey.
+                hug();
                 break;
             case "drop":
-                // TODO: 12/12/2022 Method to select an item and drop it.
+                drop();
                 break;
             case "attack":
-                // TODO: 12/12/2022 Method to attack something.
+                attack();
                 break;
             case "retreat":
-                // TODO: 12/12/2022 Method to retreat.
+                retreat();
                 break;
             case "look":
-                // TODO: 12/12/2022 Method to look around.
+                lookAtItem();
                 break;
             case "quit":
                 printGameOver();
@@ -119,12 +118,12 @@ public class TextParser {
         }
     }
 
-    private static void goTo() throws IOException {
+    private static void goTo() throws IOException, InterruptedException {
         String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
         String UpperCaseVisibleLocations = visibleLocations.toUpperCase();
         var visibleLocationsAsList = new ArrayList<String>();
         // Create a list of the available locations from the visible locations at this location
-        for (String location : mapLocations.ALL_LOCATIONS) {
+        for (String location : MapLocation.ALL_LOCATIONS) {
             if (UpperCaseVisibleLocations.contains(location)) {
                 visibleLocationsAsList.add(location);
             }
@@ -145,15 +144,100 @@ public class TextParser {
         playGame(user, mapLocations.locationHandler(userInput),day);
     }
 
+    private static void lookAtItem() throws IOException, InterruptedException {
+        System.out.println("Choose an item from your inventory to examine or write \"Cancel\":\n");
+        System.out.println("This is your current inventory:");
+        for (Object inventory: user.getInventory()) {System.out.println(inventory);}
+        System.out.print("\nWhat do you want to do?\n> ");
+        String userInput = bufferReader.readLine();
+        userInput = "["+ userInput.toLowerCase() +"]";
+
+        while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
+            if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
+                System.out.printf("You are looking at %s", user.getInventoryAsString());
+                Thread.sleep(3000);
+            }
+            System.out.println(System.lineSeparator().repeat(50));
+            playGame(user, mapLocations.locationHandler(userInput), day);
+        }
+
+        System.out.println("Sorry that item is not available");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, mapLocations.locationHandler(userInput), day);
+
+    }
+
+
+
     private static void performHelp() {
         System.out.println((Action.printHelpMenu()));
     }
 
-    public static void cry() {
-        System.out.println("You spend a few hours crying because of your situation.");
+    private static void consumeItem() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
     }
 
-    public void look(Location location) {
+    private static void swim() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
+
+    private static void cry() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
+
+    private static void rest() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
+
+    private static void grab() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
+
+    private static void hug() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
+
+    private static void drop() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
+
+    private static void attack() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
+
+    private static void retreat() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
+
+    private static void look() {
         // TODO: 12/10/22 Determine where the user is.
         // TODO: 12/10/22 Provide more information as to what the user can see.
     }
