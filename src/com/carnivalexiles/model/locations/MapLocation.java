@@ -56,7 +56,7 @@ public class MapLocation {
                     + "If the Wizard’s question is too difficult of a riddle… \n"
                     + "you can check out the moist marshland to quench your \n"
                     + "thirst.\n";
-    String lakeName = "LOGARITHMIC LAKE\n";
+    String lakeName = "LOGARITHMIC LAKE";
     String[] lakeItems = new String[4];
     String lakeVisibleLocations = "MOIST MARSHLAND and SUS MOUNTAIN";
     Location lakeLocation = new Lake(lakeDescription, lakeName, lakeItems, lakeVisibleLocations);
@@ -76,7 +76,7 @@ public class MapLocation {
     String lagoonDescription =
             "You’ve arrived at Luminous Lagoon. The ripples shimmer with the reflection\n"
                     + "of the sun.\n";
-    String lagoonName = "LUMINOUS LAGOON";
+    String lagoonName = "LUMINOUS LAGOON ";
     String[] lagoonItems = new String[4];
     String lagoonVisibleLocations = "SANDY BEACH, LOGARITHMIC LAKE, and LUMINOUS LAGOON";
     Location lagoonLocation = new Lagoon(lagoonDescription, lagoonName, lagoonItems, lagoonVisibleLocations);
