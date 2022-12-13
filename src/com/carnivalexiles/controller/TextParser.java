@@ -26,7 +26,7 @@ public class TextParser {
 
         // Enter the game with any key or quit by typing "quit"
         System.out.print("> ");
-        userInput = bufferReader.readLine().toLowerCase();
+        userInput = bufferReader.readLine().toLowerCase().trim();
 
         if (!userInput.equals("quit")) {
             System.out.println(System.lineSeparator().repeat(50));
@@ -42,10 +42,10 @@ public class TextParser {
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
         System.out.print("GAME OVER...play again? " + enterMessage);
-        String userInput = bufferReader.readLine().toLowerCase();
+        String userInput = bufferReader.readLine().toLowerCase().trim();
         while (!Arrays.asList(validAnswers).contains(userInput)) {
             System.out.print(enterMessage);
-            userInput = bufferReader.readLine().toLowerCase();
+            userInput = bufferReader.readLine().toLowerCase().trim();
         }
         if (userInput.equals("yes")) {
             System.out.println(System.lineSeparator().repeat(50));
@@ -64,11 +64,11 @@ public class TextParser {
     public static void getUserInput() throws IOException, InterruptedException {
         // At this point, provide textParser/scanner and read user input
         System.out.print("What do you want to do?\n> ");
-        String userInput = bufferReader.readLine().toLowerCase();
+        String userInput = bufferReader.readLine().toLowerCase().trim();
         while (!Arrays.asList(Action.allActions).contains(userInput)) {
             System.out.println("Action not available, type \"Help\" for assistance");
             System.out.print("> ");
-            userInput = bufferReader.readLine();
+            userInput = bufferReader.readLine().trim();
         }
         actionHandler(userInput);
     }
@@ -129,16 +129,16 @@ public class TextParser {
             }
         }
         System.out.printf("Where would you like to go? You can go to %s (pick one)\n> ", visibleLocations);
-        String userInput = bufferReader.readLine();
-        userInput = userInput.toUpperCase();
+        String userInput = bufferReader.readLine().trim();
+        userInput = userInput.toUpperCase().trim();
         while (!visibleLocationsAsList.contains(userInput)) {
             if (Arrays.asList(Action.allActions).contains(userInput.toLowerCase())) {
-                actionHandler(userInput.toLowerCase());
+                actionHandler(userInput.toLowerCase().trim());
                 break;
             }
             System.out.printf("Location not available, enter one of the following %s\n", visibleLocationsAsList);
             System.out.print("> ");
-            userInput = bufferReader.readLine();
+            userInput = bufferReader.readLine().trim();
         }
         System.out.println(System.lineSeparator().repeat(50));
         playGame(user, mapLocations.locationHandler(userInput),day);
@@ -149,7 +149,7 @@ public class TextParser {
         System.out.println("This is your current inventory:");
         for (Object inventory: user.getInventory()) {System.out.println(inventory);}
         System.out.print("\nWhat do you want to do?\n> ");
-        String userInput = bufferReader.readLine();
+        String userInput = bufferReader.readLine().trim();
         userInput = "["+ userInput.toLowerCase() +"]";
 
         while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
@@ -165,10 +165,7 @@ public class TextParser {
         Thread.sleep(3000);
         System.out.println(System.lineSeparator().repeat(50));
         playGame(user, mapLocations.locationHandler(userInput), day);
-
     }
-
-
 
     private static void performHelp() {
         System.out.println((Action.printHelpMenu()));
@@ -236,12 +233,4 @@ public class TextParser {
         System.out.println(System.lineSeparator().repeat(50));
         playGame(user, consoleView.getCurrentLocation(), day);
     }
-
-    private static void look() {
-        // TODO: 12/10/22 Determine where the user is.
-        // TODO: 12/10/22 Provide more information as to what the user can see.
-    }
-
-
-
 }

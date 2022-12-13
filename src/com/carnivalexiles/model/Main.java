@@ -13,5 +13,4 @@ public class Main {
         WelcomeScreen.displayIntroduction();
         TextParser.enterGame();
     }
-
 }

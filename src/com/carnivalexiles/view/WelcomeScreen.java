@@ -7,7 +7,7 @@ public class WelcomeScreen {
   public static final String RESET = "\033[0m";                             // Text Reset
   public static final String TITLE = "Welcome to Carnival Exiles";
 
-  public static void displayTitle(){
+  public static void displayTitle() {
     // TODO 12/11/2022: ASCII Title Text: Sprint 2
     System.out.println(GREEN + "\n" + TITLE + "\n" + RESET);
   }
