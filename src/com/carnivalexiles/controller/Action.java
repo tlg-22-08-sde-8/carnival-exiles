@@ -98,7 +98,7 @@ public class Action {
         return false;
     }
 
-    public static void look(String[] inventory) throws IOException {
+    public static void look(String[] inventory) throws IOException, InterruptedException {
         System.out.println("What do you want to look at?\n");
         System.out.println("Choose an item from your inventory to examine or write \"Cancel\":\n");
 
@@ -115,8 +115,6 @@ public class Action {
 //        } else {
 //            TextParser.getUserInput();
 //        }
-
-
 
         TextParser.getUserInput();
         // TODO: 12/10/22 Determine where the user is.

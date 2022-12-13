@@ -17,12 +17,12 @@ public class TextParser {
     static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
 
     static MapLocation mapLocations = new MapLocation();                              // All map locations obj
-    static User user = new User(100, new String[]{"Empty Bottle"});       // Game user
+    static User user = new User(100, new String[]{"Empty Bottle", "Stick", "Rock"});       // Game user
     static Day day = new Day();                                                      // Game day
 
     private static ConsoleView consoleView;                                          // Game console
 
-    public static void enterGame() throws IOException {
+    public static void enterGame() throws IOException, InterruptedException {
         String userInput;
 
         // Enter the game with any key or quit by typing "quit"
@@ -38,7 +38,7 @@ public class TextParser {
         }
     }
 
-    public static void printGameOver() throws IOException {
+    public static void printGameOver() throws IOException, InterruptedException {
         System.out.println(System.lineSeparator().repeat(50));
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
@@ -56,13 +56,14 @@ public class TextParser {
         }
     }
 
-    public static void playGame(User user, Location location, Day day) throws IOException {
+    public static void playGame(User user, Location location, Day day)
+        throws IOException, InterruptedException {
         consoleView = new ConsoleView(user, location, day);
         System.out.println(consoleView.getGameView());
         getUserInput();
     }
 
-    public static void getUserInput() throws IOException {
+    public static void getUserInput() throws IOException, InterruptedException {
         // At this point, provide textParser/scanner and read user input
         System.out.print("What do you want to do?\n> ");
         String userInput = bufferReader.readLine().toLowerCase();
@@ -74,7 +75,7 @@ public class TextParser {
         actionHandler(userInput);
     }
 
-    public static void actionHandler(String userInput) throws IOException {
+    public static void actionHandler(String userInput) throws IOException, InterruptedException {
         switch (userInput) {
             case "go":
                 goTo();
@@ -119,7 +120,7 @@ public class TextParser {
         }
     }
 
-    private static void goTo() throws IOException {
+    private static void goTo() throws IOException, InterruptedException {
         String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
         String UpperCaseVisibleLocations = visibleLocations.toUpperCase();
         var visibleLocationsAsList = new ArrayList<String>();
@@ -145,13 +146,28 @@ public class TextParser {
         playGame(user, mapLocations.locationHandler(userInput),day);
     }
 
-    private static void lookAtItem() throws IOException {
+    private static void lookAtItem() throws IOException, InterruptedException {
         System.out.println("Choose an item from your inventory to examine or write \"Cancel\":\n");
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine().toLowerCase();
-        if (userInput.equals(user.getInventoryAsString())) {
-            System.out.printf("You are looking at %s", user.getInventoryAsString());
+        System.out.println("This is your current inventory:");
+        for (Object inventory: user.getInventory()) {System.out.println(inventory);}
+        System.out.print("\nWhat do you want to do?\n> ");
+        String userInput = bufferReader.readLine();
+        userInput = "["+ userInput.toLowerCase() +"]";
+
+        while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
+            if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
+                System.out.printf("You are looking at %s", user.getInventoryAsString());
+                Thread.sleep(3000);
+            }
+            System.out.println(System.lineSeparator().repeat(50));
+            playGame(user, mapLocations.locationHandler(userInput), day);
         }
+
+        System.out.println("Sorry that item is not available");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, mapLocations.locationHandler(userInput), day);
+
     }
 
 
