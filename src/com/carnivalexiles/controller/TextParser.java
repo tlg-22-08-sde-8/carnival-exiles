@@ -106,7 +106,7 @@ public class TextParser {
                 // TODO: 12/12/2022 Method to retreat.
                 break;
             case "look":
-                // TODO: 12/12/2022 Method to look around.
+                lookAtItem();
                 break;
             case "quit":
                 printGameOver();
@@ -143,6 +143,32 @@ public class TextParser {
         System.out.println(System.lineSeparator().repeat(50));
         playGame(user, mapLocations.locationHandler(userInput),day);
     }
+
+    private static void lookAtItem() throws IOException, InterruptedException {
+        System.out.println("Choose an item from your inventory to examine or write \"Cancel\":\n");
+        System.out.println("This is your current inventory:");
+        for (Object inventory: user.getInventory()) {System.out.println(inventory);}
+        System.out.print("\nWhat do you want to do?\n> ");
+        String userInput = bufferReader.readLine();
+        userInput = "["+ userInput.toLowerCase() +"]";
+
+        while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
+            if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
+                System.out.printf("You are looking at %s", user.getInventoryAsString());
+                Thread.sleep(3000);
+            }
+            System.out.println(System.lineSeparator().repeat(50));
+            playGame(user, mapLocations.locationHandler(userInput), day);
+        }
+
+        System.out.println("Sorry that item is not available");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, mapLocations.locationHandler(userInput), day);
+
+    }
+
+
 
     private static void performHelp() {
         System.out.println((Action.printHelpMenu()));
