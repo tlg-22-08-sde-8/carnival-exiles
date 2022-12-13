@@ -11,13 +11,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class TextParser {
     static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
 
     static MapLocation mapLocations = new MapLocation();                              // All map locations obj
-    static User user = new User(100, new String[]{"Empty Bottle", "Stick", "Rock"});       // Game user
+    static User user = new User(100, new String[]{"Empty Bottle"});       // Game user
     static Day day = new Day();                                                      // Game day
 
     private static ConsoleView consoleView;                                          // Game console
@@ -56,8 +55,7 @@ public class TextParser {
         }
     }
 
-    public static void playGame(User user, Location location, Day day)
-        throws IOException, InterruptedException {
+    public static void playGame(User user, Location location, Day day) throws IOException, InterruptedException {
         consoleView = new ConsoleView(user, location, day);
         System.out.println(consoleView.getGameView());
         getUserInput();
@@ -81,7 +79,7 @@ public class TextParser {
                 goTo();
                 break;
             case "consume":
-                // TODO: 12/12/2022 Method to consume something.
+                consumeItem();
                 break;
             case "swim":
                 // TODO: 12/12/2022 Method to swim.
@@ -178,6 +176,13 @@ public class TextParser {
 
     public static void cry() {
         System.out.println("You spend a few hours crying because of your situation.");
+    }
+
+    public static void consumeItem() throws IOException, InterruptedException {
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        Thread.sleep(3000);
+        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     public void look(Location location) {
