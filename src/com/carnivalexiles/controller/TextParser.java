@@ -6,13 +6,15 @@ import com.carnivalexiles.model.locations.*;
 import com.carnivalexiles.view.ConsoleView;
 import com.carnivalexiles.view.WelcomeScreen;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class TextParser {
+    static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
 
     static MapLocation mapLocations = new MapLocation();                              // All map locations obj
     static User user = new User(100, new String[]{"Empty Bottle"});       // Game user
@@ -21,12 +23,11 @@ public class TextParser {
     private static ConsoleView consoleView;                                          // Game console
 
     public static void enterGame() throws IOException {
-        Scanner scanner = new Scanner(System.in);
         String userInput;
 
         // Enter the game with any key or quit by typing "quit"
         System.out.print("> ");
-        userInput = scanner.nextLine().toLowerCase();
+        userInput = bufferReader.readLine().toLowerCase();
 
         if (!userInput.equals("quit")) {
             System.out.println(System.lineSeparator().repeat(50));
@@ -42,11 +43,10 @@ public class TextParser {
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
         System.out.print("GAME OVER...play again? " + enterMessage);
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine().toLowerCase();
+        String userInput = bufferReader.readLine().toLowerCase();
         while (!Arrays.asList(validAnswers).contains(userInput)) {
             System.out.print(enterMessage);
-            userInput = scanner.nextLine().toLowerCase();
+            userInput = bufferReader.readLine().toLowerCase();
         }
         if (userInput.equals("yes")) {
             System.out.println(System.lineSeparator().repeat(50));
@@ -65,12 +65,11 @@ public class TextParser {
     public static void getUserInput() throws IOException {
         // At this point, provide textParser/scanner and read user input
         System.out.print("What do you want to do?\n> ");
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine().toLowerCase();
+        String userInput = bufferReader.readLine().toLowerCase();
         while (!Arrays.asList(Action.allActions).contains(userInput)) {
             System.out.println("Action not available, type \"Help\" for assistance");
             System.out.print("> ");
-            userInput = scanner.nextLine();
+            userInput = bufferReader.readLine();
         }
         actionHandler(userInput);
     }
@@ -131,8 +130,7 @@ public class TextParser {
             }
         }
         System.out.printf("Where would you like to go? You can go to %s (pick one)\n> ", visibleLocations);
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine();
+        String userInput = bufferReader.readLine();
         userInput = userInput.toUpperCase();
         while (!visibleLocationsAsList.contains(userInput)) {
             if (Arrays.asList(Action.allActions).contains(userInput.toLowerCase())) {
@@ -141,7 +139,7 @@ public class TextParser {
             }
             System.out.printf("Location not available, enter one of the following %s\n", visibleLocationsAsList);
             System.out.print("> ");
-            userInput = scanner.nextLine();
+            userInput = bufferReader.readLine();
         }
         System.out.println(System.lineSeparator().repeat(50));
         playGame(user, mapLocations.locationHandler(userInput),day);
