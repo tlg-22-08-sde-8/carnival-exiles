@@ -108,7 +108,7 @@ public class TextParser {
                 // TODO: 12/12/2022 Method to retreat.
                 break;
             case "look":
-                // TODO: 12/12/2022 Method to look around.
+                lookAtItem();
                 break;
             case "quit":
                 printGameOver();
@@ -146,6 +146,17 @@ public class TextParser {
         System.out.println(System.lineSeparator().repeat(50));
         playGame(user, mapLocations.locationHandler(userInput),day);
     }
+
+    private static void lookAtItem() throws IOException {
+        System.out.println("Choose an item from your inventory to examine or write \"Cancel\":\n");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine().toLowerCase();
+        if (userInput.equals(user.getInventoryAsString())) {
+            System.out.printf("You are looking at %s", user.getInventoryAsString());
+        }
+    }
+
+
 
     private static void performHelp() {
         System.out.println((Action.printHelpMenu()));
