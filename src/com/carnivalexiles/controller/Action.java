@@ -2,16 +2,14 @@ package com.carnivalexiles.controller;
 
 import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
-import java.util.Arrays;
 
 public class Action {
 
-    public static final String[] allActions = {"Go", "Consume", "Swim", "Cry", "Rest",
-            "Grab", "Hug", "Drop", "Attack", "Retreat", "look", "Help", "Quit"};
+    public static final String[] allActions = {"go", "consume", "swim", "cry", "rest",
+            "grab", "hug", "drop", "attack", "retreat", "look", "help", "quit"};
 
     public static String printHelpMenu() {
-        String result = ""
-                + "----------------------------------\n"
+        String result = "\n"
                 + "----------- HELP MENU-------------\n"
                 + "1. Go to a Location (Type \"Go\")\n"
                 + "2. Consume (Type \"Consume\")\n"
@@ -26,14 +24,12 @@ public class Action {
                 + "11. Look around (Type \"Look\")\n"
                 + "12. Quit the game (Type \"Quit\")\n"
                 + "-------------- END----------------\n"
-                + "----------------------------------\n"
                 ;
         return result;
     }
 
 
     public static boolean travelToValid(Location current, Location destination) {
-
         // TODO: 12/9/2022 Return boolean as to whether the user can go to the next location.
         // TODO: 12/9/2022 Call visibleLocation(Current) and determine if the destination we are going to is a possible location.
         // TODO: 12/9/2022 Takes care of GO option.
@@ -97,10 +93,7 @@ public class Action {
         return false;
     }
 
-    public static void look(String[] inventory) {
-        System.out.println("What do you want to look at?\n");
-        System.out.println("This is your current inventory:\n" + Arrays.toString(inventory));
-        TextParser.getUserInput();
+    public void look(Location location) {
         // TODO: 12/10/22 Determine where the user is.
         // TODO: 12/10/22 Provide more information as to what the user can see.
     }

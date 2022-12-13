@@ -1,11 +1,16 @@
 package com.carnivalexiles.controller;
 
 import com.carnivalexiles.model.Day;
+import com.carnivalexiles.model.Main;
 import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.Start;
 import com.carnivalexiles.view.ConsoleView;
+import com.carnivalexiles.view.WelcomeScreen;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -25,7 +30,6 @@ public class TextParser {
 
     ConsoleView consoleView;
 
-
     public static void enterGame() throws IOException {
         Scanner scanner = new Scanner(System.in);
         String userInput;
@@ -43,19 +47,32 @@ public class TextParser {
         }
     }
 
-    public static void printGameOver() {
+    public static void printGameOver() throws IOException {
         System.out.println(System.lineSeparator().repeat(50));
-        System.out.println("GAME OVER");
+        String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
+        String[] validAnswers = {"yes", "no", "quit"};
+        System.out.print("GAME OVER...play again? " + enterMessage);
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine().toLowerCase();
+        while (!Arrays.asList(validAnswers).contains(userInput)) {
+            System.out.print(enterMessage);
+            userInput = scanner.nextLine().toLowerCase();
+        }
+        if (userInput.equals("yes")) {
+            System.out.println(System.lineSeparator().repeat(50));
+            WelcomeScreen.displayTitle();
+            WelcomeScreen.displayIntroduction();
+            TextParser.enterGame();
+        }
     }
 
-
-    public static void playGame() {
+    public static void playGame() throws IOException {
         ConsoleView consoleView = new ConsoleView(user, start, day);
         System.out.println(consoleView.getGameView());
         getUserInput();
     }
 
-    public static void getUserInput() {
+    public static void getUserInput() throws IOException {
         // At this point, provide textParser/scanner and read user input
         System.out.print("What do you want to do?\n> ");
         Scanner scanner = new Scanner(System.in);
@@ -64,13 +81,11 @@ public class TextParser {
             System.out.println("Action not available, type \"Help\" for assistance");
             System.out.print("> ");
             userInput = scanner.nextLine();
-
         }
-
-       actionHandler(userInput);
+        actionHandler(userInput);
     }
 
-    public static void actionHandler(String userInput) {
+    public static void actionHandler(String userInput) throws IOException {
         switch (userInput) {
             case "go":
                 // TODO: 12/12/2022 Method to Go to location.
@@ -103,20 +118,22 @@ public class TextParser {
                 // TODO: 12/12/2022 Method to retreat.
                 break;
             case "look":
-                Action.look(user.getInventory());
+                // TODO: 12/12/2022 Method to look around.
                 break;
             case "quit":
-                // TODO: 12/12/2022 Method to quit the game.
+                printGameOver();
+                break;
+            case "help":
+                performHelp();
+                TextParser.getUserInput();
                 break;
         }
     }
 
-    // TODO: 12/9/2022 Parse the initial text and see if its valid
-    // TODO: 12/9/2022 If valid then send the match to its named method
-    // TODO: 12/9/2022 if (UserAction != null) { }
-    // TODO: 12/9/2022 Switch
-    // TODO: 12/9/2022 is userAction == Consume?
-    // TODO: 12/9/2022 is userAction == Go TO?
-    // TODO: 12/9/2022 is userAction == PickUP?
+    private static void performHelp() {
+        System.out.println((Action.printHelpMenu()));
+    }
+
+
 
 }
