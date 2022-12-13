@@ -5,10 +5,11 @@ public class WelcomeScreen {
   public static final String BOLD = "\u001b[1m";                            // BOLD
   public static final String BOLD_RED = "\u001b[1m\u001b[31m\u001b[4m";     // BOLD RED UNDERLINE
   public static final String RESET = "\033[0m";                             // Text Reset
+  public static final String TITLE = "Welcome to Carnival Exiles";
 
   public static void displayTitle(){
     // TODO 12/11/2022: ASCII Title Text: Sprint 2
-    System.out.println(GREEN + "\nWelcome to Carnival Exiles!\n" + RESET);
+    System.out.println(GREEN + "\n" + TITLE + "\n" + RESET);
   }
 
   public static void displayIntroduction() {
