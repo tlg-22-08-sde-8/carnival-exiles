@@ -2,10 +2,10 @@ package com.carnivalexiles.controller;
 
 import com.carnivalexiles.model.Day;
 import com.carnivalexiles.model.User;
-import com.carnivalexiles.model.locations.*;
+import com.carnivalexiles.model.locations.Location;
+import com.carnivalexiles.model.locations.MapLocation;
 import com.carnivalexiles.view.ConsoleView;
 import com.carnivalexiles.view.WelcomeScreen;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,8 +31,7 @@ public class TextParser {
         if (!userInput.equals("quit")) {
             clearScreen();
             playGame(user, mapLocations.getStartLocation(), day);
-        }
-        else {
+        } else {
             printGameOver();
         }
     }
@@ -50,14 +49,17 @@ public class TextParser {
         if (userInput.equals("yes")) {
             clearScreen();
             startGame();
-        }
-        else {
+        } else {
             stopGame();
         }
     }
 
     private static void stopGame() {
         Thread.currentThread().stop();
+    }
+
+    public static void clearScreen() {
+        System.out.println(System.lineSeparator().repeat(50));
     }
 
     public static void startGame() throws IOException, InterruptedException {
@@ -113,7 +115,7 @@ public class TextParser {
                 rest();
                 break;
             case "grab":
-                grab();
+                grabItem(userInput);
                 break;
             case "hug":
                 hug();
@@ -153,7 +155,7 @@ public class TextParser {
         }
         // See if userInput contains an available location
         String upperCaseRawUserInput = rawUserInput.toUpperCase();
-        for (String location: visibleLocationsAsList) {
+        for (String location : visibleLocationsAsList) {
             if (upperCaseRawUserInput.contains(location)) {
                 userRequestedLocation = location;
                 break;
@@ -165,20 +167,18 @@ public class TextParser {
         }
         clearScreen();
         day.increaseTimeOfDay(2);
-        playGame(user, mapLocations.locationHandler(userRequestedLocation),day);
-    }
-
-    public static void clearScreen() {
-        System.out.println(System.lineSeparator().repeat(50));
+        playGame(user, mapLocations.locationHandler(userRequestedLocation), day);
     }
 
     private static void lookAtItem() throws IOException, InterruptedException {
         System.out.println("Choose an item from your inventory to examine or write \"Cancel\":\n");
         System.out.println("This is your current inventory:");
-        for (Object inventory: user.getInventory()) {System.out.println(inventory);}
+        for (Object inventory : user.getInventory()) {
+            System.out.println(inventory);
+        }
         System.out.print("\nWhat do you want to do?\n> ");
         String userInput = bufferReader.readLine().trim();
-        userInput = "["+ userInput.toLowerCase() +"]";
+        userInput = "[" + userInput.toLowerCase() + "]";
 
         while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
             if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
@@ -227,9 +227,28 @@ public class TextParser {
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
-    private static void grab() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
-        Thread.sleep(3000);
+    private static void grabItem(String rawUserInput) throws IOException, InterruptedException {
+        String upperCaseRawUserInput = rawUserInput.toUpperCase();
+        String[] currentLocationItems = consoleView.getCurrentLocation().getItems();
+        String itemToGrab = "";
+        for (int i = 0; i < currentLocationItems.length; i++) {
+            if (upperCaseRawUserInput.contains(currentLocationItems[i].toUpperCase())) {
+                itemToGrab = currentLocationItems[i];
+                var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
+                itemsList.remove(i);
+                consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
+
+                var currentUserInventory = user.getInventory();
+                var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
+                currentUserInventoryAsList.add(itemToGrab);
+                user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
+                break;
+            }
+        }
+        if (itemToGrab.isEmpty()) {
+            System.out.println("Item not available.");
+            getUserInput();
+        }
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
