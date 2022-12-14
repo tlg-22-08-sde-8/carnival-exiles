@@ -131,7 +131,7 @@ public class TextParser {
                 retreat();
                 break;
             case "look":
-                lookAtItem();
+                lookAtItems();
                 break;
             case "quit":
                 printGameOver();
@@ -171,9 +171,8 @@ public class TextParser {
         playGame(user, mapLocations.locationHandler(userRequestedLocation), day);
     }
 
-    private static void lookAtItem() throws IOException, InterruptedException {
-        System.out.println("Choose an item from your inventory to examine or write \"Cancel\":\n");
-        System.out.println("This is your current inventory:");
+    private static void lookAtItems() throws IOException, InterruptedException {
+        System.out.println("\nThis is your current inventory:");
         for (Object inventory : user.getInventory()) {
             System.out.println(inventory);
         }
@@ -189,7 +188,6 @@ public class TextParser {
             clearScreen();
             playGame(user, mapLocations.locationHandler(userInput), day);
         }
-
         System.out.println("Sorry that item is not available");
         Thread.sleep(3000);
         clearScreen();

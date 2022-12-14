@@ -14,7 +14,7 @@ public class User {
   }
 
   public void increaseHealthPoints(int increasePoints) {
-    healthPoints = getHealthPoints() + increasePoints;
+    setHealthPoints(increasePoints);
   }
 
   public int getHealthPoints() {
@@ -22,7 +22,11 @@ public class User {
   }
 
   public void setHealthPoints(int healthPoints) {
-    this.healthPoints = healthPoints;
+    if (this.healthPoints + healthPoints >= 100) {
+      this.healthPoints = 100;
+    } else {
+      this.healthPoints = this.healthPoints + healthPoints;
+    }
   }
 
   public String[] getInventory() {
