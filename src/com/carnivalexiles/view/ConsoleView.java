@@ -3,7 +3,8 @@ package com.carnivalexiles.view;
 import com.carnivalexiles.model.Day;
 import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
-import com.carnivalexiles.model.locations.Start;
+
+import java.io.IOException;
 
 public class ConsoleView {
 
@@ -11,7 +12,7 @@ public class ConsoleView {
   private Location currentLocation;
   private Day currentDay;
 
-  public ConsoleView(User user, Location location, Day day) {
+  public ConsoleView(User user, Location location, Day day) throws IOException, InterruptedException {
     this.currentLocation = location;
     this.currentDay = day;
     this.gameView = String.format(""
