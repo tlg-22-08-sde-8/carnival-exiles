@@ -246,8 +246,7 @@ public class TextParser {
             }
         }
         if (itemToGrab.isEmpty()) {
-            System.out.printf("Item not available. Items: %s\n ",
-                    Arrays.toString(currentLocationItems));
+            System.out.println("Item not available.");
             getUserInput();
         }
         clearScreen();

@@ -5,6 +5,7 @@ import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class ConsoleView {
 
@@ -21,8 +22,9 @@ public class ConsoleView {
             + "Inventory: %s\n"
             + "----------------------------------------------------------------------------------\n\n"
             + "%s\n"
+            + "Local Items: %s\n\n"
         , user.getHealthPoints(), location.getName(), day.getDay(), day.getTimeOfDay(),
-        user.getInventoryAsString(), location.getDescription());
+        user.getInventoryAsString(), location.getDescription(), Arrays.toString(location.getItems()));
   }
 
   public Location getCurrentLocation() {
