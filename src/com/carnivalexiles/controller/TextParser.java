@@ -164,6 +164,7 @@ public class TextParser {
             getUserInput();
         }
         clearScreen();
+        day.increaseTimeOfDay(2);
         playGame(user, mapLocations.locationHandler(userRequestedLocation),day);
     }
 

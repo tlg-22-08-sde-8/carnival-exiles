@@ -1,27 +1,54 @@
 package com.carnivalexiles.model;
 
+import com.carnivalexiles.controller.TextParser;
+
+import java.io.IOException;
+
 public class Day {
-  private int day;
-  private String timeOfDay;           // Array with 4 values as String -> dawn, dusk, afternoon, night
+    private int day;
+    private int timeOfDayCounter;
+    private static final String[] timeOfDay = {"dawn", "noon", "dusk", "night"};
 
-  public Day() {
-    this.day = 0;
-    this.timeOfDay = "Morning";
-  }
 
-  public int getDay() {
-    return day;
-  }
+    public Day() {
+        this.day = 0;
+    }
 
-  public void setDay(int day) {
-    this.day = day;
-  }
+    public int getDay() throws IOException, InterruptedException {
+        // If day reaches 8, end the game.
+        if (day == 8) {
+            TextParser.printGameOver();
+        }
+        return day;
+    }
 
-  public String getTimeOfDay() {
-    return timeOfDay;
-  }
+    public void setDay(int day) {
+        this.day = day;
+    }
 
-  public void setTimeOfDay(String timeOfDay) {
-    this.timeOfDay = timeOfDay;
-  }
+    public String getTimeOfDay() {
+        return timeOfDay[timeOfDayCounter];
+    }
+
+    public void increaseTimeOfDay() {
+        timeOfDayCounter++;
+        if (timeOfDayCounter > timeOfDay.length - 1) {
+            day++;
+            timeOfDayCounter = 0;
+        }
+    }
+
+    public void increaseTimeOfDay(int numberToIncrease) {
+        if (numberToIncrease < 1 || numberToIncrease > 3) {
+            throw new IllegalArgumentException("Invalid number to increase time of day");
+        }
+        int tempTimeOfDayCounter = timeOfDayCounter + numberToIncrease;
+        if (tempTimeOfDayCounter > timeOfDay.length - 1) {
+            day++;
+            timeOfDayCounter = tempTimeOfDayCounter - (timeOfDay.length - 1);
+        }
+        else {
+            timeOfDayCounter = tempTimeOfDayCounter;
+        }
+    }
 }

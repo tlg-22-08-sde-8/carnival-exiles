@@ -4,13 +4,15 @@ import com.carnivalexiles.model.Day;
 import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 
+import java.io.IOException;
+
 public class ConsoleView {
 
   private String gameView;
   private Location currentLocation;
   private Day currentDay;
 
-  public ConsoleView(User user, Location location, Day day) {
+  public ConsoleView(User user, Location location, Day day) throws IOException, InterruptedException {
     this.currentLocation = location;
     this.currentDay = day;
     this.gameView = String.format(""
