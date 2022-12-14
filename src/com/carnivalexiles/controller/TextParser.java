@@ -49,10 +49,21 @@ public class TextParser {
         }
         if (userInput.equals("yes")) {
             clearScreen();
-            WelcomeScreen.displayTitle();
-            WelcomeScreen.displayIntroduction();
-            TextParser.enterGame();
+            startGame();
         }
+        else {
+            stopGame();
+        }
+    }
+
+    private static void stopGame() {
+        Thread.currentThread().stop();
+    }
+
+    public static void startGame() throws IOException, InterruptedException {
+        WelcomeScreen.displayTitle();
+        WelcomeScreen.displayIntroduction();
+        TextParser.enterGame();
     }
 
     public static void playGame(User user, Location location, Day day) throws IOException, InterruptedException {
@@ -156,7 +167,7 @@ public class TextParser {
         playGame(user, mapLocations.locationHandler(userRequestedLocation),day);
     }
 
-    private static void clearScreen() {
+    public static void clearScreen() {
         System.out.println(System.lineSeparator().repeat(50));
     }
 

@@ -8,9 +8,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         //Print opening dialogue
-        System.out.println(System.lineSeparator().repeat(50));
-        WelcomeScreen.displayTitle();
-        WelcomeScreen.displayIntroduction();
-        TextParser.enterGame();
+        TextParser.clearScreen();
+        TextParser.startGame();
     }
 }
