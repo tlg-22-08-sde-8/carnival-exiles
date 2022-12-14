@@ -2,10 +2,10 @@ package com.carnivalexiles.controller;
 
 import com.carnivalexiles.model.Day;
 import com.carnivalexiles.model.User;
-import com.carnivalexiles.model.locations.*;
+import com.carnivalexiles.model.locations.Location;
+import com.carnivalexiles.model.locations.MapLocation;
 import com.carnivalexiles.view.ConsoleView;
 import com.carnivalexiles.view.WelcomeScreen;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -56,6 +56,10 @@ public class TextParser {
 
     private static void stopGame() {
         Thread.currentThread().stop();
+    }
+
+    public static void clearScreen() {
+        System.out.println(System.lineSeparator().repeat(50));
     }
 
     public static void startGame() throws IOException, InterruptedException {
@@ -164,10 +168,6 @@ public class TextParser {
         clearScreen();
         day.increaseTimeOfDay(2);
         playGame(user, mapLocations.locationHandler(userRequestedLocation), day);
-    }
-
-    public static void clearScreen() {
-        System.out.println(System.lineSeparator().repeat(50));
     }
 
     private static void lookAtItem() throws IOException, InterruptedException {

@@ -1,0 +1,27 @@
+{"start": {
+  "items": "stick",
+  "description": "You look around and you see a beautiful Sandy Beach that stretches \nbeyond the horizon to your right and a luscious forest,\nfilled with coconuts, to your left. There are also sticks\nscattered around the shoreline.\n\nLocal Items: ",
+  "name": "START           ",
+  "visibleLocations": {
+    "option1": "SANDY BEACH",
+    "option2": "COCO FOREST"
+  }
+},
+  "Sandy Beach": {
+    "items": "stick",
+    "description": "You look around and you see a beautiful Sandy Beach that stretches \nbeyond the horizon to your right and a luscious forest,\nfilled with coconuts, to your left. There are also sticks\nscattered around the shoreline.\n\nLocal Items: ",
+    "name": "SANDY BEACH     ",
+    "visibleLocations": {
+      "option1": "SANDY BEACH",
+      "option2": "COCO FOREST"
+    }
+  },
+  "Coco Forest": {
+    "items": "stick",
+    "description": "You look around and you see a beautiful Sandy Beach that stretches \nbeyond the horizon to your right and a luscious forest,\nfilled with coconuts, to your left. There are also sticks\nscattered around the shoreline.\n\nLocal Items: ",
+    "name": "COCO FOREST     ",
+    "visibleLocations": {
+      "option1": "SANDY BEACH",
+      "option2": "COCO FOREST"
+    }
+  }}
