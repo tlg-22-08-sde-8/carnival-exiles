@@ -17,13 +17,10 @@
     }
   }],
   "Coco Forest": [{
-    "items": ["coconut", "plant"],
+    "items": ["coconut", "plant", "five", "four"],
     "description": "You’ve arrived at Coco Forest. An abundance of coconuts lie on the floor,\nsome that have been eaten. The smell of fresh coconut is pleasant.\nSandy Beach is behind you, and you also see a mountain peaking over\nbehind the trees looking ominous.\n",
     "name": "COCO FOREST     ",
-    "visibleLocations": {
-      "option1": "SUS MOUNTAIN",
-      "option2": "SANDY BEACH"
-    }
+    "visibleLocations": "SUS MOUNTAIN and SANDY BEACH"
   }],
   "Sus Mountain": [{
     "items": ["copper"],
