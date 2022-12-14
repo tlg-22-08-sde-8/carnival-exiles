@@ -6,6 +6,7 @@ import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.MapLocation;
 import com.carnivalexiles.view.ConsoleView;
 import com.carnivalexiles.view.WelcomeScreen;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -121,7 +122,7 @@ public class TextParser {
                 hug();
                 break;
             case "drop":
-                drop();
+                dropItem(userInput);
                 break;
             case "attack":
                 attack();
@@ -233,11 +234,11 @@ public class TextParser {
         String itemToGrab = "";
         for (int i = 0; i < currentLocationItems.length; i++) {
             if (upperCaseRawUserInput.contains(currentLocationItems[i].toUpperCase())) {
+                // Grab item, update item into user inventory, and remove from location items
                 itemToGrab = currentLocationItems[i];
                 var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
                 itemsList.remove(i);
                 consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
-
                 var currentUserInventory = user.getInventory();
                 var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
                 currentUserInventoryAsList.add(itemToGrab);
@@ -253,14 +254,36 @@ public class TextParser {
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
-    private static void hug() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
-        Thread.sleep(3000);
+    private static void dropItem(String rawUserInput) throws IOException, InterruptedException {
+        String upperCaseRawUserInput = rawUserInput.toUpperCase();
+        var userInventory = user.getInventory();
+        var itemsToDrop = new ArrayList<String>();
+        // Identify items to drop from the user's input
+        for (String item : userInventory) {
+            if (upperCaseRawUserInput.contains(item.toUpperCase())) {
+                itemsToDrop.add(item);
+            }
+        }
+        // If no match, print error and try again
+        if (itemsToDrop.isEmpty()) {
+            System.out.println("Please provide a valid item(s) to drop.");
+            getUserInput();
+        } else {
+            var userInventoryList = new ArrayList<>(Arrays.asList(userInventory));
+            var locationItemsList = new ArrayList<>(Arrays.asList(consoleView.getCurrentLocation().getItems()));
+            // For every item to drop, remove it from the user inventory and it to the location items
+            for (String item : itemsToDrop) {
+                userInventoryList.remove(item);
+                locationItemsList.add(item);
+            }
+            user.setInventory(userInventoryList.toArray(new String[userInventoryList.size()]));
+            consoleView.getCurrentLocation().setItems(locationItemsList.toArray(new String[locationItemsList.size()]));
+        }
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
-    private static void drop() throws IOException, InterruptedException {
+    private static void hug() throws IOException, InterruptedException {
         System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
         Thread.sleep(3000);
         clearScreen();
