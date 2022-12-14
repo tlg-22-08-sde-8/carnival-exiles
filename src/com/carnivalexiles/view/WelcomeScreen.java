@@ -24,7 +24,6 @@ public class WelcomeScreen {
           + "                                                                                                                     ";
 
   public static void displayTitle() {
-    // TODO 12/11/2022: ASCII Title Text: Sprint 2
     System.out.println(GREEN + "\n" + TITLE + "\n" + RESET);
   }
 

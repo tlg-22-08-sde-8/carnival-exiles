@@ -3,7 +3,6 @@ package com.carnivalexiles.view;
 import com.carnivalexiles.model.Day;
 import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
-import com.carnivalexiles.model.locations.Start;
 
 public class ConsoleView {
 
