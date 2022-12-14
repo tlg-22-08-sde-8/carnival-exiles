@@ -5,7 +5,7 @@ public class Location {
   //Fields
   private String description;
   private String name;
-  private String[] items = new String[10];
+  private String[] items;
   private String visibleLocations;
 
   //Ctor
@@ -36,6 +36,9 @@ public class Location {
   }
 
   public String[] getItems() {
+    if (items.length == 0 || items == null) {
+      return new String[] {"NO ITEMS AVAILABLE"};
+    }
     return items;
   }
 
