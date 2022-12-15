@@ -84,15 +84,16 @@ public class MapLocation {
                     + "of the sun.\n";
     String lagoonName = "LUMINOUS LAGOON ";
     String lagoonVisibleLocations = "MOIST MARSHLAND";
+
     Location lagoonLocation = new Lagoon(lagoonDescription, lagoonName, lagoonItems, lagoonVisibleLocations);
 
     // TODO: 12/14/2022 Attempting to see if newly created location will work as a return location.  
     // TODO: 12/14/2022 If this works then everything besides ALL_LOCATIONS can be deleted. 
     // TODO: 12/14/2022 - Current issue - return Location is null.  
-Location startingspot = JsonLocationParser.locationParser("Start");
+Location startingSpot = JsonLocationParser.locationParser("Start");
 
     public Location getStartLocation() {
-        return startingspot;
+        return startLocation;
     }
 
     public Location getBeachLocation() {

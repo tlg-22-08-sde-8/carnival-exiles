@@ -19,7 +19,7 @@ public class JsonLocationParser {
   //Method takes in a location entered by the user.
   public static Location locationParser(String enteredLocation) {
     // TODO: 12/14/2022 Attempted Null and this dummy location object and neither have worked. 
-    Location location = new Location("asdf", "placeholder", null,"Something");
+    Location location = null;
     try {
 
       //Create a Gson
@@ -95,9 +95,9 @@ public class JsonLocationParser {
 
 
 
-//  public static void main(String[] args) {
-//
-//  locationParser("Start");
-//
-//  }
+  public static void main(String[] args) {
+
+  locationParser("Coco Forest");
+
+  }
 }
