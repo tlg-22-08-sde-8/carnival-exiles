@@ -26,7 +26,6 @@ public class Action {
                 + "11. Look around (Type \"Look\")\n"
                 + "12. Quit the game (Type \"Quit\")\n"
                 + "-------------- END----------------\n"
-                + "----------------------------------\n"
                 ;
         return result;
     }
