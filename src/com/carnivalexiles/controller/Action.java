@@ -78,7 +78,7 @@ public class Action {
         return false;
     }
 
-    public boolean canDrop(User user) {
+    public boolean canDrop(User user) throws IOException, InterruptedException {
         // TODO: 12/10/22 Ensure user does not have an empty inventory
         // TODO: 12/10/22 If they do not, gather feedback from user as to which item to drop
         // TODO: 12/10/22 Return true if item can be removed from inventory.
