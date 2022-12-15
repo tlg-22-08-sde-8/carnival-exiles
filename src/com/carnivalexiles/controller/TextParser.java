@@ -38,7 +38,7 @@ public class TextParser {
     public static void newGame() {
         mapLocations = new MapLocation();                              // All map locations obj
         user = new User(100, new String[]{"empty bottle"});       // Game user
-        Day day = new Day();
+        day = new Day();
     }
 
     public static void printGameOver() throws IOException, InterruptedException {
