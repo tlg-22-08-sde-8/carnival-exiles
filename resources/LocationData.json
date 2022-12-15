@@ -4,37 +4,37 @@
   "name": "START           ",
   "visibleLocations": "SANDY BEACH and COCO FOREST"
 }],
-  "Sandy Beach": [{
+  "sandy beach": [{
     "items": ["sea shells"],
     "description": "You’ve arrived to 'Sandy Beach'. Warm sand beneath your toes and \nthe sound of waves splashing. Hundreds of sea shells are spread\nalong the coast. 'Coco Forest' is on your left and nearby\nto your right is 'Moist Marshland'.\n",
     "name": "SANDY BEACH     ",
     "visibleLocations": "MOIST MARSHLAND and COCO FOREST"
   }],
-  "Coco Forest": [{
+  "coco forest": [{
     "items": ["coconut", "plant"],
     "description": "You’ve arrived at 'Coco Forest'. An abundance of coconuts lie on the floor,\nsome that have been eaten. The smell of fresh coconut is pleasant.\n'Sandy Beach' is behind you, and you also see 'Sus Mountain' peaking over\nbehind the trees looking ominous.\n",
     "name": "COCO FOREST     ",
     "visibleLocations": "SUS MOUNTAIN and SANDY BEACH"
   }],
-  "Sus Mountain": [{
+  "sus mountain": [{
     "items": ["copper"],
     "description": "Oh no! You’ve arrived at 'Sus Mountain' and lava is slowly oozing out. \nIt seems that there are x days left until an eruption. You need to \nget off of this island quickly! There are some pieces of copper lying\nnearby. 'Logarithmic Lake' is up ahead but you need to pass the volcano.\nBe careful!\n",
     "name": "SUS MOUNTAIN    ",
     "visibleLocations": "LOGARITHMIC LAKE and COCO FOREST"
   }],
-  "Logarithmic Lake": [{
+  "logarithmic lake": [{
     "items": ["water", "fish"],
     "description": "You arrive at a very beautiful and efficiently running lake. A Wizard\nappears. He says “In order to quench your thirst with this water,\nyou must answer the following question”: \n\nIf you have 2 logs and you jump over 1, how many times\ndo you need to jump before you get tired? \n\nIf the Wizard’s question is too difficult of a riddle… \nyou can check out 'Moist Marshland' to quench your \nthirst. Along the shoreline that contain patches of\naquatic vegetation are largemouth bass.\n",
     "name": "LOGARITHMIC LAKE",
     "visibleLocations": "MOIST MARSHLAND and SUS MOUNTAIN"
   }],
-  "Moist Marshland": [{
+  "moist marshland": [{
     "items": ["frog", "brown water"],
     "description": "You have arrived to 'Moist Marshland' and it is just as humid as you\nanticipated. The stickiness of the marsh is too much to bear. You look in all\ndirections and spot 'Luminous Lagoon' ahead of you and 'Sandy Beach' and 'Logarithmic\nLake' in your rear.\n",
     "name": "MOIST MARSHLAND ",
     "visibleLocations":"SANDY BEACH and LOGARITHMIC LAKE and LUMINOUS LAGOON"
   }],
-  "Luminous Lagoon": [{
+  "luminous lagoon": [{
     "items": ["clay"],
     "description": "You’ve arrived at 'Luminous Lagoon'. The ripples shimmer with the reflection\nof the sun. The lagoon is lined with material, such as clay or an artificial liner.\n",
     "name": "LUMINOUS LAGOON ",
