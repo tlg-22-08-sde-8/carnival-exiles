@@ -16,8 +16,8 @@ public class MapLocation {
     // Creating a start location
     String[] startItems = {"stick"};
     String startDescription =
-            "You look around and you see a beautiful Sandy Beach that stretches \n"
-                    + "beyond the horizon to your right and a luscious forest,\n"
+                      "You look around and you see a beautiful 'Sandy Beach' that stretches \n"
+                    + "beyond the horizon to your right and 'Coco Forest',\n"
                     + "filled with coconuts, to your left. There are also sticks\n"
                     + "scattered around the shoreline.\n";
     String startName = "START           ";
@@ -27,10 +27,10 @@ public class MapLocation {
     // Creating SANDY BEACH
     String[] beachItems = {"sea shells"};
     String beachDescription =
-            "You’ve arrived to Sandy Beach. Warm sand beneath your toes and \n"
+                      "You’ve arrived to 'Sandy Beach'. Warm sand beneath your toes and \n"
                     + "the sound of waves splashing. Hundreds of sea shells are spread\n"
-                    + "along the coast. Coco Forest is on your left and nearby\n"
-                    + "to your right is a moist marshland.\n";
+                    + "along the coast. 'Coco Forest' is on your left and nearby\n"
+                    + "to your right is 'Moist Marshland'.\n";
     String beachName = "SANDY BEACH     ";
     String beachVisibleLocations = "MOIST MARSHLAND and COCO FOREST";
     Location beachLocation = new Beach(beachDescription, beachName, beachItems, beachVisibleLocations);
@@ -38,9 +38,9 @@ public class MapLocation {
     // Creating COCO FOREST
     String[] forestItems = {"coconut", "magical herbs"};
     String forestDescription =
-            "You’ve arrived at Coco Forest. An abundance of coconuts lie on the floor,\n"
+                      "You’ve arrived at 'Coco Forest'. An abundance of coconuts lie on the floor,\n"
                     + "some that have been eaten. The smell of fresh coconut is pleasant.\n"
-                    + "Sandy Beach is behind you, and you also see a mountain peaking over\n"
+                    + "'Sandy Beach' is behind you, and you also see 'Sus Mountain' peaking over\n"
                     + "behind the trees looking ominous.\n";
     String forestName = "COCO FOREST     ";
     String forestVisibleLocations = "SUS MOUNTAIN and SANDY BEACH";
@@ -49,10 +49,11 @@ public class MapLocation {
     // Creating SUS MOUNTAIN
     String[] mountainItems = {"copper, berries"};
     String mountainDescription =
-            "Oh no! You’ve arrived at Sus Mountain and lava is slowly oozing out. \n"
+                      "Oh no! You’ve arrived at 'Sus Mountain' and lava is slowly oozing out. \n"
                     + "It seems that there are x days left until an eruption. You need to \n"
                     + "get off of this island quickly! There are some pieces of copper lying\n"
-                    + "nearby.\n";
+                    + "nearby. 'Logarithmic Lake' is up ahead but you need to pass the volcano.\n"
+                    + "Be careful!\n";
     String mountainName = "SUS MOUNTAIN    ";
     String mountainVisibleLocations = "LOGARITHMIC LAKE and COCO FOREST";
     Location mountainLocation = new Mountain(mountainDescription, mountainName, mountainItems, mountainVisibleLocations);
@@ -60,13 +61,13 @@ public class MapLocation {
     // Creating LOGARITHMIC LAKE
     String[] lakeItems = {"water", "fish"};
     String lakeDescription =
-            "You arrive at a very beautiful and efficiently running lake. A Wizard\n"
+                      "You arrive at a very beautiful and efficiently running lake. A Wizard\n"
                     + "appears. He says “In order to quench your thirst with this water,\n"
                     + "you must answer the following question”: \n\n"
                     + "If you have 2 logs and you jump over 1, how many times\n"
                     + "do you need to jump before you get tired? \n\n"
                     + "If the Wizard’s question is too difficult of a riddle… \n"
-                    + "you can check out the moist marshland to quench your \n"
+                    + "you can check out 'Moist Marshland' to quench your \n"
                     + "thirst. Along the shoreline that contain patches of\n"
                     + "aquatic vegetation are large-mouth bass.\n";
     String lakeName = "LOGARITHMIC LAKE";
@@ -76,10 +77,10 @@ public class MapLocation {
     // Creating MOIST MARSHLAND
     String[] marshlandItems = {"frog", "brown water"};
     String marshlandDescription =
-            "You have arrived at the Moist Marshland and it is just as humid as you\n"
+                      "You have arrived to 'Moist Marshland' and it is just as humid as you\n"
                     + "anticipated. The stickiness of the marsh is too much to bear. You look in all\n"
-                    + "directions and spot Luminous Lagoon ahead of you and Sandy Beach and Logarithmic\n"
-                    + "Lake in your rear.\n";
+                    + "directions and spot 'Luminous Lagoon' ahead of you and 'Sandy Beach' and 'Logarithmic\n"
+                    + "Lake' in your rear.\n";
     String marshlandName = "MOIST MARSHLAND ";
     String marshlandVisibleLocations = "SANDY BEACH, LOGARITHMIC LAKE, and LUMINOUS LAGOON";
     Location marshlandLocation = new MarshLand(marshlandDescription, marshlandName, marshlandItems, marshlandVisibleLocations);
@@ -87,8 +88,8 @@ public class MapLocation {
     // Creating LUMINOUS LAGOON
     String[] lagoonItems = {"clay"};
     String lagoonDescription =
-            "You’ve arrived at Luminous Lagoon. The ripples shimmer with the reflection\n"
-                    + "of the sun.\n";
+                      "You’ve arrived at 'Luminous Lagoon'. The ripples shimmer with the reflection\n"
+                    + "of the sun. The lagoon is lined with material, such as clay or an artificial liner.\n";
     String lagoonName = "LUMINOUS LAGOON ";
     String lagoonVisibleLocations = "MOIST MARSHLAND";
     Location lagoonLocation = new Lagoon(lagoonDescription, lagoonName, lagoonItems, lagoonVisibleLocations);
