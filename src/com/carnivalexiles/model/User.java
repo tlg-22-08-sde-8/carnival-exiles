@@ -7,14 +7,15 @@ public class User {
   //Fields
   private int healthPoints;
   private String[] inventory;
+  private boolean inventoryContainsConsumableItems;
 
   public User(int healthPoints, String[] inventory) {
     setHealthPoints(healthPoints);
     setInventory(inventory);
   }
 
-  public void increaseHealthPoints(int increasePoints) {
-    setHealthPoints(increasePoints);
+  public void modifyHealthPoints(int hpPointsToModifyBy) {
+    setHealthPoints(hpPointsToModifyBy);
   }
 
   public int getHealthPoints() {
@@ -33,9 +34,19 @@ public class User {
     return inventory;
   }
 
+  public boolean getInventoryConsumableStatus() {
+    return inventoryContainsConsumableItems;
+  }
+
+  public void setInventoryInventoryConsumableStatus() {
+    this.inventoryContainsConsumableItems = true;
+  }
+
+  public void changeInventoryConsumableItemsStatus() {
+    inventoryContainsConsumableItems = !inventoryContainsConsumableItems;
+  }
+
   public String getInventoryAsString() {
-    // TODO: 12/12/22 Modify the output to come out cleaner, i.e., reading from the array
-    // TODO: will create funky output.
     return Arrays.toString(inventory);
   }
 
