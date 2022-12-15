@@ -36,7 +36,7 @@ public class Location {
     }
 
     public String[] getItems() {
-        if (items.length == 0 || items == null) {
+        if (this.items.length == 0) {
             return new String[]{};
         }
         return items;
