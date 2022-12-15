@@ -1,10 +1,18 @@
 package com.carnivalexiles.model.locations;
 
+import com.carnivalexiles.controller.JsonLocationParser;
 import java.util.Arrays;
+import java.util.List;
 
 public class MapLocation {
     public static final String[] ALL_LOCATIONS = {"SANDY BEACH", "COCO FOREST", "MOIST MARSHLAND", "SUS MOUNTAIN",
             "LOGARITHMIC LAKE", "LUMINOUS LAGOON"};
+
+    public static final List<String> ALL_ITEMS = Arrays.asList("stick", "sea shells", "coconut", "magical herbs",
+            "copper", "water", "fish", "frog", "brown water", "clay");
+
+    public static final List<String> CONSUMABLE_ITEMS = Arrays.asList("coconut", "magical herbs",
+            "bottled water", "bottled brown water", "fish", "berries");
 
     // Creating a start location
     String[] startItems = {"stick"};
@@ -29,7 +37,7 @@ public class MapLocation {
     Location beachLocation = new Beach(beachDescription, beachName, beachItems, beachVisibleLocations);
 
     // Creating COCO FOREST
-    String[] forestItems = {"coconut", "plant"};
+    String[] forestItems = {"coconut", "magical herbs"};
     String forestDescription =
             "You’ve arrived at Coco Forest. An abundance of coconuts lie on the floor,\n"
                     + "some that have been eaten. The smell of fresh coconut is pleasant.\n"
@@ -40,7 +48,7 @@ public class MapLocation {
     Location forestLocation = new Forest(forestDescription, forestName, forestItems, forestVisibleLocations);
 
     // Creating SUS MOUNTAIN
-    String[] mountainItems = {"copper"};
+    String[] mountainItems = {"copper, berries"};
     String mountainDescription =
             "Oh no! You’ve arrived at Sus Mountain and lava is slowly oozing out. \n"
                     + "It seems that there are x days left until an eruption. You need to \n"
@@ -61,7 +69,7 @@ public class MapLocation {
                     + "If the Wizard’s question is too difficult of a riddle… \n"
                     + "you can check out the moist marshland to quench your \n"
                     + "thirst. Along the shoreline that contain patches of\n"
-                    + "aquatic vegetation are largemouth bass.\n";
+                    + "aquatic vegetation are large-mouth bass.\n";
     String lakeName = "LOGARITHMIC LAKE";
     String lakeVisibleLocations = "MOIST MARSHLAND and SUS MOUNTAIN";
     Location lakeLocation = new Lake(lakeDescription, lakeName, lakeItems, lakeVisibleLocations);
@@ -85,6 +93,11 @@ public class MapLocation {
     String lagoonName = "LUMINOUS LAGOON ";
     String lagoonVisibleLocations = "MOIST MARSHLAND";
     Location lagoonLocation = new Lagoon(lagoonDescription, lagoonName, lagoonItems, lagoonVisibleLocations);
+
+    // TODO: 12/14/2022 Attempting to see if newly created location will work as a return location.
+    // TODO: 12/14/2022 If this works then everything besides ALL_LOCATIONS can be deleted.
+    // TODO: 12/14/2022 - Current issue - return Location is null.
+Location startingSpot = JsonLocationParser.locationParser("Start");
 
     public Location getStartLocation() {
         return startLocation;
