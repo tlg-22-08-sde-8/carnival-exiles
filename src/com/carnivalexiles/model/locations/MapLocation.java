@@ -1,9 +1,8 @@
 package com.carnivalexiles.model.locations;
 
-import java.util.ArrayList;
+import com.carnivalexiles.controller.JsonLocationParser;
 import java.util.Arrays;
 import java.util.List;
-import com.carnivalexiles.controller.JsonLocationParser;
 
 public class MapLocation {
     public static final String[] ALL_LOCATIONS = {"SANDY BEACH", "COCO FOREST", "MOIST MARSHLAND", "SUS MOUNTAIN",
