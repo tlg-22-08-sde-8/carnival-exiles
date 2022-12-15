@@ -1,6 +1,6 @@
 package com.carnivalexiles.model.locations;
 
-import java.util.Arrays;
+import com.carnivalexiles.controller.JsonLocationParser;
 
 public class MapLocation {
     public static final String[] ALL_LOCATIONS = {"SANDY BEACH", "COCO FOREST", "MOIST MARSHLAND", "SUS MOUNTAIN",
@@ -86,8 +86,13 @@ public class MapLocation {
     String lagoonVisibleLocations = "MOIST MARSHLAND";
     Location lagoonLocation = new Lagoon(lagoonDescription, lagoonName, lagoonItems, lagoonVisibleLocations);
 
+    // TODO: 12/14/2022 Attempting to see if newly created location will work as a return location.  
+    // TODO: 12/14/2022 If this works then everything besides ALL_LOCATIONS can be deleted. 
+    // TODO: 12/14/2022 - Current issue - return Location is null.  
+Location startingspot = JsonLocationParser.locationParser("Start");
+
     public Location getStartLocation() {
-        return startLocation;
+        return startingspot;
     }
 
     public Location getBeachLocation() {
