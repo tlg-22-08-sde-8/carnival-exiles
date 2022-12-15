@@ -5,6 +5,7 @@ import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.MapLocation;
 import com.carnivalexiles.view.ConsoleView;
+import com.carnivalexiles.view.GoingToText;
 import com.carnivalexiles.view.WelcomeScreen;
 
 import java.io.BufferedReader;
@@ -38,7 +39,7 @@ public class TextParser {
     public static void newGame() {
         mapLocations = new MapLocation();                              // All map locations obj
         user = new User(100, new String[]{"empty bottle"});       // Game user
-        Day day = new Day();
+        day = new Day();
     }
 
     public static void printGameOver() throws IOException, InterruptedException {
@@ -95,7 +96,7 @@ public class TextParser {
         // If user's input does not contain a valid action, prompt again for input
         if (requestedAction.isEmpty()) {
             System.out.println("Action not available, type \"Help\" for assistance");
-            Thread.sleep(3000);
+            pauseTheGame();
             clearScreen();
             playGame(user, consoleView.getCurrentLocation(), day);
             getUserInput();
@@ -174,8 +175,16 @@ public class TextParser {
             clearScreen();
             day.increaseTimeOfDay(2);
             user.modifyHealthPoints(-20);
+            clearScreen();
+            System.out.println((printGoToScreen(userRequestedLocation)));
+            pauseTheGame();
+            clearScreen();
             playGame(user, mapLocations.locationHandler(userRequestedLocation), day);
         }
+    }
+
+    private static void pauseTheGame() throws InterruptedException {
+        Thread.sleep(3000);
     }
 
     private static void lookAtItems() throws IOException, InterruptedException {
@@ -190,13 +199,13 @@ public class TextParser {
         while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
             if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
                 System.out.printf("You are looking at %s", user.getInventoryAsString());
-                Thread.sleep(3000);
+                pauseTheGame();
             }
             clearScreen();
             playGame(user, mapLocations.locationHandler(userInput), day);
         }
         System.out.println("Sorry that item is not available");
-        Thread.sleep(3000);
+        pauseTheGame();
         clearScreen();
         playGame(user, mapLocations.locationHandler(userInput), day);
     }
@@ -243,21 +252,21 @@ public class TextParser {
 
     private static void swim() throws IOException, InterruptedException {
         System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
-        Thread.sleep(3000);
+        pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void cry() throws IOException, InterruptedException {
         System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
-        Thread.sleep(3000);
+        pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void rest() throws IOException, InterruptedException {
         System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
-        Thread.sleep(3000);
+        pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
@@ -292,6 +301,25 @@ public class TextParser {
         }
     }
 
+    private static String printGoToScreen(String requestedLocation) {
+        switch (requestedLocation) {
+            case "SANDY BEACH":
+                return GoingToText.travelingSandyBeach;
+            case "COCO FOREST":
+                return GoingToText.travelingCocoForest;
+            case "MOIST MARSHLAND":
+                return GoingToText.travelingMoistMarshland;
+            case "SUS MOUNTAIN":
+                return GoingToText.travelingSusMountain;
+            case "LOGARITHMIC LAKE":
+                return GoingToText.travelingLogarithmicLake;
+            case "LUMINOUS LAGOON":
+                return GoingToText.travelingLuminousLagoon;
+            default:
+                return "NOT VALID LOCATION";
+        }
+    }
+
     private static void dropItem(String rawUserInput) throws IOException, InterruptedException {
         String upperCaseRawUserInput = rawUserInput.toUpperCase();
         var userInventory = user.getInventory();
@@ -323,21 +351,21 @@ public class TextParser {
 
     private static void hug() throws IOException, InterruptedException {
         System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
-        Thread.sleep(3000);
+        pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void attack() throws IOException, InterruptedException {
         System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
-        Thread.sleep(3000);
+        pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void retreat() throws IOException, InterruptedException {
         System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
-        Thread.sleep(3000);
+        pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
