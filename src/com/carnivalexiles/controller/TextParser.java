@@ -31,7 +31,7 @@ public class TextParser {
 
         if (!userInput.equals("quit")) {
             clearScreen();
-            playGame(user, mapLocations.getStartLocation(), day);
+            playGame(user, JsonLocationParser.allMapLocations.get(0), day);
         } else {
             printGameOver();
         }
@@ -64,6 +64,7 @@ public class TextParser {
     }
 
     public static void startGame() throws IOException, InterruptedException {
+        JsonLocationParser.locationParser();
         WelcomeScreen.displayTitle();
         WelcomeScreen.displayIntroduction();
         TextParser.enterGame();
