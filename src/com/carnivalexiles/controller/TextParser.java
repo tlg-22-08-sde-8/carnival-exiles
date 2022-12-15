@@ -24,17 +24,21 @@ public class TextParser {
 
     public static void enterGame() throws IOException, InterruptedException {
         String userInput;
-
         // Enter the game with any key or quit by typing "quit"
         System.out.print("> ");
         userInput = bufferReader.readLine().toLowerCase().trim();
-
         if (!userInput.equals("quit")) {
             clearScreen();
             playGame(user, mapLocations.getStartLocation(), day);
         } else {
             printGameOver();
         }
+    }
+
+    public static void newGame() {
+        mapLocations = new MapLocation();                              // All map locations obj
+        user = new User(100, new String[]{"empty bottle"});       // Game user
+        Day day = new Day();
     }
 
     public static void printGameOver() throws IOException, InterruptedException {
@@ -49,6 +53,7 @@ public class TextParser {
         }
         if (userInput.equals("yes")) {
             clearScreen();
+            newGame();
             startGame();
         } else {
             stopGame();
@@ -165,11 +170,12 @@ public class TextParser {
         if (userRequestedLocation.isEmpty()) {
             System.out.printf("You can only go to %s (pick one)\n ", visibleLocations);
             getUserInput();
+        } else {
+            clearScreen();
+            day.increaseTimeOfDay(2);
+            user.modifyHealthPoints(-20);
+            playGame(user, mapLocations.locationHandler(userRequestedLocation), day);
         }
-        clearScreen();
-        day.increaseTimeOfDay(2);
-        user.modifyHealthPoints(-20);
-        playGame(user, mapLocations.locationHandler(userRequestedLocation), day);
     }
 
     private static void lookAtItems() throws IOException, InterruptedException {
@@ -203,8 +209,7 @@ public class TextParser {
         if (!user.getInventoryConsumableStatus()) {
             System.out.println("No consumable items in inventory.");
             getUserInput();
-        }
-        else {
+        } else {
             String lowerCaseRawUserInput = rawUserInput.toLowerCase();
             var currentUserInventory = user.getInventory();
             var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
@@ -261,6 +266,7 @@ public class TextParser {
         String upperCaseRawUserInput = rawUserInput.toUpperCase();
         String[] currentLocationItems = consoleView.getCurrentLocation().getItems();
         String itemToGrab = "";
+        // For each item in the current location
         for (int i = 0; i < currentLocationItems.length; i++) {
             if (upperCaseRawUserInput.contains(currentLocationItems[i].toUpperCase())) {
                 // Grab item, update item into user inventory, and remove from location items
@@ -268,21 +274,22 @@ public class TextParser {
                 var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
                 itemsList.remove(i);
                 consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
+                // Handle user's inventory
                 var currentUserInventory = user.getInventory();
                 var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
                 currentUserInventoryAsList.add(itemToGrab);
                 user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
-                break;
             }
         }
         if (itemToGrab.isEmpty()) {
             System.out.println("Item not available.");
             getUserInput();
+        } else {
+            handleBottleInUserInventory();
+            doesUserInventoryContainEdibles();
+            clearScreen();
+            playGame(user, consoleView.getCurrentLocation(), day);
         }
-        handleBottleInUserInventory();
-        doesUserInventoryContainEdibles();
-        clearScreen();
-        playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void dropItem(String rawUserInput) throws IOException, InterruptedException {

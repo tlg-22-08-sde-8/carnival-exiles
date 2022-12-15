@@ -7,7 +7,7 @@ public class User {
   //Fields
   private int healthPoints;
   private String[] inventory;
-  private boolean inventoryContainsConsumableItems;
+  private boolean inventoryContainsConsumableItems;         // Tell me if user's inventory contains consumable item
 
   public User(int healthPoints, String[] inventory) {
     setHealthPoints(healthPoints);
