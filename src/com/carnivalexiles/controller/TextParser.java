@@ -281,25 +281,24 @@ public class TextParser {
         String upperCaseRawUserInput = rawUserInput.toUpperCase();
         String[] currentLocationItems = consoleView.getCurrentLocation().getItems();
         String itemToGrab = "";
+        var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
+        var currentUserInventory = user.getInventory();
+        var newUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
         // For each item in the current location
         for (int i = 0; i < currentLocationItems.length; i++) {
-            if (upperCaseRawUserInput.contains(currentLocationItems[i].toUpperCase())) {
+            if (upperCaseRawUserInput.contains(currentLocationItems[i].toUpperCase().trim())) {
                 // Grab item, update item into user inventory, and remove from location items
                 itemToGrab = currentLocationItems[i];
-                var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
-                itemsList.remove(i);
-                consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
-                // Handle user's inventory
-                var currentUserInventory = user.getInventory();
-                var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
-                currentUserInventoryAsList.add(itemToGrab);
-                user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
+                itemsList.remove(currentLocationItems[i]);
+                newUserInventoryAsList.add(itemToGrab);
             }
         }
         if (itemToGrab.isEmpty()) {
             System.out.println("Item not available.");
             getUserInput();
         } else {
+            consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
+            user.setInventory(newUserInventoryAsList.toArray(new String[newUserInventoryAsList.size()]));
             handleBottleInUserInventory();
             doesUserInventoryContainEdibles();
             clearScreen();

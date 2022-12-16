@@ -177,10 +177,4 @@ public class JsonLocationParser {
     //return location;
     return;
   }
-
-//  public static void main(String[] args) {
-//
-//  //locationParser("Coco Forest");
-//
-//  }
 }
