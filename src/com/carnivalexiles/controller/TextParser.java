@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TextParser {
+    public static final int LAST_DAY_IN_GAME = 8;
     static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
 
     static MapLocation mapLocations = new MapLocation();                              // All map locations obj
@@ -78,7 +79,7 @@ public class TextParser {
 
     public static void playGame(User user, Location location, Day day) throws IOException, InterruptedException {
         consoleView = new ConsoleView(user, location, day);
-        if (user.getHealthPoints() > 0) {
+        if (user.getHealthPoints() > 0 && day.getDay() < LAST_DAY_IN_GAME) {
             System.out.println(consoleView.getGameView());
             getUserInput();
         } else {
