@@ -257,21 +257,21 @@ public class TextParser {
     }
 
     private static void swim() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void cry() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void rest() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
@@ -355,21 +355,21 @@ public class TextParser {
     }
 
     private static void hug() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void attack() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void retreat() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 2");
+        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
