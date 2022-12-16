@@ -11,7 +11,7 @@
     "visibleLocations": "MOIST MARSHLAND and COCO FOREST"
   }],
   "coco forest": [{
-    "items": ["coconut", "plant"],
+    "items": ["coconut", "magical herbs"],
     "description": "You’ve arrived at 'Coco Forest'. An abundance of coconuts lie on the floor,\nsome that have been eaten. The smell of fresh coconut is pleasant.\n'Sandy Beach' is behind you, and you also see 'Sus Mountain' peaking over\nbehind the trees looking ominous.\n",
     "name": "COCO FOREST     ",
     "visibleLocations": "SUS MOUNTAIN and SANDY BEACH"
