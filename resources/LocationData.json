@@ -1,0 +1,43 @@
+{"landing zone": [{
+  "items": ["stick"],
+  "description": "You look around and you see a beautiful 'Sandy Beach' that stretches \nbeyond the horizon to your right and 'Coco Forest', filled with coconuts,\nto your left. There are also sticks scattered around the shoreline.\n",
+  "name": "LANDING ZONE     ",
+  "visibleLocations": "SANDY BEACH and COCO FOREST"
+}],
+  "sandy beach": [{
+    "items": ["sea shells"],
+    "description": "You’ve arrived to 'Sandy Beach'. Warm sand beneath your toes and \nthe sound of waves splashing. Hundreds of sea shells are spread\nalong the coast. The 'Landing Zone' is behind you, 'Coco Forest'\nis on your left and nearby to your right is 'Moist Marshland'.\n",
+    "name": "SANDY BEACH     ",
+    "visibleLocations": "LANDING ZONE, MOIST MARSHLAND, and COCO FOREST"
+  }],
+  "coco forest": [{
+    "items": ["coconut", "magical herbs"],
+    "description": "You’ve arrived at 'Coco Forest'. An abundance of coconuts lie on the floor,\nsome that have been eaten. The smell of fresh coconut is pleasant.\n'Landing Zone' is behind you, the 'Sandy Beach' is to your right, and you\n also see 'Sus Mountain' peaking over behind the trees looking ominous.\n",
+    "name": "COCO FOREST     ",
+    "visibleLocations": "LANDING ZONE, SUS MOUNTAIN, and SANDY BEACH"
+  }],
+  "sus mountain": [{
+    "items": ["copper"],
+    "description": "Oh no! You’ve arrived at 'Sus Mountain' and lava is slowly oozing out. \nIt seems that there are x days left until an eruption. You need to \nget off of this island quickly! There are some pieces of copper lying\nnearby. 'Logarithmic Lake' is up ahead but you need to pass the volcano.\nBe careful!\n",
+    "name": "SUS MOUNTAIN    ",
+    "visibleLocations": "LOGARITHMIC LAKE and COCO FOREST"
+  }],
+  "logarithmic lake": [{
+    "items": ["water", "fish"],
+    "description": "You arrive at a very beautiful and efficiently running lake. A Wizard\nappears. He says “In order to quench your thirst with this water,\nyou must answer the following question”: \n\nIf you have 2 logs and you jump over 1, how many times\ndo you need to jump before you get tired? \n\nIf the Wizard’s question is too difficult of a riddle… \nyou can check out 'Moist Marshland' to quench your \nthirst. Along the shoreline that contain patches of\naquatic vegetation are largemouth bass.\n",
+    "name": "LOGARITHMIC LAKE",
+    "visibleLocations": "MOIST MARSHLAND and SUS MOUNTAIN"
+  }],
+  "moist marshland": [{
+    "items": ["frog", "brown water"],
+    "description": "You have arrived to 'Moist Marshland' and it is just as humid as you\nanticipated. The stickiness of the marsh is too much to bear. You look in all\ndirections and spot 'Luminous Lagoon' ahead of you and 'Sandy Beach' and 'Logarithmic\nLake' in your rear.\n",
+    "name": "MOIST MARSHLAND ",
+    "visibleLocations":"SANDY BEACH and LOGARITHMIC LAKE and LUMINOUS LAGOON"
+  }],
+  "luminous lagoon": [{
+    "items": ["clay"],
+    "description": "You’ve arrived at 'Luminous Lagoon'. The ripples shimmer with the reflection\nof the sun. The lagoon is lined with material, such as clay or an artificial liner.\n",
+    "name": "LUMINOUS LAGOON ",
+    "visibleLocations": "MOIST MARSHLAND"
+  }]
+}
