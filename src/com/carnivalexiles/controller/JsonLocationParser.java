@@ -53,7 +53,7 @@ public class JsonLocationParser {
 
           var listOfItems = new ArrayList<String>();
           for (JsonElement items : locationJsonObject.get("items").getAsJsonArray()) {
-            listOfItems.add(String.valueOf(items));
+            listOfItems.add(String.valueOf(items).replace("\"", ""));
           }
           itemList = listOfItems.toArray(new String[listOfItems.size()]);
           name = locationJsonObject.get("name").getAsString();
