@@ -78,8 +78,12 @@ public class TextParser {
 
     public static void playGame(User user, Location location, Day day) throws IOException, InterruptedException {
         consoleView = new ConsoleView(user, location, day);
-        System.out.println(consoleView.getGameView());
-        getUserInput();
+        if (user.getHealthPoints() > 0) {
+            System.out.println(consoleView.getGameView());
+            getUserInput();
+        } else {
+            printGameOver();
+        }
     }
 
     public static void getUserInput() throws IOException, InterruptedException {
