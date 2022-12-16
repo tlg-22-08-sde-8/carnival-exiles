@@ -113,9 +113,13 @@ public class TextParser {
     public static void actionHandler(String requestedAction, String userInput) throws IOException, InterruptedException {
         switch (requestedAction) {
             case "go":
+            case "travel":
+            case "walk":
                 goTo(userInput);
                 break;
             case "consume":
+            case "eat":
+            //case "drink":
                 consumeItem(userInput);
                 break;
             case "swim":
