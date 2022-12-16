@@ -10,7 +10,20 @@ public class GoingToText {
     public static final String YELLOW = "\033[0;33m";
     public static final String BLACK = "\033[0;30m";
     public static final String RESET = "\033[0m";                             // Text Reset
-
+    public static final String TREE = ""
+            + "\n        __ _.--..--._ _\n"
+            + "     .-' _/   _/\\_   \\_'-.\n"
+            + "    |__ /   _/\\__/\\_   \\__|\n"
+            + "       |___/\\_\\__/  \\___|\n"
+            + "              \\__/\n"
+            + "              \\__/\n"
+            + "               \\__/\n"
+            + "                \\__/\n"
+            + "             ____\\__/___\n"
+            + "       . - '             ' -.\n"
+            + "      /                      \\\n"
+            + "~~~~~~~  ~~~~~ ~~~~~  ~~~ ~~~  ~~~~~\n"
+            + "  ~~~   ~~~~~   ~!~~   ~~ ~  ~ ~ ~~~\n";
     public static final String travelingSandyBeach = YELLOW +
             ""
             + "████████╗██████╗  █████╗ ██╗   ██╗███████╗██╗     ██╗███╗   ██╗ ██████╗     ████████╗ ██████╗   \n"
