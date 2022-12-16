@@ -1,20 +1,20 @@
-{"start": [{
+{"landing zone": [{
   "items": ["stick"],
   "description": "You look around and you see a beautiful 'Sandy Beach' that stretches \nbeyond the horizon to your right and 'Coco Forest',\nfilled with coconuts, to your left. There are also sticks\nscattered around the shoreline.\n",
-  "name": "START           ",
+  "name": "LANDING ZONE     ",
   "visibleLocations": "SANDY BEACH and COCO FOREST"
 }],
   "sandy beach": [{
     "items": ["sea shells"],
-    "description": "You’ve arrived to 'Sandy Beach'. Warm sand beneath your toes and \nthe sound of waves splashing. Hundreds of sea shells are spread\nalong the coast. 'Coco Forest' is on your left and nearby\nto your right is 'Moist Marshland'.\n",
+    "description": "You’ve arrived to 'Sandy Beach'. Warm sand beneath your toes and \nthe sound of waves splashing. Hundreds of sea shells are spread\nalong the coast. The 'Landing Zone' is behind you, 'Coco Forest'\n is on your left and nearby to your right is 'Moist Marshland'.\n",
     "name": "SANDY BEACH     ",
-    "visibleLocations": "MOIST MARSHLAND and COCO FOREST"
+    "visibleLocations": "LANDING ZONE, MOIST MARSHLAND, and COCO FOREST"
   }],
   "coco forest": [{
-    "items": ["coconut", "plant"],
-    "description": "You’ve arrived at 'Coco Forest'. An abundance of coconuts lie on the floor,\nsome that have been eaten. The smell of fresh coconut is pleasant.\n'Sandy Beach' is behind you, and you also see 'Sus Mountain' peaking over\nbehind the trees looking ominous.\n",
+    "items": ["coconut", "magical herbs"],
+    "description": "You’ve arrived at 'Coco Forest'. An abundance of coconuts lie on the floor,\nsome that have been eaten. The smell of fresh coconut is pleasant.\n'Landing Zone' is behind you, the 'Sandy Beach' is to your right, and you also see 'Sus Mountain' peaking over\nbehind the trees looking ominous.\n",
     "name": "COCO FOREST     ",
-    "visibleLocations": "SUS MOUNTAIN and SANDY BEACH"
+    "visibleLocations": "LANDING ZONE, SUS MOUNTAIN, and SANDY BEACH"
   }],
   "sus mountain": [{
     "items": ["copper"],

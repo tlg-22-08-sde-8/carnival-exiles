@@ -1,14 +1,14 @@
 package com.carnivalexiles.controller;
 
-import com.carnivalexiles.model.User;
-import com.carnivalexiles.model.locations.Location;
-import java.io.IOException;
-import java.util.Arrays;
-
 public class Action {
 
-    public static final String[] allActions = {"go", "consume", "swim", "cry", "rest",
-            "grab", "hug", "drop", "attack", "retreat", "look", "help", "quit"};
+    public static final String[] allActions = {"go", "travel", "walk", "trek", "navigate",
+            "stroll", "dash", "skip", "crawl", "transit", "move", "consume", "swim", "cry",
+            "rest", "get", "grab", "grasp", "collect", "pickup", "seize", "take", "hook",
+            "grab", "catch", "acquire", "fetch", "snatch", "grip", "capture", "dominate",
+            "clasp", "hug", "drop", "attack", "retreat", "run", "skedaddle", "zonk",
+            "scamper", "look", "examine", "stare", "scrutinize", "glance", "peep",
+            "help", "quit"};
 
     public static String printHelpMenu() {
         String result = "\n"
@@ -28,95 +28,5 @@ public class Action {
                 + "-------------- END----------------\n"
                 ;
         return result;
-    }
-
-
-    public static boolean travelToValid(Location current, Location destination) {
-
-        // TODO: 12/9/2022 Return boolean as to whether the user can go to the next location.
-        // TODO: 12/9/2022 Call visibleLocation(Current) and determine if the destination we are going to is a possible location.
-        // TODO: 12/9/2022 Takes care of GO option.
-        return false;
-    }
-
-    public boolean canConsumeValid(User player) {
-        // TODO: 12/9/2022 Determine if the user has an edible item in the inventory bag.
-        // TODO: 12/9/2022 Consume item and increase HP.
-        // player.increaseHealthPoints();
-        return false;
-    }
-
-    public boolean canSwim(Location originalLocation) {
-        // TODO: 12/10/22 Checks to see if there is water at the location
-        // TODO: 12/10/22 If there is, swim.
-        // TODO: 12/10/22 Else, not available
-        return false;
-    }
-
-    //Changed method to public static so when it's called a message will print out.
-    public static void cry() {
-        System.out.println("You spend a few hours crying because of your situation.");
-    }
-
-    public boolean canRest() {
-        // TODO: 12/10/22 Increase hp by a certain amount
-        // TODO: 12/10/22 Increase day counter/time
-        return false;
-    }
-
-    public boolean canHug() {
-        // TODO: 12/10/22 Troll feature, can hug monkey unlimited times. True
-        return false;
-    }
-
-    public boolean canGrab(Location location) {
-        // TODO: 12/10/22 Check to see if there is any items to grab at the location
-        // TODO: 12/10/22 If so, determine what item the user wants to grab from list
-        // TODO: 12/10/22 Returns true if user can grab specified item.
-        // TODO: 12/10/22 Returns false otherwise
-        return false;
-    }
-
-    public boolean canDrop(User user) throws IOException, InterruptedException {
-        // TODO: 12/10/22 Ensure user does not have an empty inventory
-        // TODO: 12/10/22 If they do not, gather feedback from user as to which item to drop
-        // TODO: 12/10/22 Return true if item can be removed from inventory.
-        // TODO: 12/10/22 Returns false otherwise
-        return false;
-    }
-
-    public boolean canAttack() {
-        // TODO: 12/10/22 Determine if there is a confrontation with a NPC, e.g., snake, lion, gator, etc.
-        // TODO: 12/10/22 return true if so. False otherwise.
-        return false;
-    }
-
-    public boolean canRetreat() {
-        // TODO: 12/10/22 Determine if there is a confrontation with a NPC, e.g., snake, lion, gator, etc.
-        // TODO: 12/10/22 return true if so. False otherwise.
-        return false;
-    }
-
-    public static void look(String[] inventory) throws IOException, InterruptedException {
-        System.out.println("What do you want to look at?\n");
-        System.out.println("Choose an item from your inventory to examine or write \"Cancel\":\n");
-
-        //Print out contents of inventory
-        for(String content: inventory) {System.out.println(content);}
-
-        //Checks to see if user wants to examine an item or cancel look method.
-//        if (!TextParser.getUserInput().equalsIgnoreCase("cancel")){
-//
-//            //Stream to see if next input is a match.
-//            String result = String.valueOf(
-//                Arrays.stream(inventory).findFirst().equals(TextParser.getUserInput()));
-//            System.out.println(result);
-//        } else {
-//            TextParser.getUserInput();
-//        }
-
-        TextParser.getUserInput();
-        // TODO: 12/10/22 Determine where the user is.
-        // TODO: 12/10/22 Provide more information as to what the user can see.
     }
 }
