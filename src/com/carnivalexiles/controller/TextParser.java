@@ -113,9 +113,21 @@ public class TextParser {
     public static void actionHandler(String requestedAction, String userInput) throws IOException, InterruptedException {
         switch (requestedAction) {
             case "go":
+            case "travel":
+            case "walk":
+            case "trek":
+            case "navigate":
+            case "stroll":
+            case "dash":
+            case "skip":
+            case "crawl":
+            case "transit":
+            case "move":
                 goTo(userInput);
                 break;
             case "consume":
+            //case "eat":
+            //case "drink":
                 consumeItem(userInput);
                 break;
             case "swim":
@@ -127,7 +139,22 @@ public class TextParser {
             case "rest":
                 rest();
                 break;
+            case "get":
             case "grab":
+            case "grasp":
+            case "collect":
+            case "pickup":
+            case "seize":
+            case "take":
+            case "hook":
+            case "catch":
+            case "acquire":
+            case "fetch":
+            case "snatch":
+            case "grip":
+            case "capture":
+            case "dominate":
+            case "clasp":
                 grabItem(userInput);
                 break;
             case "hug":
@@ -140,9 +167,18 @@ public class TextParser {
                 attack();
                 break;
             case "retreat":
+            case "run":
+            case "skedaddle":
+            case "zonk":
+            case "scamper":
                 retreat();
                 break;
             case "look":
+            case "examine":
+            case "stare":
+            case "scrutinize":
+            case "glance":
+            case "peep":
                 lookAtItems();
                 break;
             case "quit":
@@ -308,6 +344,8 @@ public class TextParser {
 
     private static String printGoToScreen(String requestedLocation) {
         switch (requestedLocation) {
+            case "LANDING ZONE":
+                return GoingToText.travelingLandingZone;
             case "SANDY BEACH":
                 return GoingToText.travelingSandyBeach;
             case "COCO FOREST":

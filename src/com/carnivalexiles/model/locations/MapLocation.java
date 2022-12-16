@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MapLocation {
-    public static final String[] ALL_LOCATIONS = {"START", "SANDY BEACH", "COCO FOREST", "MOIST MARSHLAND", "SUS MOUNTAIN",
+    public static final String[] ALL_LOCATIONS = {"LANDING ZONE", "SANDY BEACH", "COCO FOREST", "MOIST MARSHLAND", "SUS MOUNTAIN",
             "LOGARITHMIC LAKE", "LUMINOUS LAGOON"};
 
     public static final List<String> ALL_ITEMS = Arrays.asList("stick", "sea shells", "coconut", "magical herbs",
@@ -16,6 +16,8 @@ public class MapLocation {
 
     public Location locationHandler(String userInput) {
         switch (userInput) {
+            case "LANDING ZONE":
+                return JsonLocationParser.allMapLocations.get(0);
             case "SANDY BEACH":
                 return JsonLocationParser.allMapLocations.get(1);
             case "COCO FOREST":
@@ -29,7 +31,7 @@ public class MapLocation {
             case "LUMINOUS LAGOON":
                 return JsonLocationParser.allMapLocations.get(6);
             default:
-                return JsonLocationParser.allMapLocations.get(0);
+                return null;
         }
     }
 }

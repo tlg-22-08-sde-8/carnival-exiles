@@ -2,8 +2,13 @@ package com.carnivalexiles.controller;
 
 public class Action {
 
-    public static final String[] allActions = {"go", "consume", "swim", "cry", "rest",
-            "grab", "hug", "drop", "attack", "retreat", "look", "help", "quit"};
+    public static final String[] allActions = {"go", "travel", "walk", "trek", "navigate",
+            "stroll", "dash", "skip", "crawl", "transit", "move", "consume", "swim", "cry",
+            "rest", "get", "grab", "grasp", "collect", "pickup", "seize", "take", "hook",
+            "grab", "catch", "acquire", "fetch", "snatch", "grip", "capture", "dominate",
+            "clasp", "hug", "drop", "attack", "retreat", "run", "skedaddle", "zonk",
+            "scamper", "look", "examine", "stare", "scrutinize", "glance", "peep",
+            "help", "quit"};
 
     public static String printHelpMenu() {
         String result = "\n"
