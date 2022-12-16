@@ -150,9 +150,11 @@ public class TextParser {
                 attack();
                 break;
             case "retreat":
+            case "run":
                 retreat();
                 break;
             case "look":
+            case "examine":
                 lookAtItems();
                 break;
             case "quit":
