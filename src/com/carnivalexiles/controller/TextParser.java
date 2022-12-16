@@ -234,7 +234,7 @@ public class TextParser {
             for (String item : currentUserInventory) {
                 // Check if input contains a valid item from inventory and if item is consumable
                 if (lowerCaseRawUserInput.contains(item) && MapLocation.CONSUMABLE_ITEMS.contains(item)) {
-                    if (rawUserInputContainsEdible == false) {
+                    if (!rawUserInputContainsEdible) {
                         rawUserInputContainsEdible = true;
                     }
                     pointsToIncreaseHp += 20;
@@ -285,11 +285,11 @@ public class TextParser {
         var currentUserInventory = user.getInventory();
         var newUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
         // For each item in the current location
-        for (int i = 0; i < currentLocationItems.length; i++) {
-            if (upperCaseRawUserInput.contains(currentLocationItems[i].toUpperCase().trim())) {
+        for (String currentLocationItem : currentLocationItems) {
+            if (upperCaseRawUserInput.contains(currentLocationItem.toUpperCase().trim())) {
                 // Grab item, update item into user inventory, and remove from location items
-                itemToGrab = currentLocationItems[i];
-                itemsList.remove(currentLocationItems[i]);
+                itemToGrab = currentLocationItem;
+                itemsList.remove(currentLocationItem);
                 newUserInventoryAsList.add(itemToGrab);
             }
         }
