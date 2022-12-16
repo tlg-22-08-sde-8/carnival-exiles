@@ -240,6 +240,7 @@ public class TextParser {
 
         while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
             if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
+
                 System.out.printf("You are looking at %s", user.getInventoryAsString());
                 pauseTheGame();
             }
