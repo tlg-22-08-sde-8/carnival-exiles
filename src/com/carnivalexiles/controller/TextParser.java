@@ -344,6 +344,8 @@ public class TextParser {
 
     private static String printGoToScreen(String requestedLocation) {
         switch (requestedLocation) {
+            case "LANDING ZONE":
+                return GoingToText.travelingLandingZone;
             case "SANDY BEACH":
                 return GoingToText.travelingSandyBeach;
             case "COCO FOREST":
