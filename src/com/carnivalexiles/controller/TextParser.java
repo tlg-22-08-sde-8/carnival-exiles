@@ -128,6 +128,12 @@ public class TextParser {
                 rest();
                 break;
             case "grab":
+            case "grasp":
+            case "pickup":
+            case "seize":
+            case "take":
+            case "hook":
+            case "catch":
                 grabItem(userInput);
                 break;
             case "hug":

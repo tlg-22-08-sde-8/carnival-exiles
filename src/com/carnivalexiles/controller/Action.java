@@ -7,8 +7,12 @@ import java.util.Arrays;
 
 public class Action {
 
-    public static final String[] allActions = {"go", "consume", "swim", "cry", "rest",
-            "grab", "hug", "drop", "attack", "retreat", "look", "help", "quit"};
+    public static final String[] allActions = {"go", "travel", "walk", "consume",
+            "eat", "drink", "swim", "cry", "rest", "grab", "grasp", "grab", "pickup",
+            "seize", "take", "hook", "catch", "hug", "drop", "attack", "retreat", "run",
+            "look", "examine", "help", "quit"};
+
+
 
     public static String printHelpMenu() {
         String result = "\n"
