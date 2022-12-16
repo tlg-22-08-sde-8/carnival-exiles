@@ -105,10 +105,6 @@ public class JsonLocationParser {
     }
   }
 
-
-  public static void main(String[] args) throws IOException {
-    itemParser();
-  }
 }
 
 
