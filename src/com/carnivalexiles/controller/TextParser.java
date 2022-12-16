@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TextParser {
+    public static final int LAST_DAY_IN_GAME = 8;
     static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
 
     static MapLocation mapLocations = new MapLocation();                              // All map locations obj
@@ -78,8 +79,12 @@ public class TextParser {
 
     public static void playGame(User user, Location location, Day day) throws IOException, InterruptedException {
         consoleView = new ConsoleView(user, location, day);
-        System.out.println(consoleView.getGameView());
-        getUserInput();
+        if (user.getHealthPoints() > 0 && day.getDay() < LAST_DAY_IN_GAME) {
+            System.out.println(consoleView.getGameView());
+            getUserInput();
+        } else {
+            printGameOver();
+        }
     }
 
     public static void getUserInput() throws IOException, InterruptedException {
@@ -229,7 +234,7 @@ public class TextParser {
             for (String item : currentUserInventory) {
                 // Check if input contains a valid item from inventory and if item is consumable
                 if (lowerCaseRawUserInput.contains(item) && MapLocation.CONSUMABLE_ITEMS.contains(item)) {
-                    if (rawUserInputContainsEdible == false) {
+                    if (!rawUserInputContainsEdible) {
                         rawUserInputContainsEdible = true;
                     }
                     pointsToIncreaseHp += 20;
@@ -276,25 +281,24 @@ public class TextParser {
         String upperCaseRawUserInput = rawUserInput.toUpperCase();
         String[] currentLocationItems = consoleView.getCurrentLocation().getItems();
         String itemToGrab = "";
+        var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
+        var currentUserInventory = user.getInventory();
+        var newUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
         // For each item in the current location
-        for (int i = 0; i < currentLocationItems.length; i++) {
-            if (upperCaseRawUserInput.contains(currentLocationItems[i].toUpperCase())) {
+        for (String currentLocationItem : currentLocationItems) {
+            if (upperCaseRawUserInput.contains(currentLocationItem.toUpperCase().trim())) {
                 // Grab item, update item into user inventory, and remove from location items
-                itemToGrab = currentLocationItems[i];
-                var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
-                itemsList.remove(i);
-                consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
-                // Handle user's inventory
-                var currentUserInventory = user.getInventory();
-                var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
-                currentUserInventoryAsList.add(itemToGrab);
-                user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
+                itemToGrab = currentLocationItem;
+                itemsList.remove(currentLocationItem);
+                newUserInventoryAsList.add(itemToGrab);
             }
         }
         if (itemToGrab.isEmpty()) {
             System.out.println("Item not available.");
             getUserInput();
         } else {
+            consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
+            user.setInventory(newUserInventoryAsList.toArray(new String[newUserInventoryAsList.size()]));
             handleBottleInUserInventory();
             doesUserInventoryContainEdibles();
             clearScreen();
