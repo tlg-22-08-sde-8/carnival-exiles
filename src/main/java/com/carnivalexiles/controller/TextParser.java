@@ -308,8 +308,10 @@ public class TextParser {
     }
 
     private static void rest() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
+        System.out.println("You rest for a short while and regain some hp");
         pauseTheGame();
+        user.modifyHealthPoints(10);
+        day.increaseTimeOfDay(2);
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
