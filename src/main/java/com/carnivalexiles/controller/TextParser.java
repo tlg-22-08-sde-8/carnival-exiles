@@ -305,7 +305,7 @@ public class TextParser {
     private static void cry() throws IOException, InterruptedException {
         user.modifyHealthPoints(5);
         day.increaseTimeOfDay(1);
-        System.out.println("In a fit of despair, you have a good cry and feel slightly better");
+        System.out.println("In a fit of despair, you spend part of the day having a good cry and feel slightly better");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
