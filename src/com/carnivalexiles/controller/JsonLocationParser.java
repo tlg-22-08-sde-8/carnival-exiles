@@ -1,13 +1,13 @@
 package com.carnivalexiles.controller;
 
+import static com.google.gson.JsonParser.parseReader;
+
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.MapLocation;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class JsonLocationParser {
@@ -19,15 +19,9 @@ public class JsonLocationParser {
   private static String visibleLocations;
 
   public static void locationParser() {
-
     try {
-      //Create a reader to access LocationData.json
-      BufferedReader reader = new BufferedReader(
-          new FileReader("resources/LocationData.json"));
-
       //Accessing the json file
-      JsonElement fileElement = com.google.gson.JsonParser.parseReader(
-          new FileReader("resources/LocationData.json"));
+      JsonElement fileElement = parseReader(new FileReader("resources/LocationData.json"));
       JsonObject fileObject = fileElement.getAsJsonObject();
 
       //Iterate through all places and store them in allMapLocations
@@ -49,20 +43,13 @@ public class JsonLocationParser {
           name = locationJsonObject.get("name").getAsString();
           visibleLocations = locationJsonObject.get("visibleLocations").getAsString();
           description = locationJsonObject.get("description").getAsString();
-
-          Location location = new Location(description, name, itemList, visibleLocations);
-          //System.out.println(location.getDescription() + location.getName());
-          allMapLocations.add(location);
+          allMapLocations.add(new Location(description, name, itemList, visibleLocations));
         }
       }
-      try {
-        reader.close();
-      } catch (IOException ex) {
-        throw new RuntimeException(ex);
-      }
-
     } catch (Exception e) {
       e.printStackTrace();
+      System.out.println("CHECK JSON LOCATION, PATH IS STILL NOT READABLE BY JAR FILE");
+      Thread.currentThread().stop();
     }
   }
 }
