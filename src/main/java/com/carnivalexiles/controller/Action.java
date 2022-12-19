@@ -17,7 +17,7 @@ public class Action {
                 + "2. Consume (Type \"Consume\")\n"
                 + "3. Swim (Type \"Swim\")\n"
                 + "4. Cry (Type \"Cry\")\n"
-                + "5. Rest (Type \"Swim\")\n"
+                + "5. Rest (Type \"Rest\")\n"
                 + "6. Grab an item (Type \"Grab\")\n"
                 + "7. Hug Monkey (Type \"Hug\")\n"
                 + "8. Drop an item (Type \"Drop\")\n"
