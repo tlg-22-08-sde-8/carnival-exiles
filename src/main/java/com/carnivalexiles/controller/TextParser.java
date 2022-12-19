@@ -287,7 +287,7 @@ public class TextParser {
             } else {
                 user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
                 user.modifyHealthPoints(pointsToIncreaseHp);
-                System.out.println("You feel reinvigorated and increased your HP!");
+                System.out.println("You feel reinvigorated and slightly increased your HP!");
                 pauseTheGame();
                 clearScreen();
                 playGame(user, consoleView.getCurrentLocation(), day);
