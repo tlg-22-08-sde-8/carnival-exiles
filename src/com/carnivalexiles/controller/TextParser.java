@@ -126,8 +126,6 @@ public class TextParser {
                 goTo(userInput);
                 break;
             case "consume":
-            //case "eat":
-            //case "drink":
                 consumeItem(userInput);
                 break;
             case "swim":
