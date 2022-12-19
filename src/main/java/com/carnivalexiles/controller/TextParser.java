@@ -310,7 +310,7 @@ public class TextParser {
     private static void rest() throws IOException, InterruptedException {
         user.modifyHealthPoints(10);
         day.increaseTimeOfDay(2);
-        System.out.println("You rest for a short while and regain some hp");
+        System.out.println("You rest for a half a day and regain 10 HP");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
