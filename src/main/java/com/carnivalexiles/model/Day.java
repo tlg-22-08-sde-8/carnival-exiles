@@ -9,7 +9,6 @@ public class Day {
     private int timeOfDayCounter;
     private static final String[] timeOfDay = {"dawn", "noon", "dusk", "night"};
 
-
     public Day() {
         this.day = 0;
     }
