@@ -313,20 +313,32 @@ public class TextParser {
     String upperCaseRawUserInput = rawUserInput.toUpperCase();
     String[] currentLocationItems = consoleView.getCurrentLocation().getItems();
     String itemToGrab = "";
+    Boolean attemptedToGrabWaterWithoutEmptyBottle = false;
     var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
     var currentUserInventory = user.getInventory();
     var newUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
     // For each item in the current location
     for (String currentLocationItem : currentLocationItems) {
       if (upperCaseRawUserInput.contains(currentLocationItem.toUpperCase().trim())) {
-        // Grab item, update item into user inventory, and remove from location items
-        itemToGrab = currentLocationItem;
-        itemsList.remove(currentLocationItem);
-        newUserInventoryAsList.add(itemToGrab);
+        if (currentLocationItem.contains("water") && !newUserInventoryAsList.contains(
+            "empty bottle")) {
+          attemptedToGrabWaterWithoutEmptyBottle = true;
+          continue;
+        } else {
+          // Grab item, update item into user inventory, and remove from location items
+          itemToGrab = currentLocationItem;
+          itemsList.remove(currentLocationItem);
+          newUserInventoryAsList.add(itemToGrab);
+        }
       }
     }
     if (itemToGrab.isEmpty()) {
-      System.out.println("Item not available.");
+      String noEmptyBottleMessage = "Cannot pick up water without an empty bottle.";
+      if (attemptedToGrabWaterWithoutEmptyBottle) {
+        System.out.printf("Item not available. %s\n", noEmptyBottleMessage);
+      } else {
+        System.out.println("Item not available");
+      }
       getUserInput();
     } else {
       consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
