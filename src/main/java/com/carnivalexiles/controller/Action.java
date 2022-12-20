@@ -7,7 +7,7 @@ public class Action {
             "rest", "get", "grab", "grasp", "collect", "pickup", "seize", "take", "hook",
             "grab", "catch", "acquire", "fetch", "snatch", "grip", "capture", "dominate",
             "clasp", "drop", "look", "examine", "stare", "scrutinize", "glance", "peep",
-            "help", "quit"};
+            "help", "music on", "music off","quit"};
 
     public static String printHelpMenu() {
         String result = "\n"

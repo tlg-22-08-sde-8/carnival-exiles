@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.sound.sampled.LineUnavailableException;
 
 public class TextParser {
     public static final int LAST_DAY_IN_GAME = 8;
@@ -70,6 +71,11 @@ public class TextParser {
     }
 
     public static void startGame() throws IOException, InterruptedException {
+        try {
+            MusicHandler.music("music on");
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
         JsonLocationParser.locationParser();
         WelcomeScreen.displayTitle();
         WelcomeScreen.displayIntroduction();
@@ -161,6 +167,22 @@ public class TextParser {
             case "glance":
             case "peep":
                 lookAtItems();
+                break;
+            case "music on":
+                try {
+                    MusicHandler.music("music on");
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
+                playGame(user, consoleView.getCurrentLocation(), day);
+                break;
+            case "music off":
+                try {
+                    MusicHandler.music("music off");
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
+                playGame(user, consoleView.getCurrentLocation(), day);
                 break;
             case "quit":
                 printGameOver();
@@ -280,6 +302,18 @@ public class TextParser {
         user.modifyHealthPoints(5);
         day.increaseTimeOfDay(1);
         System.out.println("In a fit of despair, you spend part of the day having a good cry and feel slightly better");
+        System.out.println(""
+            + "    ____            ____\n"
+            + "  _,',--.`-.      _,',--.`-.\n"
+            + " <_ ( () )  >  ( <_ ( () )  >\n"
+            + "   `-:__;,-'    \\  `A:__:,-'\n"
+            + "                 \\ / \\\n"
+            + "                  ((  )\n"
+            + "                   \\-'\n"
+            + "                    \\\n"
+            + "                     \\\n"
+            + "          (           )       \n"
+            + "           `-'\"`-----'");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
@@ -289,6 +323,15 @@ public class TextParser {
         user.modifyHealthPoints(10);
         day.increaseTimeOfDay(2);
         System.out.println("You rest for a half a day and regain 10 HP");
+        System.out.println(""
+            + "      _____|~~\\_____      _____________\n"
+            + "             _-~               \\    |    \\\n"
+            + "             _-    | )     \\    |__/   \\   \\\n"
+            + "             _-         )   |   |  |     \\  \\\n"
+            + "             _-    | )     /    |--|      |  |\n"
+            + "            __-_______________ /__/_______|  |_________\n"
+            + "           (                |----         |  |\n"
+            + "            `---------------'--\\\\\\\\      .`--'          ");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
