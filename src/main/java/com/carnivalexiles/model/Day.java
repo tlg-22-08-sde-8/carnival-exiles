@@ -14,11 +14,10 @@ public class Day {
     }
 
     public int getDay() throws IOException, InterruptedException {
-        // If day reaches 8, end the game.
-        if (day == 2){
+        // If day reaches 7, end the game.
+        if (day == 7){
+            // if user makes it to day 7 then bring up win scenario method.
             TextParser.printGameWin();
-        } else if (day == 8) {
-            TextParser.printGameOver();
         }
         return day;
     }
