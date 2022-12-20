@@ -126,8 +126,6 @@ public class TextParser {
                 goTo(userInput);
                 break;
             case "consume":
-            //case "eat":
-            //case "drink":
                 consumeItem(userInput);
                 break;
             case "swim":
@@ -240,7 +238,6 @@ public class TextParser {
 
         while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
             if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
-
                 System.out.printf("You are looking at %s", user.getInventoryAsString());
                 pauseTheGame();
             }
@@ -275,7 +272,6 @@ public class TextParser {
                         rawUserInputContainsEdible = true;
                     }
                     pointsToIncreaseHp += 20;
-
                     currentUserInventoryAsList.remove(item);
                     if (item.equals("bottled water") || item.equals("bottled brown water")) {
                         currentUserInventoryAsList.add("empty bottle");
@@ -289,11 +285,7 @@ public class TextParser {
                 user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
                 user.modifyHealthPoints(pointsToIncreaseHp);
                 clearScreen();
-
-                //Print out message so the user can see they have eaten an item and their hp increased.
-                System.out.println("You feel refreshed after eating and your hitpoints have increased.");
                 playGame(user, consoleView.getCurrentLocation(), day);
-
             }
         }
     }
@@ -436,7 +428,7 @@ public class TextParser {
             currentUserInventoryAsList.remove("water");
             currentUserInventoryAsList.add("bottled water");
         } else if (currentUserInventoryAsList.contains("empty bottle")
-                && currentUserInventoryAsList.contains("brown water")) {
+            && currentUserInventoryAsList.contains("brown water")) {
             currentUserInventoryAsList.remove("empty bottle");
             currentUserInventoryAsList.remove("brown water");
             currentUserInventoryAsList.add("bottled brown water");
