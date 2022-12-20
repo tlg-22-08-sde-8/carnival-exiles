@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TextParser {
 
@@ -267,7 +269,14 @@ public class TextParser {
         }
       }
       if (!rawUserInputContainsEdible) {
-        System.out.println("Please provide the item(s) to consume");
+        var consumablesList = new LinkedList<String>();
+        for (String item : currentUserInventory) {
+          if (MapLocation.CONSUMABLE_ITEMS.contains(item)) {
+            consumablesList.add(item);
+          }
+        }
+        System.out.printf("Please provide the item(s) to consume: %s\n",
+            consumablesList.toString());
         getUserInput();
       } else {
         user.setInventory(
