@@ -4,53 +4,53 @@ import java.util.Arrays;
 
 public class User {
 
-  //Fields
-  private int healthPoints;
-  private String[] inventory;
-  private boolean inventoryContainsConsumableItems;         // Tell me if user's inventory contains consumable item
+    //Fields
+    private int healthPoints;
+    private String[] inventory;
+    private boolean inventoryContainsConsumableItems;         // Tell me if user's inventory contains consumable item
 
-  public User(int healthPoints, String[] inventory) {
-    setHealthPoints(healthPoints);
-    setInventory(inventory);
-  }
-
-  public void modifyHealthPoints(int hpPointsToModifyBy) {
-    setHealthPoints(hpPointsToModifyBy);
-  }
-
-  public int getHealthPoints() {
-    return healthPoints;
-  }
-
-  public void setHealthPoints(int healthPoints) {
-    if (this.healthPoints + healthPoints >= 100) {
-      this.healthPoints = 100;
-    } else {
-      this.healthPoints = this.healthPoints + healthPoints;
+    public User(int healthPoints, String[] inventory) {
+        setHealthPoints(healthPoints);
+        setInventory(inventory);
     }
-  }
 
-  public String[] getInventory() {
-    return inventory;
-  }
+    public void modifyHealthPoints(int hpPointsToModifyBy) {
+        setHealthPoints(hpPointsToModifyBy);
+    }
 
-  public boolean getInventoryConsumableStatus() {
-    return inventoryContainsConsumableItems;
-  }
+    public int getHealthPoints() {
+        return healthPoints;
+    }
 
-  public void setInventoryInventoryConsumableStatus() {
-    this.inventoryContainsConsumableItems = true;
-  }
+    public void setHealthPoints(int healthPoints) {
+        if (this.healthPoints + healthPoints >= 100) {
+            this.healthPoints = 100;
+        } else {
+            this.healthPoints = this.healthPoints + healthPoints;
+        }
+    }
 
-  public void changeInventoryConsumableItemsStatus() {
-    inventoryContainsConsumableItems = !inventoryContainsConsumableItems;
-  }
+    public String[] getInventory() {
+        return inventory;
+    }
 
-  public String getInventoryAsString() {
-    return Arrays.toString(inventory);
-  }
+    public boolean getInventoryConsumableStatus() {
+        return inventoryContainsConsumableItems;
+    }
 
-  public void setInventory(String[] inventory) {
-    this.inventory = inventory;
-  }
+    public void setInventoryInventoryConsumableStatus() {
+        this.inventoryContainsConsumableItems = true;
+    }
+
+    public void changeInventoryConsumableItemsStatus() {
+        inventoryContainsConsumableItems = !inventoryContainsConsumableItems;
+    }
+
+    public String getInventoryAsString() {
+        return Arrays.toString(inventory);
+    }
+
+    public void setInventory(String[] inventory) {
+        this.inventory = inventory;
+    }
 }
