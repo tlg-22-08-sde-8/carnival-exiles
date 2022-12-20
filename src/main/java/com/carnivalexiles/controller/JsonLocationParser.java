@@ -3,14 +3,14 @@ package com.carnivalexiles.controller;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.MapLocation;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class JsonLocationParser {
 
@@ -35,65 +35,83 @@ public class JsonLocationParser {
 
   public static void locationParser() {
 
-    //try {
     //Create a Gson
     Gson gson = new Gson();
 
-    InputStream locationJson = getFileFromResourceAsStream("LocationData.json");
-    Map<String,String> map = null;
-    try (
-        BufferedReader newReader = new BufferedReader(
-            new InputStreamReader(locationJson, "UTF-8"))) {
-      map = gson.fromJson(newReader, Map.class);
-    } catch (IOException ioe) {
-      System.out.println("Unable to read file" + ioe);
+    try {
+
+      InputStream locationJson = getFileFromResourceAsStream("LocationData.json");
+      BufferedReader newReader = new BufferedReader(
+          new InputStreamReader(locationJson, "UTF-8"));
+      JsonObject countryObj = gson.fromJson(newReader, JsonObject.class);
+
+      for (String places : MapLocation.ALL_LOCATIONS) {
+
+        JsonArray jsonArrayOfLocation = countryObj.get(places.toLowerCase()).getAsJsonArray();
+
+        for (JsonElement locationElement : jsonArrayOfLocation) {
+
+          JsonObject locationJsonObject = locationElement.getAsJsonObject();
+
+          //Extract Data
+          var listOfItems = new ArrayList<String>();
+          for (JsonElement items : locationJsonObject.get("items").getAsJsonArray()) {
+            listOfItems.add(String.valueOf(items).replace("\"", ""));
+          }
+          itemList = listOfItems.toArray(new String[listOfItems.size()]);
+          name = locationJsonObject.get("name").getAsString();
+          visibleLocations = locationJsonObject.get("visibleLocations").getAsString();
+          description = locationJsonObject.get("description").getAsString();
+          allMapLocations.add(new Location(description, name, itemList, visibleLocations));
+
+        }
+      }
+
+
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
-    Object value = null;
-    Set<Entry<String, String>> entries = map.entrySet();
-    for (Map.Entry<?, ?> entry : entries) {
-      value = entry.getValue();
-      System.out.println(value);
-
-    }
-
-
-    for (String places : MapLocation.ALL_LOCATIONS) {
-
-
-
-      //allMapLocations.add(location);
-    }
-
-
   }
 
-//  public static void itemParser() throws IOException {
-//
-//    try {
-//
-//      // create Gson instance
-//      Gson gson = new Gson();
-//
-//      // create a reader
-//      Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/Item.json"));
-//
-//      // convert JSON file to map
-//      Map<?, ?> map = gson.fromJson(reader, Map.class);
-//
-//      // print map entries
-//      for (Map.Entry<?, ?> entry : map.entrySet()) {
-//        System.out.println(entry.getKey() + "=" + entry.getValue());
-//      }
-//
-//      // close reader
-//      reader.close();
-//    } catch (IOException ex) {
-//      throw new RuntimeException(ex);
-//    }
-//  }
+
+
+
+  public static void itemParser() throws IOException {
+
+    try {
+
+      // create Gson instance
+      Gson gson = new Gson();
+
+      // create a reader
+      InputStream locationJson = getFileFromResourceAsStream("Item.json");
+      BufferedReader newReader = new BufferedReader(
+          new InputStreamReader(locationJson, "UTF-8"));
+      JsonObject countryObj = gson.fromJson(newReader, JsonObject.class);
+
+      // convert JSON file to map
+      for (int i = 0; i < countryObj.size(); i++) {
+        String item = countryObj.keySet().toString();
+        System.out.println(item);
+        }
+
+
+     //System.out.println(countryObj.get("stick"));
+
+
+      // close reader
+      newReader.close();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
+  public static void main(String[] args) throws IOException {
+   JsonLocationParser.itemParser();
+  }
 
 
 }
+
 
 
