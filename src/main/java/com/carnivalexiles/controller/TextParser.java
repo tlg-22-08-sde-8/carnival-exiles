@@ -5,17 +5,20 @@ import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.MapLocation;
 import com.carnivalexiles.view.ConsoleView;
+import com.carnivalexiles.view.Failure;
 import com.carnivalexiles.view.GoingToText;
+import com.carnivalexiles.view.Success;
 import com.carnivalexiles.view.WelcomeScreen;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.sound.sampled.LineUnavailableException;
+import java.util.LinkedList;
 
 public class TextParser {
+
     public static final int LAST_DAY_IN_GAME = 8;
     static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
     static MapLocation mapLocations = new MapLocation();                              // All map locations obj
@@ -43,8 +46,31 @@ public class TextParser {
         day = new Day();
     }
 
+
+    public static void printGameWin() throws IOException, InterruptedException {
+        clearScreen();
+        Success.displaySuccess();
+        String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
+        String[] validAnswers = {"yes", "no", "quit"};
+        System.out.print("You Won!!...play again? " + enterMessage);
+        String userInput = bufferReader.readLine().toLowerCase().trim();
+        while (!Arrays.asList(validAnswers).contains(userInput)) {
+            System.out.print(enterMessage);
+            userInput = bufferReader.readLine().toLowerCase().trim();
+        }
+        if (userInput.equals("yes")) {
+            clearScreen();
+            newGame();
+            startGame();
+        } else {
+            stopGame();
+        }
+    }
+
+
     public static void printGameOver() throws IOException, InterruptedException {
         clearScreen();
+        Failure.displayFail();
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
         System.out.print("GAME OVER...play again? " + enterMessage);
@@ -82,7 +108,8 @@ public class TextParser {
         TextParser.enterGame();
     }
 
-    public static void playGame(User user, Location location, Day day) throws IOException, InterruptedException {
+    public static void playGame(User user, Location location, Day day)
+            throws IOException, InterruptedException {
         consoleView = new ConsoleView(user, location, day);
         if (user.getHealthPoints() > 0 && day.getDay() < LAST_DAY_IN_GAME) {
             System.out.println(consoleView.getGameView());
@@ -115,7 +142,8 @@ public class TextParser {
         actionHandler(requestedAction, userInput);
     }
 
-    public static void actionHandler(String requestedAction, String userInput) throws IOException, InterruptedException {
+    public static void actionHandler(String requestedAction, String userInput)
+            throws IOException, InterruptedException {
         switch (requestedAction) {
             case "go":
             case "travel":
@@ -241,7 +269,8 @@ public class TextParser {
         String userInput = bufferReader.readLine().trim();
         userInput = "[" + userInput.toLowerCase() + "]";
 
-        while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
+        while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals(
+                "[cancel]"))) {
             if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
 
                 System.out.printf("You are looking at %s", user.getInventoryAsString());
@@ -273,7 +302,8 @@ public class TextParser {
             // For each item in users inventory
             for (String item : currentUserInventory) {
                 // Check if input contains a valid item from inventory and if item is consumable
-                if (lowerCaseRawUserInput.contains(item) && MapLocation.CONSUMABLE_ITEMS.contains(item)) {
+                if (lowerCaseRawUserInput.contains(item) && MapLocation.CONSUMABLE_ITEMS.contains(
+                        item)) {
                     if (!rawUserInputContainsEdible) {
                         rawUserInputContainsEdible = true;
                     }
@@ -285,10 +315,19 @@ public class TextParser {
                 }
             }
             if (!rawUserInputContainsEdible) {
-                System.out.println("Please provide the item(s) to consume");
+                var consumablesList = new LinkedList<String>();
+                for (String item : currentUserInventory) {
+                    if (MapLocation.CONSUMABLE_ITEMS.contains(item)) {
+                        consumablesList.add(item);
+                    }
+                }
+                System.out.printf("Please provide the item(s) to consume: %s\n",
+                        consumablesList.toString());
                 getUserInput();
             } else {
-                user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
+                user.setInventory(
+                        currentUserInventoryAsList.toArray(
+                                new String[currentUserInventoryAsList.size()]));
                 user.modifyHealthPoints(pointsToIncreaseHp);
                 System.out.println("You feel reinvigorated and slightly increased your HP!");
                 pauseTheGame();
@@ -341,24 +380,38 @@ public class TextParser {
         String upperCaseRawUserInput = rawUserInput.toUpperCase();
         String[] currentLocationItems = consoleView.getCurrentLocation().getItems();
         String itemToGrab = "";
+        Boolean attemptedToGrabWaterWithoutEmptyBottle = false;
         var itemsList = new ArrayList<>(Arrays.asList(currentLocationItems));
         var currentUserInventory = user.getInventory();
         var newUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
         // For each item in the current location
         for (String currentLocationItem : currentLocationItems) {
             if (upperCaseRawUserInput.contains(currentLocationItem.toUpperCase().trim())) {
-                // Grab item, update item into user inventory, and remove from location items
-                itemToGrab = currentLocationItem;
-                itemsList.remove(currentLocationItem);
-                newUserInventoryAsList.add(itemToGrab);
+                if (currentLocationItem.contains("water") && !newUserInventoryAsList.contains(
+                        "empty bottle")) {
+                    attemptedToGrabWaterWithoutEmptyBottle = true;
+                    continue;
+                } else {
+                    // Grab item, update item into user inventory, and remove from location items
+                    itemToGrab = currentLocationItem;
+                    itemsList.remove(currentLocationItem);
+                    newUserInventoryAsList.add(itemToGrab);
+                }
             }
         }
         if (itemToGrab.isEmpty()) {
-            System.out.println("Item not available.");
+            String noEmptyBottleMessage = "Cannot pick up water without an empty bottle.";
+            if (attemptedToGrabWaterWithoutEmptyBottle) {
+                System.out.printf("Item not available. %s\n", noEmptyBottleMessage);
+            } else {
+                System.out.println("Item not available");
+            }
             getUserInput();
         } else {
-            consoleView.getCurrentLocation().setItems(itemsList.toArray(new String[itemsList.size()]));
-            user.setInventory(newUserInventoryAsList.toArray(new String[newUserInventoryAsList.size()]));
+            consoleView.getCurrentLocation()
+                    .setItems(itemsList.toArray(new String[itemsList.size()]));
+            user.setInventory(
+                    newUserInventoryAsList.toArray(new String[newUserInventoryAsList.size()]));
             handleBottleInUserInventory();
             doesUserInventoryContainEdibles();
             clearScreen();
@@ -403,41 +456,52 @@ public class TextParser {
             getUserInput();
         } else {
             var userInventoryList = new ArrayList<>(Arrays.asList(userInventory));
-            var locationItemsList = new ArrayList<>(Arrays.asList(consoleView.getCurrentLocation().getItems()));
+            var locationItemsList = new ArrayList<>(
+                    Arrays.asList(consoleView.getCurrentLocation().getItems()));
             // For every item to drop, remove it from the user inventory and it to the location items
             for (String item : itemsToDrop) {
                 userInventoryList.remove(item);
                 locationItemsList.add(item);
             }
             user.setInventory(userInventoryList.toArray(new String[userInventoryList.size()]));
-            consoleView.getCurrentLocation().setItems(locationItemsList.toArray(new String[locationItemsList.size()]));
+            consoleView.getCurrentLocation()
+                    .setItems(locationItemsList.toArray(new String[locationItemsList.size()]));
+            doesUserInventoryContainEdibles();  // Update if there are still consumables in inventory
         }
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
     private static void doesUserInventoryContainEdibles() {
+        Boolean changedFlag = false;
         for (String item : user.getInventory()) {
             if (MapLocation.CONSUMABLE_ITEMS.contains(item)) {
                 user.setInventoryInventoryConsumableStatus();
+                changedFlag = true;
                 break;
             }
+        }
+        if (!changedFlag) {
+            user.changeInventoryConsumableItemsStatus();
         }
     }
 
     private static void handleBottleInUserInventory() {
         var currentUserInventory = user.getInventory();
         var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
-        if (currentUserInventoryAsList.contains("empty bottle") && currentUserInventoryAsList.contains("water")) {
+        if (currentUserInventoryAsList.contains("empty bottle")
+                && currentUserInventoryAsList.contains(
+                "water")) {
             currentUserInventoryAsList.remove("empty bottle");
             currentUserInventoryAsList.remove("water");
             currentUserInventoryAsList.add("bottled water");
         } else if (currentUserInventoryAsList.contains("empty bottle")
-            && currentUserInventoryAsList.contains("brown water")) {
+                && currentUserInventoryAsList.contains("brown water")) {
             currentUserInventoryAsList.remove("empty bottle");
             currentUserInventoryAsList.remove("brown water");
             currentUserInventoryAsList.add("bottled brown water");
         }
-        user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
+        user.setInventory(
+                currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
     }
 }

@@ -20,8 +20,7 @@ public class Action {
                 + "6. Drop an item (Type \"Drop\")\n"
                 + "7. Look around (Type \"Look\")\n"
                 + "8. Quit the game (Type \"Quit\")\n"
-                + "-------------- END----------------\n"
-                ;
+                + "-------------- END----------------\n";
         return result;
     }
 }

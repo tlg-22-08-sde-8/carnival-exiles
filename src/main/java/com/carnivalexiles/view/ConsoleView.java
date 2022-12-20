@@ -13,7 +13,8 @@ public class ConsoleView {
     private Location currentLocation;
     private Day currentDay;
 
-    public ConsoleView(User user, Location location, Day day) throws IOException, InterruptedException {
+    public ConsoleView(User user, Location location, Day day)
+            throws IOException, InterruptedException {
         this.currentLocation = location;
         this.currentDay = day;
         this.gameView = String.format(""
@@ -24,7 +25,8 @@ public class ConsoleView {
                         + "%s\n"
                         + "Local Items: %s\n\n"
                 , user.getHealthPoints(), location.getName(), day.getDay(), day.getTimeOfDay(),
-                user.getInventoryAsString(), location.getDescription(), Arrays.toString(location.getItems()));
+                user.getInventoryAsString(), location.getDescription(),
+                Arrays.toString(location.getItems()));
     }
 
     public Location getCurrentLocation() {

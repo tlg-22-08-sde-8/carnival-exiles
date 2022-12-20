@@ -5,14 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MapLocation {
-    public static final String[] ALL_LOCATIONS = {"LANDING ZONE", "SANDY BEACH", "COCO FOREST", "MOIST MARSHLAND", "SUS MOUNTAIN",
-        "LOGARITHMIC LAKE", "LUMINOUS LAGOON"};
 
-    public static final List<String> ALL_ITEMS = Arrays.asList("stick", "sea shells", "coconut", "magical herbs",
-        "copper", "water", "fish", "frog", "brown water", "clay");
+    public static final String[] ALL_LOCATIONS = {"LANDING ZONE", "SANDY BEACH", "COCO FOREST",
+            "MOIST MARSHLAND", "SUS MOUNTAIN",
+            "LOGARITHMIC LAKE", "LUMINOUS LAGOON"};
+
+    public static final List<String> ALL_ITEMS = Arrays.asList("stick", "sea shells", "coconut",
+            "magical herbs",
+            "copper", "water", "fish", "frog", "brown water", "clay");
 
     public static final List<String> CONSUMABLE_ITEMS = Arrays.asList("coconut", "magical herbs",
-        "bottled water", "bottled brown water", "fish", "berries");
+            "bottled water", "bottled brown water", "fish", "berries");
 
     public Location locationHandler(String userInput) {
         switch (userInput) {
