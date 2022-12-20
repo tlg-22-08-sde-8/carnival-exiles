@@ -238,6 +238,7 @@ public class TextParser {
 
         while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
             if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
+
                 System.out.printf("You are looking at %s", user.getInventoryAsString());
                 pauseTheGame();
             }
@@ -284,6 +285,8 @@ public class TextParser {
             } else {
                 user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
                 user.modifyHealthPoints(pointsToIncreaseHp);
+                System.out.println("You feel reinvigorated and slightly increased your HP!");
+                pauseTheGame();
                 clearScreen();
                 playGame(user, consoleView.getCurrentLocation(), day);
             }
@@ -305,6 +308,8 @@ public class TextParser {
     }
 
     private static void rest() throws IOException, InterruptedException {
+        System.out.println("You rest for a short while and regain some hp!");
+        pauseTheGame();
         user.modifyHealthPoints(10);
         day.increaseTimeOfDay(2);
         System.out.println("You rest for a half a day and regain 10 HP");
