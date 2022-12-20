@@ -126,8 +126,6 @@ public class TextParser {
                 goTo(userInput);
                 break;
             case "consume":
-            //case "eat":
-            //case "drink":
                 consumeItem(userInput);
                 break;
             case "swim":
@@ -240,7 +238,6 @@ public class TextParser {
 
         while (userInput.equals(user.getInventoryAsString().toLowerCase()) || (userInput.equals("[cancel]"))) {
             if (userInput.equals(user.getInventoryAsString().toLowerCase())) {
-
                 System.out.printf("You are looking at %s", user.getInventoryAsString());
                 pauseTheGame();
             }
@@ -433,7 +430,7 @@ public class TextParser {
             currentUserInventoryAsList.remove("water");
             currentUserInventoryAsList.add("bottled water");
         } else if (currentUserInventoryAsList.contains("empty bottle")
-                && currentUserInventoryAsList.contains("brown water")) {
+            && currentUserInventoryAsList.contains("brown water")) {
             currentUserInventoryAsList.remove("empty bottle");
             currentUserInventoryAsList.remove("brown water");
             currentUserInventoryAsList.add("bottled brown water");

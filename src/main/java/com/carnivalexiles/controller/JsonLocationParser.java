@@ -3,14 +3,14 @@ package com.carnivalexiles.controller;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.MapLocation;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class JsonLocationParser {
 
@@ -35,65 +35,43 @@ public class JsonLocationParser {
 
   public static void locationParser() {
 
-    //try {
     //Create a Gson
     Gson gson = new Gson();
 
+    //Opening the file as a stream with the getFileFromResourceAsStream method,
     InputStream locationJson = getFileFromResourceAsStream("LocationData.json");
-    Map<String,String> map = null;
-    try (
-        BufferedReader newReader = new BufferedReader(
-            new InputStreamReader(locationJson, "UTF-8"))) {
-      map = gson.fromJson(newReader, Map.class);
-    } catch (IOException ioe) {
-      System.out.println("Unable to read file" + ioe);
-    }
+    BufferedReader newReader = new BufferedReader(
+        new InputStreamReader(locationJson, StandardCharsets.UTF_8));
 
-    Object value = null;
-    Set<Entry<String, String>> entries = map.entrySet();
-    for (Map.Entry<?, ?> entry : entries) {
-      value = entry.getValue();
-      System.out.println(value);
+    //Save the object in a way that is accessible to the method.
+    JsonObject countryObj = gson.fromJson(newReader, JsonObject.class);
 
-    }
-
-
+    //Iterate through all locations and store the location objects in allMapLocations
     for (String places : MapLocation.ALL_LOCATIONS) {
 
+      //use each place in MapLocation.ALL_LOCATIONS to get the json information.
+      JsonArray jsonArrayOfLocation = countryObj.get(places.toLowerCase()).getAsJsonArray();
 
+      //Iterate through every element within a single place and parse out the information to create a location object.
+      for (JsonElement locationElement : jsonArrayOfLocation) {
 
-      //allMapLocations.add(location);
+        JsonObject locationJsonObject = locationElement.getAsJsonObject();
+
+        //Extract Data
+        var listOfItems = new ArrayList<String>();
+        for (JsonElement items : locationJsonObject.get("items").getAsJsonArray()) {
+          listOfItems.add(String.valueOf(items).replace("\"", ""));
+        }
+        itemList = listOfItems.toArray(new String[listOfItems.size()]);
+        name = locationJsonObject.get("name").getAsString();
+        visibleLocations = locationJsonObject.get("visibleLocations").getAsString();
+        description = locationJsonObject.get("description").getAsString();
+        allMapLocations.add(new Location(description, name, itemList, visibleLocations));
+
+      }
     }
-
-
   }
-
-//  public static void itemParser() throws IOException {
-//
-//    try {
-//
-//      // create Gson instance
-//      Gson gson = new Gson();
-//
-//      // create a reader
-//      Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/Item.json"));
-//
-//      // convert JSON file to map
-//      Map<?, ?> map = gson.fromJson(reader, Map.class);
-//
-//      // print map entries
-//      for (Map.Entry<?, ?> entry : map.entrySet()) {
-//        System.out.println(entry.getKey() + "=" + entry.getValue());
-//      }
-//
-//      // close reader
-//      reader.close();
-//    } catch (IOException ex) {
-//      throw new RuntimeException(ex);
-//    }
-//  }
-
-
 }
+
 
 
