@@ -301,7 +301,9 @@ public class TextParser {
     }
 
     private static void cry() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
+        user.modifyHealthPoints(5);
+        day.increaseTimeOfDay(1);
+        System.out.println("In a fit of despair, you spend part of the day having a good cry and feel slightly better");
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
