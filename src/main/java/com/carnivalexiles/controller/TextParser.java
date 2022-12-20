@@ -275,6 +275,7 @@ public class TextParser {
                         rawUserInputContainsEdible = true;
                     }
                     pointsToIncreaseHp += 20;
+
                     currentUserInventoryAsList.remove(item);
                     if (item.equals("bottled water") || item.equals("bottled brown water")) {
                         currentUserInventoryAsList.add("empty bottle");
@@ -288,7 +289,11 @@ public class TextParser {
                 user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
                 user.modifyHealthPoints(pointsToIncreaseHp);
                 clearScreen();
+
+                //Print out message so the user can see they have eaten an item and their hp increased.
+                System.out.println("You feel refreshed after eating and your hitpoints have increased.");
                 playGame(user, consoleView.getCurrentLocation(), day);
+
             }
         }
     }
