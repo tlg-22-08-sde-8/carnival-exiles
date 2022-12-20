@@ -53,4 +53,5 @@ public class User {
     public void setInventory(String[] inventory) {
         this.inventory = inventory;
     }
+
 }
