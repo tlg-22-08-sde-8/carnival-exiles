@@ -40,15 +40,21 @@ public class JsonLocationParser {
 
     try {
 
+      //Opening the file as a stream with the getFileFromResourceAsStream method,
       InputStream locationJson = getFileFromResourceAsStream("LocationData.json");
       BufferedReader newReader = new BufferedReader(
           new InputStreamReader(locationJson, "UTF-8"));
+
+      //Save the object in a way that is accessible to the method.
       JsonObject countryObj = gson.fromJson(newReader, JsonObject.class);
 
+      //Iterate through all locations and store the location objects in allMapLocations
       for (String places : MapLocation.ALL_LOCATIONS) {
 
+        //use each place in MapLocation.ALL_LOCATIONS to get the json information.
         JsonArray jsonArrayOfLocation = countryObj.get(places.toLowerCase()).getAsJsonArray();
 
+        //Iterate through every element within a single place and parse out the information to create a location object.
         for (JsonElement locationElement : jsonArrayOfLocation) {
 
           JsonObject locationJsonObject = locationElement.getAsJsonObject();
