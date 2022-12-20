@@ -196,10 +196,25 @@ public class TextParser {
                 performHelp();
                 TextParser.getUserInput();
                 break;
+          case "speak":
+          case "talk":
+          case "chat":
+            talkToNPC();
         }
     }
 
-    private static void goTo(String rawUserInput) throws IOException, InterruptedException {
+  private static void talkToNPC() throws IOException, InterruptedException {
+      if (!consoleView.getCurrentLocation().getName().trim().equals("LOGARITHMIC LAKE".trim())) {
+        System.out.println("Talk not available at this location.");
+        TextParser.getUserInput();
+      }
+      else {
+        // TODO: 12/20/22 Place puzzle/interaction code here
+        System.out.println("TODO: 12/20/22 Place puzzle/interaction code here");
+      }
+  }
+
+  private static void goTo(String rawUserInput) throws IOException, InterruptedException {
         String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
         String UpperCaseVisibleLocations = visibleLocations.toUpperCase();
         String userRequestedLocation = "";
