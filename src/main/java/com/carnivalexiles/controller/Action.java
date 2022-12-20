@@ -7,7 +7,7 @@ public class Action {
             "rest", "get", "grab", "grasp", "collect", "pickup", "seize", "take", "hook",
             "grab", "catch", "acquire", "fetch", "snatch", "grip", "capture", "dominate",
             "clasp", "drop", "look", "examine", "stare", "scrutinize", "glance", "peep",
-            "help", "music on", "music off","quit"};
+            "help", "quit", "speak", "talk", "chat"};
 
     public static String printHelpMenu() {
         String result = "\n"
@@ -19,7 +19,8 @@ public class Action {
                 + "5. Grab an item (Type \"Grab\")\n"
                 + "6. Drop an item (Type \"Drop\")\n"
                 + "7. Look around (Type \"Look\")\n"
-                + "8. Quit the game (Type \"Quit\")\n"
+                + "8. Talk (Type \"Talk\")\n"
+                + "9. Quit the game (Type \"Quit\")\n"
                 + "-------------- END----------------\n";
         return result;
     }

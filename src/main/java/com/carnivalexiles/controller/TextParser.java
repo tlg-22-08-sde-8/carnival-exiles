@@ -67,7 +67,6 @@ public class TextParser {
         }
     }
 
-
     public static void printGameOver() throws IOException, InterruptedException {
         clearScreen();
         Failure.displayFail();
