@@ -5,6 +5,7 @@ import com.carnivalexiles.controller.TextParser;
 import java.io.IOException;
 
 public class Day {
+
     private int day;
     private int timeOfDayCounter;
     private static final String[] timeOfDay = {"dawn", "noon", "dusk", "night"};
@@ -14,9 +15,10 @@ public class Day {
     }
 
     public int getDay() throws IOException, InterruptedException {
-        // If day reaches 8, end the game.
-        if (day == 8) {
-            TextParser.printGameOver();
+        // If day reaches 7, end the game.
+        if (day == 7) {
+            // if user makes it to day 7 then bring up win scenario method.
+            TextParser.printGameWin();
         }
         return day;
     }
@@ -45,8 +47,7 @@ public class Day {
         if (tempTimeOfDayCounter > timeOfDay.length - 1) {
             day++;
             timeOfDayCounter = tempTimeOfDayCounter - (timeOfDay.length - 1);
-        }
-        else {
+        } else {
             timeOfDayCounter = tempTimeOfDayCounter;
         }
     }
