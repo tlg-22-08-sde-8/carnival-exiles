@@ -5,7 +5,9 @@ import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.MapLocation;
 import com.carnivalexiles.view.ConsoleView;
+import com.carnivalexiles.view.Failure;
 import com.carnivalexiles.view.GoingToText;
+import com.carnivalexiles.view.Success;
 import com.carnivalexiles.view.WelcomeScreen;
 
 import java.io.BufferedReader;
@@ -42,8 +44,30 @@ public class TextParser {
         day = new Day();
     }
 
+    public static void printGameWin() throws IOException, InterruptedException {
+        clearScreen();
+        Success.displaySuccess();
+        String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
+        String[] validAnswers = {"yes", "no", "quit"};
+        System.out.print("You Won!!...play again? " + enterMessage);
+        String userInput = bufferReader.readLine().toLowerCase().trim();
+        while (!Arrays.asList(validAnswers).contains(userInput)) {
+            System.out.print(enterMessage);
+            userInput = bufferReader.readLine().toLowerCase().trim();
+        }
+        if (userInput.equals("yes")) {
+            clearScreen();
+            newGame();
+            startGame();
+        } else {
+            stopGame();
+        }
+    }
+
+
     public static void printGameOver() throws IOException, InterruptedException {
         clearScreen();
+        Failure.displayFail();
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
         System.out.print("GAME OVER...play again? " + enterMessage);
@@ -183,6 +207,7 @@ public class TextParser {
                 visibleLocationsAsList.add(location);
             }
         }
+
         // See if userInput contains an available location
         String upperCaseRawUserInput = rawUserInput.toUpperCase();
         for (String location : visibleLocationsAsList) {

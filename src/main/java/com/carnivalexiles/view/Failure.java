@@ -23,4 +23,10 @@ public class Failure {
             + "██║ ╚████║██║╚██████╗███████╗       ██║   ██║  ██║   ██║   ██╗            \n"
             + "╚═╝  ╚═══╝╚═╝ ╚═════╝╚══════╝       ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚═╝            \n"
             + "                                                                          ";
+
+
+    public static void displayFail() {
+        System.out.println(GREEN + "\n" + FAIL + "\n" + RESET);
+    }
+
 }
