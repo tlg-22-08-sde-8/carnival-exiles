@@ -17,7 +17,6 @@ import java.util.Arrays;
 public class TextParser {
     public static final int LAST_DAY_IN_GAME = 8;
     static BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
-
     static MapLocation mapLocations = new MapLocation();                              // All map locations obj
     static User user = new User(100, new String[]{"empty bottle"});       // Game user
     static Day day = new Day();                                                      // Game day
@@ -128,9 +127,6 @@ public class TextParser {
             case "consume":
                 consumeItem(userInput);
                 break;
-            case "swim":
-                swim();
-                break;
             case "cry":
                 cry();
                 break;
@@ -155,21 +151,8 @@ public class TextParser {
             case "clasp":
                 grabItem(userInput);
                 break;
-            case "hug":
-                hug();
-                break;
             case "drop":
                 dropItem(userInput);
-                break;
-            case "attack":
-                attack();
-                break;
-            case "retreat":
-            case "run":
-            case "skedaddle":
-            case "zonk":
-            case "scamper":
-                retreat();
                 break;
             case "look":
             case "examine":
@@ -293,13 +276,6 @@ public class TextParser {
         }
     }
 
-    private static void swim() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
-        pauseTheGame();
-        clearScreen();
-        playGame(user, consoleView.getCurrentLocation(), day);
-    }
-
     private static void cry() throws IOException, InterruptedException {
         user.modifyHealthPoints(5);
         day.increaseTimeOfDay(1);
@@ -310,8 +286,6 @@ public class TextParser {
     }
 
     private static void rest() throws IOException, InterruptedException {
-        System.out.println("You rest for a short while and regain some hp!");
-        pauseTheGame();
         user.modifyHealthPoints(10);
         day.increaseTimeOfDay(2);
         System.out.println("You rest for a half a day and regain 10 HP");
@@ -399,27 +373,6 @@ public class TextParser {
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
-    private static void hug() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
-        pauseTheGame();
-        clearScreen();
-        playGame(user, consoleView.getCurrentLocation(), day);
-    }
-
-    private static void attack() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
-        pauseTheGame();
-        clearScreen();
-        playGame(user, consoleView.getCurrentLocation(), day);
-    }
-
-    private static void retreat() throws IOException, InterruptedException {
-        System.out.println("STUB METHOD - IMPLEMENT DURING SPRINT 3");
-        pauseTheGame();
-        clearScreen();
-        playGame(user, consoleView.getCurrentLocation(), day);
-    }
-
     private static void doesUserInventoryContainEdibles() {
         for (String item : user.getInventory()) {
             if (MapLocation.CONSUMABLE_ITEMS.contains(item)) {
@@ -444,5 +397,4 @@ public class TextParser {
         }
         user.setInventory(currentUserInventoryAsList.toArray(new String[currentUserInventoryAsList.size()]));
     }
-
 }
