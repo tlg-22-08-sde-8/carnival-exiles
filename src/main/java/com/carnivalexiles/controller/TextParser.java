@@ -329,6 +329,16 @@ public class TextParser {
                                 new String[currentUserInventoryAsList.size()]));
                 user.modifyHealthPoints(pointsToIncreaseHp);
                 System.out.println("You feel reinvigorated and slightly increased your HP!");
+                System.out.println(""
+                    + "              ,-------------------.\n"
+                    + "             ( Tried it, loved it! )\n"
+                    + "        munch `-v-----------------'\n"
+                    + " ,---'. --------'\n"
+                    + " C.^_^|   munch\n"
+                    + " (_,-_)\n"
+                    + ",--`|-.\n"
+                    + "|\\    ]\\__n_\n"
+                    + "||`   '----/   ");
                 pauseTheGame();
                 clearScreen();
                 playGame(user, consoleView.getCurrentLocation(), day);
@@ -341,6 +351,10 @@ public class TextParser {
         day.increaseTimeOfDay(1);
         System.out.println("In a fit of despair, you spend part of the day having a good cry and feel slightly better");
         System.out.println(""
+            + "                                  ,-------------------.\n"
+            + "                                 (     I hate JAR!!!   )\n"
+            + "                                  `-v-----------------'\n"
+            + "                     ------------'\n"
             + "    ____            ____\n"
             + "  _,',--.`-.      _,',--.`-.\n"
             + " <_ ( () )  >  ( <_ ( () )  >\n"
