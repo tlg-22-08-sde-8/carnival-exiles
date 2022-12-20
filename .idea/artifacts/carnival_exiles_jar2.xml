@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="carnival-exiles:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/carnival_exiles_jar2</output-path>
+    <root id="archive" name="carnival-exiles.jar">
+      <element id="module-output" name="carnival-exiles" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.9/gson-2.8.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/github/lbovolini/object-mapper/1.1.68/object-mapper-1.1.68.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
