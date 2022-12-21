@@ -44,6 +44,13 @@ public class TextParser {
 		mapLocations = new MapLocation();                              // All map locations obj
 		user = new User(100, new String[]{"empty bottle"});       // Game user
 		day = new Day();
+		JsonLocationParser.allMapLocations.get(0).setItems(new String[]{"stick"});
+		JsonLocationParser.allMapLocations.get(1).setItems(new String[]{"sea shells"});
+		JsonLocationParser.allMapLocations.get(2).setItems(new String[]{"coconut", "magical herbs"});
+		JsonLocationParser.allMapLocations.get(3).setItems(new String[]{"frog", "brown water"});
+		JsonLocationParser.allMapLocations.get(4).setItems(new String[]{"copper"});
+		JsonLocationParser.allMapLocations.get(5).setItems(new String[]{"water", "fish"});
+		JsonLocationParser.allMapLocations.get(6).setItems(new String[]{"clay"});
 	}
 
 
