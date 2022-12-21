@@ -12,13 +12,32 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class MusicHandler {
 
-  public static void music(String userInput) throws LineUnavailableException {
-    Clip clip = AudioSystem.getClip();
-    if (userInput.contains("music on")) {
+  //fields
+  private static boolean music = true;
+  private static Clip clip;
+
+
+  public static boolean isMusic() {
+    return music;
+  }
+
+  public static boolean setMusic(boolean music) {
+    MusicHandler.music = music;
+    return music;
+  }
+
+  public MusicHandler() {
+  }
+
+  public static void music() throws LineUnavailableException {
+    if (music) {
       try {
         URL musicStream = MusicHandler.class.getClassLoader().getResource("island-beach.wav");
+        if (musicStream == null) {
+          throw new IllegalArgumentException("file not found");
+        }
         AudioInputStream inputStream = AudioSystem.getAudioInputStream(musicStream);
-//        Clip clip = AudioSystem.getClip();
+        clip = AudioSystem.getClip();
         clip.open(inputStream);
 
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -33,21 +52,10 @@ public class MusicHandler {
         e.printStackTrace();
       }
     }
-    else if (userInput.contains("music off")) {
-//      Clip clip = AudioSystem.getClip();
-      clip.stop(); //stops clip
-      clip.close();
+    if (setMusic(false)) {
+      clip.stop();
     }
   }
-//
-//  public static void turnMusicOff()
-//      throws LineUnavailableException {
-//    Clip clip = AudioSystem.getClip();
-////    long clipTime = clip.getMicrosecondPosition(); //gets clip position
-//    clip.stop(); //stops clip
-////    clip.setMicrosecondPosition(clipTime); //sets clip pos
-//  }
-
 
   private static InputStream getFileFromResourceAsStream(String fileName) {
     ClassLoader classLoader = MusicHandler.class.getClassLoader();
@@ -58,17 +66,4 @@ public class MusicHandler {
       return inputStream;
     }
   }
-
-
-
-
-
 }
-
-//  public static void main(String[] args) throws InterruptedException, LineUnavailableException {
-//    music("resources/song2.wav");
-//    Thread.sleep(2000);
-//    System.out.println("music is on");
-//    turnMusicOff();
-//    System.out.println("music is off");
-//  }

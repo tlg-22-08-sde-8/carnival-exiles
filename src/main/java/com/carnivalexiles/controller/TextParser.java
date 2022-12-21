@@ -5,10 +5,7 @@ import com.carnivalexiles.model.User;
 import com.carnivalexiles.model.locations.Location;
 import com.carnivalexiles.model.locations.MapLocation;
 import com.carnivalexiles.view.ConsoleView;
-import com.carnivalexiles.view.Failure;
-import com.carnivalexiles.view.GoingToText;
-import com.carnivalexiles.view.Success;
-import com.carnivalexiles.view.WelcomeScreen;
+import com.carnivalexiles.view.ArtText;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -49,7 +46,7 @@ public class TextParser {
 
     public static void printGameWin() throws IOException, InterruptedException {
         clearScreen();
-        Success.displaySuccess();
+        ArtText.displaySuccess();
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
         System.out.print("You Won!!...play again? " + enterMessage);
@@ -69,7 +66,7 @@ public class TextParser {
 
     public static void printGameOver() throws IOException, InterruptedException {
         clearScreen();
-        Failure.displayFail();
+        ArtText.displayFail();
         String enterMessage = "(Enter \"Yes\" or \"No\")\n> ";
         String[] validAnswers = {"yes", "no", "quit"};
         System.out.print("GAME OVER...play again? " + enterMessage);
@@ -97,13 +94,13 @@ public class TextParser {
 
     public static void startGame() throws IOException, InterruptedException {
         try {
-            MusicHandler.music("music on");
+            MusicHandler.music();
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
         JsonLocationParser.locationParser();
-        WelcomeScreen.displayTitle();
-        WelcomeScreen.displayIntroduction();
+        ArtText.displayTitle();
+        ArtText.displayIntroduction();
         TextParser.enterGame();
     }
 
@@ -195,22 +192,19 @@ public class TextParser {
             case "peep":
                 lookAtItems();
                 break;
-            case "music on":
-                try {
-                    MusicHandler.music("music on");
-                } catch (LineUnavailableException e) {
-                    e.printStackTrace();
-                }
-                playGame(user, consoleView.getCurrentLocation(), day);
-                break;
-            case "music off":
-                try {
-                    MusicHandler.music("music off");
-                } catch (LineUnavailableException e) {
-                    e.printStackTrace();
-                }
-                playGame(user, consoleView.getCurrentLocation(), day);
-                break;
+//                attempting to music off/on with user input
+//            case "music on":
+//                if (userInput.equals("music on")){
+//                    MusicHandler.setMusic(true);
+//                }
+//                playGame(user, consoleView.getCurrentLocation(), day);
+//                break;
+//            case "music off":
+//                if (userInput.equals("music off")){
+//                    MusicHandler.setMusic(false);
+//                }
+//                playGame(user, consoleView.getCurrentLocation(), day);
+//                break;
             case "quit":
                 printGameOver();
                 break;
@@ -344,16 +338,7 @@ public class TextParser {
                                 new String[currentUserInventoryAsList.size()]));
                 user.modifyHealthPoints(pointsToIncreaseHp);
                 System.out.println("You feel reinvigorated and slightly increased your HP!");
-                System.out.println(""
-                    + "              ,-------------------.\n"
-                    + "             ( Tried it, loved it! )\n"
-                    + "        munch `-v-----------------'\n"
-                    + " ,---'. --------'\n"
-                    + " C.^_^|   munch\n"
-                    + " (_,-_)\n"
-                    + ",--`|-.\n"
-                    + "|\\    ]\\__n_\n"
-                    + "||`   '----/   ");
+                System.out.println(ArtText.CONSUME_ART);
                 pauseTheGame();
                 clearScreen();
                 playGame(user, consoleView.getCurrentLocation(), day);
@@ -365,22 +350,7 @@ public class TextParser {
         user.modifyHealthPoints(5);
         day.increaseTimeOfDay(1);
         System.out.println("In a fit of despair, you spend part of the day having a good cry and feel slightly better");
-        System.out.println(""
-            + "                                  ,-------------------.\n"
-            + "                                 (     I hate JAR!!!   )\n"
-            + "                                  `-v-----------------'\n"
-            + "                     ------------'\n"
-            + "    ____            ____\n"
-            + "  _,',--.`-.      _,',--.`-.\n"
-            + " <_ ( () )  >  ( <_ ( () )  >\n"
-            + "   `-:__;,-'    \\  `A:__:,-'\n"
-            + "                 \\ / \\\n"
-            + "                  ((  )\n"
-            + "                   \\-'\n"
-            + "                    \\\n"
-            + "                     \\\n"
-            + "          (           )       \n"
-            + "           `-'\"`-----'");
+        System.out.println(ArtText.CRY_ART);
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
@@ -390,15 +360,7 @@ public class TextParser {
         user.modifyHealthPoints(10);
         day.increaseTimeOfDay(2);
         System.out.println("You rest for a half a day and regain 10 HP");
-        System.out.println(""
-            + "      _____|~~\\_____      _____________\n"
-            + "             _-~               \\    |    \\\n"
-            + "             _-    | )     \\    |__/   \\   \\\n"
-            + "             _-         )   |   |  |     \\  \\\n"
-            + "             _-    | )     /    |--|      |  |\n"
-            + "            __-_______________ /__/_______|  |_________\n"
-            + "           (                |----         |  |\n"
-            + "            `---------------'--\\\\\\\\      .`--'          ");
+        System.out.println(ArtText.REST_ART);
         pauseTheGame();
         clearScreen();
         playGame(user, consoleView.getCurrentLocation(), day);
@@ -450,19 +412,19 @@ public class TextParser {
     private static String printGoToScreen(String requestedLocation) {
         switch (requestedLocation) {
             case "LANDING ZONE":
-                return GoingToText.travelingLandingZone;
+                return ArtText.travelingLandingZone;
             case "SANDY BEACH":
-                return GoingToText.travelingSandyBeach;
+                return ArtText.travelingSandyBeach;
             case "COCO FOREST":
-                return GoingToText.travelingCocoForest;
+                return ArtText.travelingCocoForest;
             case "MOIST MARSHLAND":
-                return GoingToText.travelingMoistMarshland;
+                return ArtText.travelingMoistMarshland;
             case "SUS MOUNTAIN":
-                return GoingToText.travelingSusMountain;
+                return ArtText.travelingSusMountain;
             case "LOGARITHMIC LAKE":
-                return GoingToText.travelingLogarithmicLake;
+                return ArtText.travelingLogarithmicLake;
             case "LUMINOUS LAGOON":
-                return GoingToText.travelingLuminousLagoon;
+                return ArtText.travelingLuminousLagoon;
             default:
                 return "NOT VALID LOCATION";
         }
