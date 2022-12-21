@@ -357,6 +357,9 @@ public class TextParser {
     private static void talkToNPC() throws IOException, InterruptedException {
         if (!consoleView.getCurrentLocation().getName().trim().equals("LOGARITHMIC LAKE".trim())) {
             System.out.println("Talk not available at this location.");
+            pauseTheGame();
+            clearScreen();
+            playGame(user, consoleView.getCurrentLocation(), day);
             TextParser.getUserInput();
         } else {
             riddle();
@@ -365,7 +368,7 @@ public class TextParser {
 
     private static void riddle() throws InterruptedException, IOException {
         System.out.println(
-                " You must answer this riddle. If correct, you will be rewarded, if not, punished you will be\n");
+                " You must answer this riddle. If correct, you will be rewarded, if not, punished you will be!\n");
         System.out.println(
                 "I am taken from a mine, and shut up in a wooden case,\n from which I am never released, and yet I am used. What am I?");
         System.out.print("> ");
