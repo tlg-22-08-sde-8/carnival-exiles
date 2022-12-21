@@ -53,7 +53,6 @@ public class TextParser {
 		JsonLocationParser.allMapLocations.get(6).setItems(new String[]{"clay"});
 	}
 
-
 	public static void printGameWin() throws IOException, InterruptedException {
 		clearScreen();
 		Success.displaySuccess();
