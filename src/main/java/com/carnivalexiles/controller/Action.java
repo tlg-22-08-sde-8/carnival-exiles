@@ -19,7 +19,7 @@ public class Action {
                 + "5. Grab an item (Type \"Grab\")\n"
                 + "6. Drop an item (Type \"Drop\")\n"
                 + "7. Look around (Type \"Look\")\n"
-                + "8. Talk (Type \"Talk\")\n"
+                + "8. Talk to an NPC (Type \"Talk\")\n"
                 + "9. Quit the game (Type \"Quit\")\n"
                 + "-------------- END----------------\n";
         return result;

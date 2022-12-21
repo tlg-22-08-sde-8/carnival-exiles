@@ -24,7 +24,7 @@
   }],
   "logarithmic lake": [{
     "items": ["water", "fish"],
-    "description": "You arrive at a very beautiful and efficiently running lake. A Wizard\nappears. He says “In order to quench your thirst with this water,\nyou must answer the following question”: \n\nIf you have 2 logs and you jump over 1, how many times\ndo you need to jump before you get tired? \n\nIf the Wizard’s question is too difficult of a riddle… \nyou can check out 'Moist Marshland' to quench your \nthirst. Along the shoreline that contain patches of\naquatic vegetation are largemouth bass.\n",
+    "description": "You arrive at a very beautiful and efficiently running lake. \n Along the shoreline of the lake, there are patches of dead squirrels and rodents.\n In the lake there are some swimming large-mouth bas, \n\n A Wizard appears. He says: “In order to quench your thirst with this magical elixir,\nyou must talk to me and answer a riddle”: \n",
     "name": "LOGARITHMIC LAKE",
     "visibleLocations": "MOIST MARSHLAND and SUS MOUNTAIN"
   }],
