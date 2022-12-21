@@ -37,12 +37,18 @@ public class TextParser {
         }
     }
 
-    public static void newGame() {
-        mapLocations = new MapLocation();                              // All map locations obj
-        user = new User(100, new String[]{"empty bottle"});       // Game user
-        day = new Day();
-    }
-
+	public static void newGame() {
+		mapLocations = new MapLocation();                              // All map locations obj
+		user = new User(100, new String[]{"empty bottle"});       // Game user
+		day = new Day();
+		JsonLocationParser.allMapLocations.get(0).setItems(new String[]{"stick"});
+		JsonLocationParser.allMapLocations.get(1).setItems(new String[]{"sea shells"});
+		JsonLocationParser.allMapLocations.get(2).setItems(new String[]{"coconut", "magical herbs"});
+		JsonLocationParser.allMapLocations.get(3).setItems(new String[]{"frog", "brown water"});
+		JsonLocationParser.allMapLocations.get(4).setItems(new String[]{"copper"});
+		JsonLocationParser.allMapLocations.get(5).setItems(new String[]{"water", "fish"});
+		JsonLocationParser.allMapLocations.get(6).setItems(new String[]{"clay"});
+	}
 
     public static void printGameWin() throws IOException, InterruptedException {
         clearScreen();
@@ -216,53 +222,43 @@ public class TextParser {
           case "talk":
           case "chat":
             talkToNPC();
+            break;
         }
     }
 
-  private static void talkToNPC() throws IOException, InterruptedException {
-      if (!consoleView.getCurrentLocation().getName().trim().equals("LOGARITHMIC LAKE".trim())) {
-        System.out.println("Talk not available at this location.");
-        TextParser.getUserInput();
-      }
-      else {
-        // TODO: 12/20/22 Place puzzle/interaction code here
-        System.out.println("TODO: 12/20/22 Place puzzle/interaction code here");
-      }
-  }
-
-  private static void goTo(String rawUserInput) throws IOException, InterruptedException {
-        String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
-        String UpperCaseVisibleLocations = visibleLocations.toUpperCase();
-        String userRequestedLocation = "";
-        var visibleLocationsAsList = new ArrayList<String>();
-        // Create a list of the available locations from the visible locations at this location
-        for (String location : MapLocation.ALL_LOCATIONS) {
-            if (UpperCaseVisibleLocations.contains(location)) {
-                visibleLocationsAsList.add(location);
-            }
-        }
-        // See if userInput contains an available location
-        String upperCaseRawUserInput = rawUserInput.toUpperCase();
-        for (String location : visibleLocationsAsList) {
-            if (upperCaseRawUserInput.contains(location)) {
-                userRequestedLocation = location;
-                break;
-            }
-        }
-        if (userRequestedLocation.isEmpty()) {
-            System.out.printf("You can only go to %s (pick one)\n ", visibleLocations);
-            getUserInput();
-        } else {
-            clearScreen();
-            day.increaseTimeOfDay(2);
-            user.modifyHealthPoints(-20);
-            clearScreen();
-            System.out.println((printGoToScreen(userRequestedLocation)));
-            pauseTheGame();
-            clearScreen();
-            playGame(user, mapLocations.locationHandler(userRequestedLocation), day);
-        }
-    }
+	private static void goTo(String rawUserInput) throws IOException, InterruptedException {
+		String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
+		String UpperCaseVisibleLocations = visibleLocations.toUpperCase();
+		String userRequestedLocation = "";
+		var visibleLocationsAsList = new ArrayList<String>();
+		// Create a list of the available locations from the visible locations at this location
+		for (String location : MapLocation.ALL_LOCATIONS) {
+			if (UpperCaseVisibleLocations.contains(location)) {
+				visibleLocationsAsList.add(location);
+			}
+		}
+		// See if userInput contains an available location
+		String upperCaseRawUserInput = rawUserInput.toUpperCase();
+		for (String location : visibleLocationsAsList) {
+			if (upperCaseRawUserInput.contains(location)) {
+				userRequestedLocation = location;
+				break;
+			}
+		}
+		if (userRequestedLocation.isEmpty()) {
+			System.out.printf("You can only go to %s (pick one)\n ", visibleLocations);
+			getUserInput();
+		} else {
+			clearScreen();
+			day.increaseTimeOfDay(2);
+			user.modifyHealthPoints(-20);
+			clearScreen();
+			System.out.println((printGoToScreen(userRequestedLocation)));
+			pauseTheGame();
+			clearScreen();
+			playGame(user, mapLocations.locationHandler(userRequestedLocation), day);
+		}
+	}
 
     private static void pauseTheGame() throws InterruptedException {
         Thread.sleep(3000);
@@ -356,6 +352,36 @@ public class TextParser {
         playGame(user, consoleView.getCurrentLocation(), day);
     }
 
+	private static void talkToNPC() throws IOException, InterruptedException {
+		if (!consoleView.getCurrentLocation().getName().trim().equals("LOGARITHMIC LAKE".trim())) {
+			System.out.println("Talk not available at this location.");
+			TextParser.getUserInput();
+		} else {
+			riddle();
+		}
+	}
+
+	private static void riddle() throws InterruptedException, IOException {
+		System.out.println(" You must answer this riddle. If correct, you will be rewarded, if not, punished you will be\n");
+		System.out.println("I am taken from a mine, and shut up in a wooden case,\n from which I am never released, and yet I am used. What am I?");
+		System.out.print("> ");
+		String userInput = bufferReader.readLine().toLowerCase().trim();
+		if (userInput.equals("candle")) {
+			user.modifyHealthPoints(100);
+			System.out.println("Correct! You must be at least somewhat intelligent");
+			System.out.println("You've been fully healed");
+			pauseTheGame();
+			clearScreen();
+			playGame(user, consoleView.getCurrentLocation(), day);
+		} else {
+            user.modifyHealthPoints(-20);
+			System.out.println("No, dum dum, into the Bog with you!");
+			System.out.println("You lost some health and time!");
+			pauseTheGame();
+			clearScreen();
+			playGame(user, consoleView.getCurrentLocation(), day);
+		}
+	}
     private static void rest() throws IOException, InterruptedException {
         user.modifyHealthPoints(10);
         day.increaseTimeOfDay(2);
