@@ -273,9 +273,9 @@ public class ArtText {
 
     public static void displayObjective() {
         System.out.println(BOLD + "OBJECTIVE: " + RESET
+                + "Another cruise line will return in 7 days and you will be rescued\n"
                 + "Explore the lands! Interact with the wildlife! Eat some interesting food!\n"
-                + BOLD_RED + "Do not let your health points (HP) fall below zero!\n\n" + RESET
-                + "P.S. Watch out for traps!\n");
+                + BOLD_RED + "Do not let your health points (HP) fall below zero!\n\n" + RESET);
         System.out.println(
                 "Would you like to start your true vacation adventure? (Enter any key or 'Quit')");
     }
