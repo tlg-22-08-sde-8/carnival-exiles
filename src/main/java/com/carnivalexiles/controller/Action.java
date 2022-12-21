@@ -2,7 +2,7 @@ package com.carnivalexiles.controller;
 
 public class Action {
 
-    //allActions are stored in
+    //This array of strings includes synonyms for users to type different words for the same action.
     public static final String[] allActions = {"go", "travel", "walk", "trek", "navigate",
             "stroll", "dash", "skip", "crawl", "transit", "move", "consume", "cry",
             "rest", "get", "grab", "grasp", "collect", "pickup", "seize", "take", "hook",
