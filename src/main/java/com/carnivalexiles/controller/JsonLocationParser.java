@@ -22,6 +22,7 @@ public class JsonLocationParser {
     private static String[] itemList;
     private static String visibleLocations;
 
+    //Load file as a stream and include an IllegalArgumentException to catch invalid file names.
     private static InputStream getFileFromResourceAsStream(String fileName) {
         ClassLoader classLoader = JsonLocationParser.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
@@ -32,6 +33,7 @@ public class JsonLocationParser {
         }
     }
 
+    //Method loads and creates location objects for every location and stores them in allMapLocations
     public static void locationParser() {
         //Create a Gson
         Gson gson = new Gson();
@@ -62,6 +64,8 @@ public class JsonLocationParser {
                 name = locationJsonObject.get("name").getAsString();
                 visibleLocations = locationJsonObject.get("visibleLocations").getAsString();
                 description = locationJsonObject.get("description").getAsString();
+
+                //Use extracted data to create a new location object and add it to an ArrayList of locations.
                 allMapLocations.add(new Location(description, name, itemList, visibleLocations));
             }
         }

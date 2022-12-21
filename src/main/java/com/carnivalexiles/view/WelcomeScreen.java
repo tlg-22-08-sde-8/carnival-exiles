@@ -41,8 +41,11 @@ public class WelcomeScreen {
         displayObjective();
     }
 
+    //
     public static void displayObjective() {
         System.out.println(BOLD + "OBJECTIVE: " + RESET
+                + "The cruise liner comes around to the island every 7 days!\n"
+                + "You must survive until the next the cruise returns\n"
                 + "Explore the lands! Interact with the wildlife! Eat some interesting food!\n"
                 + BOLD_RED + "Do not let your health points (HP) fall below zero!\n\n" + RESET
                 + "P.S. Watch out for traps!\n");

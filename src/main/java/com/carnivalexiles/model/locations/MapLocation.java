@@ -6,17 +6,18 @@ import java.util.List;
 
 public class MapLocation {
 
+    //Final
     public static final String[] ALL_LOCATIONS = {"LANDING ZONE", "SANDY BEACH", "COCO FOREST",
-            "MOIST MARSHLAND", "SUS MOUNTAIN",
-            "LOGARITHMIC LAKE", "LUMINOUS LAGOON"};
+            "MOIST MARSHLAND", "SUS MOUNTAIN", "LOGARITHMIC LAKE", "LUMINOUS LAGOON"};
 
     public static final List<String> ALL_ITEMS = Arrays.asList("stick", "sea shells", "coconut",
-            "magical herbs",
-            "copper", "water", "fish", "frog", "brown water", "clay");
+            "magical herbs", "copper", "water", "fish", "frog", "brown water", "clay");
 
     public static final List<String> CONSUMABLE_ITEMS = Arrays.asList("coconut", "magical herbs",
             "bottled water", "bottled brown water", "fish", "berries");
 
+    //(Comment Line 1) locationHandler method takes the user input and loads a specific location according to its index in
+    //(Comment Line 2) the ALL_LOCATIONS variable. Ex: "LANDING ZONE" = 0, "SANDY BEACH" = 1, ... "LUMINOUS LAGOON" = 6.
     public Location locationHandler(String userInput) {
         switch (userInput) {
             case "LANDING ZONE":
