@@ -1,6 +1,7 @@
 module carnival.exiles {
 
   requires com.google.gson;
+  requires java.desktop;
 
   exports com.carnivalexiles.model;
   opens com.carnivalexiles.model to com.google.gson;

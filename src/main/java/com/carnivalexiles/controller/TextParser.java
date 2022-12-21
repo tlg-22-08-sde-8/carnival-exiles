@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.sound.sampled.LineUnavailableException;
 import java.util.LinkedList;
 
 public class TextParser {
@@ -94,12 +95,17 @@ public class TextParser {
 		System.out.println(System.lineSeparator().repeat(50));
 	}
 
-	public static void startGame() throws IOException, InterruptedException {
-		JsonLocationParser.locationParser();
-		WelcomeScreen.displayTitle();
-		WelcomeScreen.displayIntroduction();
-		TextParser.enterGame();
-	}
+    public static void startGame() throws IOException, InterruptedException {
+        try {
+            MusicHandler.music("music on");
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+        JsonLocationParser.locationParser();
+        WelcomeScreen.displayTitle();
+        WelcomeScreen.displayIntroduction();
+        TextParser.enterGame();
+    }
 
 	public static void playGame(User user, Location location, Day day)
 			throws IOException, InterruptedException {
@@ -135,75 +141,101 @@ public class TextParser {
 		actionHandler(requestedAction, userInput);
 	}
 
-	public static void actionHandler(String requestedAction, String userInput)
-			throws IOException, InterruptedException {
-		switch (requestedAction) {
-			case "go":
-			case "travel":
-			case "walk":
-			case "trek":
-			case "navigate":
-			case "stroll":
-			case "dash":
-			case "skip":
-			case "crawl":
-			case "transit":
-			case "move":
-				goTo(userInput);
-				break;
-			case "consume":
-				consumeItem(userInput);
-				break;
-			case "cry":
-				cry();
-				break;
-			case "rest":
-				rest();
-				break;
-			case "get":
-			case "grab":
-			case "grasp":
-			case "collect":
-			case "pickup":
-			case "seize":
-			case "take":
-			case "hook":
-			case "catch":
-			case "acquire":
-			case "fetch":
-			case "snatch":
-			case "grip":
-			case "capture":
-			case "dominate":
-			case "clasp":
-				grabItem(userInput);
-				break;
-			case "drop":
-				dropItem(userInput);
-				break;
-			case "look":
-			case "examine":
-			case "stare":
-			case "scrutinize":
-			case "glance":
-			case "peep":
-				lookAtItems();
-				break;
-			case "quit":
-				printGameOver();
-				break;
-			case "speak":
-			case "talk":
-			case "chat":
-				talkToNPC();
-				break;
-			case "help":
-				performHelp();
-				TextParser.getUserInput();
-				break;
-		}
-	}
+    public static void actionHandler(String requestedAction, String userInput)
+            throws IOException, InterruptedException {
+        switch (requestedAction) {
+            case "go":
+            case "travel":
+            case "walk":
+            case "trek":
+            case "navigate":
+            case "stroll":
+            case "dash":
+            case "skip":
+            case "crawl":
+            case "transit":
+            case "move":
+                goTo(userInput);
+                break;
+            case "consume":
+                consumeItem(userInput);
+                break;
+            case "cry":
+                cry();
+                break;
+            case "rest":
+                rest();
+                break;
+            case "get":
+            case "grab":
+            case "grasp":
+            case "collect":
+            case "pickup":
+            case "seize":
+            case "take":
+            case "hook":
+            case "catch":
+            case "acquire":
+            case "fetch":
+            case "snatch":
+            case "grip":
+            case "capture":
+            case "dominate":
+            case "clasp":
+                grabItem(userInput);
+                break;
+            case "drop":
+                dropItem(userInput);
+                break;
+            case "look":
+            case "examine":
+            case "stare":
+            case "scrutinize":
+            case "glance":
+            case "peep":
+                lookAtItems();
+                break;
+            case "music on":
+                try {
+                    MusicHandler.music("music on");
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
+                playGame(user, consoleView.getCurrentLocation(), day);
+                break;
+            case "music off":
+                try {
+                    MusicHandler.music("music off");
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
+                playGame(user, consoleView.getCurrentLocation(), day);
+                break;
+            case "quit":
+                printGameOver();
+                break;
+            case "help":
+                performHelp();
+                TextParser.getUserInput();
+                break;
+          case "speak":
+          case "talk":
+          case "chat":
+            talkToNPC();
+            break;
+        }
+    }
 
+  private static void talkToNPC() throws IOException, InterruptedException {
+      if (!consoleView.getCurrentLocation().getName().trim().equals("LOGARITHMIC LAKE".trim())) {
+        System.out.println("Talk not available at this location.");
+        TextParser.getUserInput();
+      }
+      else {
+        // TODO: 12/20/22 Place puzzle/interaction code here
+        System.out.println("TODO: 12/20/22 Place puzzle/interaction code here");
+      }
+  }
 
 	private static void goTo(String rawUserInput) throws IOException, InterruptedException {
 		String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
@@ -272,73 +304,88 @@ public class TextParser {
 		System.out.println((Action.printHelpMenu()));
 	}
 
-	private static void consumeItem(String rawUserInput) throws IOException, InterruptedException {
-		if (!user.getInventoryConsumableStatus()) {
-			System.out.println("No consumable items in inventory.");
-			getUserInput();
-		} else {
-			String lowerCaseRawUserInput = rawUserInput.toLowerCase();
-			var currentUserInventory = user.getInventory();
-			var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
-			boolean rawUserInputContainsEdible = false;
-			int pointsToIncreaseHp = 0;                     // Counter for points to increase user hp
-			// For each item in users inventory
-			for (String item : currentUserInventory) {
-				// Check if input contains a valid item from inventory and if item is consumable
-				if (lowerCaseRawUserInput.contains(item) && MapLocation.CONSUMABLE_ITEMS.contains(
-						item)) {
-					if (!rawUserInputContainsEdible) {
-						rawUserInputContainsEdible = true;
-					}
-					pointsToIncreaseHp += 20;
-					currentUserInventoryAsList.remove(item);
-					if (item.equals("bottled water") || item.equals("bottled brown water")) {
-						currentUserInventoryAsList.add("empty bottle");
-					}
-				}
-			}
-			if (!rawUserInputContainsEdible) {
-				var consumablesList = new LinkedList<String>();
-				for (String item : currentUserInventory) {
-					if (MapLocation.CONSUMABLE_ITEMS.contains(item)) {
-						consumablesList.add(item);
-					}
-				}
-				System.out.printf("Please provide the item(s) to consume: %s\n",
-						consumablesList.toString());
-				getUserInput();
-			} else {
-				user.setInventory(
-						currentUserInventoryAsList.toArray(
-								new String[currentUserInventoryAsList.size()]));
-				user.modifyHealthPoints(pointsToIncreaseHp);
-				System.out.println("You feel reinvigorated and slightly increased your HP!");
-				pauseTheGame();
-				clearScreen();
-				playGame(user, consoleView.getCurrentLocation(), day);
-			}
-		}
-	}
+    private static void consumeItem(String rawUserInput) throws IOException, InterruptedException {
+        if (!user.getInventoryConsumableStatus()) {
+            System.out.println("No consumable items in inventory.");
+            getUserInput();
+        } else {
+            String lowerCaseRawUserInput = rawUserInput.toLowerCase();
+            var currentUserInventory = user.getInventory();
+            var currentUserInventoryAsList = new ArrayList<>(Arrays.asList(currentUserInventory));
+            boolean rawUserInputContainsEdible = false;
+            int pointsToIncreaseHp = 0;                     // Counter for points to increase user hp
+            // For each item in users inventory
+            for (String item : currentUserInventory) {
+                // Check if input contains a valid item from inventory and if item is consumable
+                if (lowerCaseRawUserInput.contains(item) && MapLocation.CONSUMABLE_ITEMS.contains(
+                        item)) {
+                    if (!rawUserInputContainsEdible) {
+                        rawUserInputContainsEdible = true;
+                    }
+                    pointsToIncreaseHp += 20;
+                    currentUserInventoryAsList.remove(item);
+                    if (item.equals("bottled water") || item.equals("bottled brown water")) {
+                        currentUserInventoryAsList.add("empty bottle");
+                    }
+                }
+            }
+            if (!rawUserInputContainsEdible) {
+                var consumablesList = new LinkedList<String>();
+                for (String item : currentUserInventory) {
+                    if (MapLocation.CONSUMABLE_ITEMS.contains(item)) {
+                        consumablesList.add(item);
+                    }
+                }
+                System.out.printf("Please provide the item(s) to consume: %s\n",
+                        consumablesList.toString());
+                getUserInput();
+            } else {
+                user.setInventory(
+                        currentUserInventoryAsList.toArray(
+                                new String[currentUserInventoryAsList.size()]));
+                user.modifyHealthPoints(pointsToIncreaseHp);
+                System.out.println("You feel reinvigorated and slightly increased your HP!");
+                System.out.println(""
+                    + "              ,-------------------.\n"
+                    + "             ( Tried it, loved it! )\n"
+                    + "        munch `-v-----------------'\n"
+                    + " ,---'. --------'\n"
+                    + " C.^_^|   munch\n"
+                    + " (_,-_)\n"
+                    + ",--`|-.\n"
+                    + "|\\    ]\\__n_\n"
+                    + "||`   '----/   ");
+                pauseTheGame();
+                clearScreen();
+                playGame(user, consoleView.getCurrentLocation(), day);
+            }
+        }
+    }
 
-	private static void cry() throws IOException, InterruptedException {
-		user.modifyHealthPoints(5);
-		day.increaseTimeOfDay(1);
-		System.out.println(
-				"In a fit of despair, you spend part of the day having a good cry and feel slightly better");
-		pauseTheGame();
-		clearScreen();
-		playGame(user, consoleView.getCurrentLocation(), day);
-	}
-
-	private static void rest() throws IOException, InterruptedException {
-		user.modifyHealthPoints(10);
-		day.increaseTimeOfDay(2);
-		System.out.println("You rest for a half a day and regain 10 HP");
-		pauseTheGame();
-		clearScreen();
-		playGame(user, consoleView.getCurrentLocation(), day);
-	}
-
+    private static void cry() throws IOException, InterruptedException {
+        user.modifyHealthPoints(5);
+        day.increaseTimeOfDay(1);
+        System.out.println("In a fit of despair, you spend part of the day having a good cry and feel slightly better");
+        System.out.println(""
+            + "                                  ,-------------------.\n"
+            + "                                 (     I hate JAR!!!   )\n"
+            + "                                  `-v-----------------'\n"
+            + "                     ------------'\n"
+            + "    ____            ____\n"
+            + "  _,',--.`-.      _,',--.`-.\n"
+            + " <_ ( () )  >  ( <_ ( () )  >\n"
+            + "   `-:__;,-'    \\  `A:__:,-'\n"
+            + "                 \\ / \\\n"
+            + "                  ((  )\n"
+            + "                   \\-'\n"
+            + "                    \\\n"
+            + "                     \\\n"
+            + "          (           )       \n"
+            + "           `-'\"`-----'");
+        pauseTheGame();
+        clearScreen();
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
 
 	private static void talkToNPC() throws IOException, InterruptedException {
 		if (!consoleView.getCurrentLocation().getName().trim().equals("LOGARITHMIC LAKE".trim())) {
@@ -370,6 +417,23 @@ public class TextParser {
 			playGame(user, consoleView.getCurrentLocation(), day);
 		}
 	}
+    private static void rest() throws IOException, InterruptedException {
+        user.modifyHealthPoints(10);
+        day.increaseTimeOfDay(2);
+        System.out.println("You rest for a half a day and regain 10 HP");
+        System.out.println(""
+            + "      _____|~~\\_____      _____________\n"
+            + "             _-~               \\    |    \\\n"
+            + "             _-    | )     \\    |__/   \\   \\\n"
+            + "             _-         )   |   |  |     \\  \\\n"
+            + "             _-    | )     /    |--|      |  |\n"
+            + "            __-_______________ /__/_______|  |_________\n"
+            + "           (                |----         |  |\n"
+            + "            `---------------'--\\\\\\\\      .`--'          ");
+        pauseTheGame();
+        clearScreen();
+        playGame(user, consoleView.getCurrentLocation(), day);
+    }
 
 	private static void grabItem(String rawUserInput) throws IOException, InterruptedException {
 		String upperCaseRawUserInput = rawUserInput.toUpperCase();
