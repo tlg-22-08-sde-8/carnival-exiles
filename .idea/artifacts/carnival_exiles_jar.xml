@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="carnival-exiles:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/carnival_exiles_jar</output-path>
-    <root id="archive" name="carnival-exiles.jar">
-      <element id="module-output" name="carnival-exiles" />
-    </root>
-  </artifact>
-</component>

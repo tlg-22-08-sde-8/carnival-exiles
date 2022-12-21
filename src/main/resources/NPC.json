@@ -1,0 +1,26 @@
+{
+  "shark": [
+    {
+      "name": "Sammy The Shark",
+      "type": "enemy",
+      "Location": "Luminous Lagoon",
+      "hp": "40",
+      "talk": [
+        "i'm a shark",
+        "shark shark"
+      ]
+    }
+  ],
+  "Monkey": [
+    {
+      "name": "Rafael",
+      "type": "friend",
+      "location": "start",
+      "hp": "100",
+      "talk": [
+        "Hi Stranger. Welcome to my island. I'm lonely and afraid, and can't find my family.",
+        "Be careful... There are some dangerous NPC's out here."
+      ]
+    }
+  ]
+}
