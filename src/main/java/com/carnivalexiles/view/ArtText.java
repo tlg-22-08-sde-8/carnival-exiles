@@ -6,7 +6,6 @@ public class ArtText {
     public static final String BOLD = "\u001b[1m";
     public static final String GREEN = "\033[0;32m";
     public static final String CYAN = "\033[0;36m";
-    public static final String WHITE = "\033[0;37m";
     public static final String RED = "\033[0;31m";
     public static final String BLUE = "\033[0;34m";
     public static final String YELLOW = "\033[0;33m";
@@ -176,7 +175,7 @@ public class ArtText {
             + "                                                                                                           "
             + RESET;
 
-    public static final String travelingMoistMarshland = WHITE + ""
+    public static final String travelingMoistMarshland = GREEN + ""
             + "████████╗██████╗  █████╗ ██╗   ██╗███████╗██╗     ██╗███╗   ██╗ ██████╗     ████████╗ ██████╗                                     \n"
             + "╚══██╔══╝██╔══██╗██╔══██╗██║   ██║██╔════╝██║     ██║████╗  ██║██╔════╝     ╚══██╔══╝██╔═══██╗                                    \n"
             + "   ██║   ██████╔╝███████║██║   ██║█████╗  ██║     ██║██╔██╗ ██║██║  ███╗       ██║   ██║   ██║                                    \n"
@@ -227,7 +226,7 @@ public class ArtText {
             + "                                                                                                                                 "
             + RESET;
 
-    public static final String travelingLandingZone = GREEN + ""
+    public static final String travelingLandingZone = YELLOW + ""
             + "████████╗██████╗  █████╗ ██╗   ██╗███████╗██╗     ██╗███╗   ██╗ ██████╗     ████████╗ ██████╗               \n"
             + "╚══██╔══╝██╔══██╗██╔══██╗██║   ██║██╔════╝██║     ██║████╗  ██║██╔════╝     ╚══██╔══╝██╔═══██╗              \n"
             + "   ██║   ██████╔╝███████║██║   ██║█████╗  ██║     ██║██╔██╗ ██║██║  ███╗       ██║   ██║   ██║              \n"
