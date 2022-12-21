@@ -262,7 +262,7 @@ public class TextParser {
     }
 
     private static void pauseTheGame() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(2500);
     }
 
     private static void lookAtItems() throws IOException, InterruptedException {
