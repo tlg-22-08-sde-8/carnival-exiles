@@ -24,14 +24,17 @@ public class TextParser {
 	static MapLocation mapLocations = new MapLocation();                              // All map locations obj
 	static User user = new User(100, new String[]{"empty bottle"});       // Game user
 	static Day day = new Day();                                                      // Game day
-
 	private static ConsoleView consoleView;                                          // Game console
 
+	//Takes in the user input during the welcome screen to start the game or quit.
 	public static void enterGame() throws IOException, InterruptedException {
 		String userInput;
-		// Enter the game with any key or quit by typing "quit"
 		System.out.print("> ");
+
+		//format the input to trim any spaces and make it lowercase
 		userInput = bufferReader.readLine().toLowerCase().trim();
+
+		//If the input is not quit then load up the landing zone location.
 		if (!userInput.equals("quit")) {
 			clearScreen();
 			playGame(user, JsonLocationParser.allMapLocations.get(0), day);
@@ -40,10 +43,13 @@ public class TextParser {
 		}
 	}
 
+	//Reset the game by resting environmental variables.
 	public static void newGame() {
 		mapLocations = new MapLocation();                              // All map locations obj
 		user = new User(100, new String[]{"empty bottle"});       // Game user
 		day = new Day();
+
+		//All locations need items reset this way to avoid missing items.
 		JsonLocationParser.allMapLocations.get(0).setItems(new String[]{"stick"});
 		JsonLocationParser.allMapLocations.get(1).setItems(new String[]{"sea shells"});
 		JsonLocationParser.allMapLocations.get(2).setItems(new String[]{"coconut", "magical herbs"});
@@ -53,6 +59,7 @@ public class TextParser {
 		JsonLocationParser.allMapLocations.get(6).setItems(new String[]{"clay"});
 	}
 
+	//The win mechanism once the user reaches the last day.
 	public static void printGameWin() throws IOException, InterruptedException {
 		clearScreen();
 		Success.displaySuccess();
@@ -60,10 +67,14 @@ public class TextParser {
 		String[] validAnswers = {"yes", "no", "quit"};
 		System.out.print("You Won!!...play again? " + enterMessage);
 		String userInput = bufferReader.readLine().toLowerCase().trim();
+
+		//Obtains formatted user input to choose whether to start a new game or end the game.
 		while (!Arrays.asList(validAnswers).contains(userInput)) {
 			System.out.print(enterMessage);
+			//Secondary formatter required or while loop never ends.
 			userInput = bufferReader.readLine().toLowerCase().trim();
 		}
+		//If yes is chosen then the following code resets the game and environmental variables.
 		if (userInput.equals("yes")) {
 			clearScreen();
 			newGame();
@@ -73,6 +84,7 @@ public class TextParser {
 		}
 	}
 
+	//This code is the mirror of printGameWin, we did not have enough time to combine both methods.
 	public static void printGameOver() throws IOException, InterruptedException {
 		clearScreen();
 		Failure.displayFail();
@@ -94,28 +106,37 @@ public class TextParser {
 	}
 
 	private static void stopGame() {
+		//Stop is deprecated, but we found it is necessary in our setup.
 		Thread.currentThread().stop();
 	}
 
 	public static void clearScreen() {
+		//Clear screen by adding 50 blank lines to the console.
 		System.out.println(System.lineSeparator().repeat(50));
 	}
 
     public static void startGame() throws IOException, InterruptedException {
+		//Music startup method
         try {
             MusicHandler.music("music on");
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
+		//Load up the location objects for user to travel.
         JsonLocationParser.locationParser();
+		//Display the Welcome Ascii art.
         WelcomeScreen.displayTitle();
+		//Display the introduction message.
         WelcomeScreen.displayIntroduction();
+		//Lays out the environment for the user
         TextParser.enterGame();
     }
 
 	public static void playGame(User user, Location location, Day day)
 			throws IOException, InterruptedException {
+		//Create the user's view of the console with all environment variables.
 		consoleView = new ConsoleView(user, location, day);
+		//Verifies the user has valid health points and not past the last day.
 		if (user.getHealthPoints() > 0 && day.getDay() < LAST_DAY_IN_GAME) {
 			System.out.println(consoleView.getGameView());
 			getUserInput();
@@ -131,6 +152,7 @@ public class TextParser {
 		// Capture the requested action from the user's input
 		String requestedAction = "";
 		for (String action : Action.allActions) {
+			//If requested action is valid then the for loop ends and saves that action.
 			if (userInput.contains(action)) {
 				requestedAction = action;
 				break;
@@ -144,11 +166,14 @@ public class TextParser {
 			playGame(user, consoleView.getCurrentLocation(), day);
 			getUserInput();
 		}
+		//The saved action and the original input are used in the handler.
 		actionHandler(requestedAction, userInput);
 	}
 
+	//actionHandler takes in found action and original user input.
     public static void actionHandler(String requestedAction, String userInput)
             throws IOException, InterruptedException {
+		//Switch statement is implemented in this fashion to allow synonyms.
         switch (requestedAction) {
             case "go":
             case "travel":
@@ -201,6 +226,7 @@ public class TextParser {
             case "peep":
                 lookAtItems();
                 break;
+			// TODO: 12/21/2022 Music On/Off does not work.
             case "music on":
                 try {
                     MusicHandler.music("music on");
@@ -232,6 +258,7 @@ public class TextParser {
         }
     }
 
+	//Navigation method for user to travel to different locations.
 	private static void goTo(String rawUserInput) throws IOException, InterruptedException {
 		String visibleLocations = consoleView.getCurrentLocation().getVisibleLocations();
 		String UpperCaseVisibleLocations = visibleLocations.toUpperCase();
@@ -256,6 +283,7 @@ public class TextParser {
 			getUserInput();
 		} else {
 			clearScreen();
+			//Every location change causes the day to increment by 2 and health points decreased by 20.
 			day.increaseTimeOfDay(2);
 			user.modifyHealthPoints(-20);
 			clearScreen();
@@ -472,6 +500,7 @@ public class TextParser {
 			playGame(user, consoleView.getCurrentLocation(), day);
 		}
 	}
+
 
 	private static String printGoToScreen(String requestedLocation) {
 		switch (requestedLocation) {
